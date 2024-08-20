@@ -12,15 +12,14 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             //Arrange
             GrpAutomoveis grupoInvalido = new GrpAutomoveis("");
 
-            List<string> erroEsperado =
-            [
-                "O campo \"Nome\" é obrigatório"
-            ];
-
             //Act
             List<string> erros = grupoInvalido.Validar();
 
             //Assert
+            List<string> erroEsperado =
+            [
+                "O campo \"Nome\" é obrigatório"
+            ];
             CollectionAssert.AreEqual(erroEsperado, erros);
         }
     }
