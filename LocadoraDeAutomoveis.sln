@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeAutomoveis.WebApp", "LocadoraDeAutomoveis.WebApp\LocadoraDeAutomoveis.WebApp.csproj", "{DE41D390-BEC0-4BAD-8F96-F18A9F829481}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Apresentação", "1.Apresentação", "{B34AAD53-EACD-4207-B3D4-170DDEA6C09C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Aplicação", "2.Aplicação", "{09930CB8-E3E1-4FAB-9D23-AA14FB9B17D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Dominio", "3.Dominio", "{7C4D3EF9-07AE-49F2-B2B3-0A4B96206F1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Infra", "4.Infra", "{B28878B5-E065-43BA-94A8-16F529025D66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Testes", "5.Testes", "{D53125AA-82B7-4C95-BEFB-DC87A22013F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE41D390-BEC0-4BAD-8F96-F18A9F829481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE41D390-BEC0-4BAD-8F96-F18A9F829481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE41D390-BEC0-4BAD-8F96-F18A9F829481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE41D390-BEC0-4BAD-8F96-F18A9F829481}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DE41D390-BEC0-4BAD-8F96-F18A9F829481} = {B34AAD53-EACD-4207-B3D4-170DDEA6C09C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A380449-6B47-4968-B198-95BA49ABC0BB}
+	EndGlobalSection
+EndGlobal
