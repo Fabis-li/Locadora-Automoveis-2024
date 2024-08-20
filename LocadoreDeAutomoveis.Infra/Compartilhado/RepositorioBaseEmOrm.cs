@@ -5,11 +5,11 @@ namespace LocadoreDeAutomoveis.Infra.Compartilhado
 {
     public abstract class RepositorioBaseEmOrm<TEntidade> where TEntidade : EntidadeBase
     {
-        protected readonly LocadoraDeAutomoveisDbContext _dbContext;
+        protected readonly LocadoraDeAutomoveisDbContext dbContext;
 
         protected RepositorioBaseEmOrm(LocadoraDeAutomoveisDbContext dbContext)
         {
-            this._dbContext = dbContext;
+            this.dbContext = dbContext;
         }
 
         protected abstract DbSet<TEntidade> ObterRegistros();
@@ -18,21 +18,21 @@ namespace LocadoreDeAutomoveis.Infra.Compartilhado
         {
             ObterRegistros().Add(entidade);
 
-            _dbContext.SaveChanges();
+            dbContext.SaveChanges();
         }
 
         public void Editar(TEntidade entidade)
         {
             ObterRegistros().Update(entidade);
 
-            _dbContext.SaveChanges();
+            dbContext.SaveChanges();
         }
 
         public void Excluir(TEntidade entidade)
         {
             ObterRegistros().Remove(entidade);
 
-            _dbContext.SaveChanges();
+            dbContext.SaveChanges();
         }
 
         public virtual TEntidade SelecionarPorId(int id)

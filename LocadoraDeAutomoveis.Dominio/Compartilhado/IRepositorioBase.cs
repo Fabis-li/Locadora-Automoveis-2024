@@ -2,10 +2,10 @@
 {
     public interface IRepositorioBase<TEntidade> where TEntidade : EntidadeBase
     {
-        void Inserir(TEntidade registro);
-        bool Editar(TEntidade registro);
-        bool Excluir(TEntidade registro);
-        TEntidade SElecionarPorId(int id);
+        void Inserir(TEntidade entidade);
+        void Editar(TEntidade entidadeAtualizada);
+        void Excluir(TEntidade entidadeParaExcluir);
+        TEntidade SelecionarPorId(int idSelecionado);
         List<TEntidade> SelecionarTodos();
     }
 }
