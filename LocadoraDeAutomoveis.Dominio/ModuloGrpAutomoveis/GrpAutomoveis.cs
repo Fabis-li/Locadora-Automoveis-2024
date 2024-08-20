@@ -13,5 +13,15 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis
         {
             Nome = nome;
         }
+
+        public List<string> Validar()
+        {
+            List<string> erros = new List<string>();
+
+            if (string.IsNullOrEmpty(Nome))
+                erros.Add("O campo \"Nome\" é obrigatório");
+
+            return erros;
+        }
     }
 }
