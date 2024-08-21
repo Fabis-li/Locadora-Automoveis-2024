@@ -63,7 +63,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             return RedirectToAction(nameof(Listar));
         }
 
-        public IAsyncResult Editar(int id)
+        public IActionResult Editar(int id)
         {
             var grupo = servicoGrpAutomoveis.SelecionarPorId(id);
 
