@@ -56,11 +56,11 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
             if (Ano < 0)
                 erros.Add("O campo \"Ano\" é obrigatório");
 
-            if (CapacidadeCombustivel == 0)
-                erros.Add("O campo \"Capacidade do Tanque\" é obrigatório");
+            if (CapacidadeCombustivel < 1)
+                erros.Add("O campo \"CapacidadeCombustivel\" é obrigatório");
 
             if (string.IsNullOrEmpty(FotoVeiculo))
-                erros.Add("O campo \"Foto do Veículo\" é obrigatório");
+                erros.Add("O campo \"FotoVeiculo\" é obrigatório");
 
             return erros;
 
