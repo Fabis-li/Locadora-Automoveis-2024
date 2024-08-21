@@ -2,6 +2,7 @@ using AutoMapper;
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado;
 using LocadoraDeAutomoveis.WebApp.Extensions;
+using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 ApresentarMensagemFalha(grupos.ToResult());
             }
 
-            var gruposViewModel = mapeador.Map<IEnumerable<GrpAutomoveisViewModel>>(grupos.Value);
+            var gruposViewModel = mapeador.Map<IEnumerable<ListarGrpAutomoveisViewModel>>(grupos.Value);
 
             ViewBag.Mensagem = TempData.DesserializarMensagemViewModel();
 
