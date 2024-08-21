@@ -15,6 +15,7 @@ namespace LocadoraDeAutomoveis.WebApp
             builder.Services.AddDbContext<LocadoraDeAutomoveisDbContext>();
 
             builder.Services.AddScoped<IRepositorioGrpAutomoveis, RepositorioGrpAutomoveisEmOrm>();
+            builder.Services.AddScoped<IRepositorioAutomoveis, RepositorioAutomoveisEmOrm>();
 
             builder.Services.AddScoped<GrpAutomoveisService>();
 

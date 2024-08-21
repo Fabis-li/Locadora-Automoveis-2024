@@ -1,4 +1,7 @@
-﻿using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
+﻿using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
+using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
+using LocadoreDeAutomoveis.Infra.ModuloAutomovel;
+using LocadoreDeAutomoveis.Infra.ModuloGrpAutomoveis;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +11,7 @@ namespace LocadoreDeAutomoveis.Infra.Compartilhado
     public class LocadoraDeAutomoveisDbContext : IdentityDbContext
     {
         public DbSet<GrpAutomoveis> GrpAutomoveis { get; set; }
+        public DbSet<Automovel> Automoveis { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,12 +30,11 @@ namespace LocadoreDeAutomoveis.Infra.Compartilhado
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<GrpAutomoveis>().ToTable("GrpAutomoveis");
-            modelBuilder.Entity<GrpAutomoveis>().HasKey(x => x.Id);
-            modelBuilder.Entity<GrpAutomoveis>().Property(x => x.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<GrpAutomoveis>().Property(x => x.Nome).HasMaxLength(100).IsRequired();
+            modelBuilder.ApplyConfiguration(new MapeadorGrpAutomoveisEmOrm());
+            modelBuilder.ApplyConfiguration(new MapeadorAutomovelEmOrm());
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
