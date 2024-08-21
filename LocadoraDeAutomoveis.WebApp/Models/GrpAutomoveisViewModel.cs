@@ -18,7 +18,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Nome { get; set; }
     }
 
-    public class listarGrpAutomoveisViewModel
+    public class ListarGrpAutomoveisViewModel
     {
         public int Id { get; set; }
         public string Nome { get; set; }
