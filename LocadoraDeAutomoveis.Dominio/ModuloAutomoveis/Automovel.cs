@@ -18,10 +18,11 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
 
         public Automovel()
         {
-            
+
         }
 
-        public Automovel(string modelo, string marca, string cor, string placa, string combustivel, int ano, int capacidadeCombustivel, string fotoVeiculo)
+        public Automovel(string modelo, string marca, string cor, string placa, string combustivel, int ano,
+            int capacidadeCombustivel, string fotoVeiculo)
         {
             Modelo = modelo;
             Marca = marca;
@@ -64,8 +65,5 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
             return erros;
 
         }
-
-
-
-    
+    }
 }
