@@ -1,5 +1,4 @@
 ﻿using FluentResults;
-using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 
 namespace LocadoraDeAutomovies.Aplicacao.Servicos

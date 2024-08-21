@@ -18,6 +18,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             this.servicoGrpAutomoveis = servicoGrpAutomoveis;
             this.mapeador = mapeador;
         }
+
         public IActionResult Listar()
         {
             var grupos = servicoGrpAutomoveis.SelecionarTodos();
@@ -25,13 +26,17 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             if (grupos.IsFailed)
             {
                 ApresentarMensagemFalha(grupos.ToResult());
+
+                return RedirectToAction("Index", "Inicio");
             }
 
-            var gruposViewModel = mapeador.Map<IEnumerable<ListarGrpAutomoveisViewModel>>(grupos.Value);
+            var grpAutomoveis = grupos.Value;
+
+            var listarGrpAutomoveisVm = mapeador.Map<IEnumerable<ListarGrpAutomoveisViewModel>>(grpAutomoveis);
 
             ViewBag.Mensagem = TempData.DesserializarMensagemViewModel();
 
-            return View(gruposViewModel);
+            return View(listarGrpAutomoveisVm);
         }
 
         public IActionResult Inserir()

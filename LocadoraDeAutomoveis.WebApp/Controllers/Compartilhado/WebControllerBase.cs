@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using LocadoraDeAutomoveis.WebApp.Extensions;
+using LocadoraDeAutomoveis.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado

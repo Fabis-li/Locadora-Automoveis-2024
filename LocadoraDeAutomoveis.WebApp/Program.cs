@@ -1,5 +1,8 @@
 using System.Reflection;
+using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
+using LocadoraDeAutomovies.Aplicacao.Servicos;
 using LocadoreDeAutomoveis.Infra.Compartilhado;
+using LocadoreDeAutomoveis.Infra.ModuloGrpAutomoveis;
 
 namespace LocadoraDeAutomoveis.WebApp
 {
@@ -10,6 +13,10 @@ namespace LocadoraDeAutomoveis.WebApp
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<LocadoraDeAutomoveisDbContext>();
+
+            builder.Services.AddScoped<IRepositorioGrpAutomoveis, RepositorioGrpAutomoveisEmOrm>();
+
+            builder.Services.AddScoped<GrpAutomoveisService>();
 
             builder.Services.AddAutoMapper(cfg =>
             {
