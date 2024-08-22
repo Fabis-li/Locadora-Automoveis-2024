@@ -94,6 +94,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Placa { get; set; }
         public string Combustivel { get; set; }
         public string FotoVeiculo { get; set; }
+        public string GrupoAutomoveis { get; set; }
     }
 
     public class AgrupamentoAutomovelViewModel
