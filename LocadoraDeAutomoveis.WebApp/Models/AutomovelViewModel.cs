@@ -85,7 +85,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public IEnumerable<SelectListItem>? GrpAutomoveis { get; set; }
     }
 
-    public class ListarAutomovelViewModel
+    public class ListarAutomoveisViewModel
     {
         public int Id { get; set; }
         public string Marca { get; set; }
@@ -100,7 +100,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
     public class AgrupamentoAutomovelViewModel
     {
         public string GrupoAutomoveis { get; set; }
-        public IEnumerable<ListarAutomovelViewModel> Automoveis { get; set; }
+        public IEnumerable<ListarAutomoveisViewModel> Automoveis { get; set; }
     }
 
     public class DetalhesAutomovelViewModel

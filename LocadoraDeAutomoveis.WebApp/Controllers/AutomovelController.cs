@@ -1,20 +1,24 @@
 ﻿using AutoMapper;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado;
+using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LocadoraDeAutomoveis.WebApp.Controllers
 {
     public class AutomovelController : WebControllerBase
     {
         private readonly AutomovelService service;
+        private readonly GrpAutomoveisService serviceGrupo;
         private readonly IMapper mapeador;
 
-        public AutomovelController(AutomovelService service, IMapper mapeador)
+        public AutomovelController(AutomovelService service, IMapper mapeador, GrpAutomoveisService serviceGrupo)
         {
             this.service = service;
             this.mapeador = mapeador;
+            this.serviceGrupo = serviceGrupo;
         }
 
         public IActionResult Listar()
@@ -37,7 +41,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         public IActionResult Inserir()
         {
-            return View();
+            return View(CarregarDados());
         }
 
         [HttpPost]
@@ -153,6 +157,35 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             var detalhesAutomovelVm = mapeador.Map<DetalhesAutomovelViewModel>(automovel);
 
             return View(detalhesAutomovelVm);
+        }
+
+        private InserirAutomovelViewModel? CarregarDados(InserirAutomovelViewModel? dadosPrevios = null)
+        {
+            var resultadoGrp = serviceGrupo.SelecionarTodos();
+
+            if(resultadoGrp.IsFailed)
+            {
+                ApresentarMensagemFalha(resultadoGrp.ToResult());
+
+                return null;
+            }
+
+            var gruposDisponiveis = resultadoGrp.Value;
+
+            if (dadosPrevios is null)
+            {
+                var inserirAutomovelVm = new InserirAutomovelViewModel
+                {
+                    GrpAutomoveis = gruposDisponiveis
+                        .Select(g => new SelectListItem(g.Nome, g.Id.ToString()))
+                };
+                return inserirAutomovelVm;
+            }
+
+            dadosPrevios.GrpAutomoveis = gruposDisponiveis
+                .Select(g => new SelectListItem(g.Nome, g.Id.ToString()));
+
+            return dadosPrevios;
         }
     }
 }
