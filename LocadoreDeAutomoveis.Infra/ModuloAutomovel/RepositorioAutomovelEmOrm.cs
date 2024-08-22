@@ -14,5 +14,12 @@ namespace LocadoreDeAutomoveis.Infra.ModuloAutomovel
         {
             return dbContext.Automoveis;
         }
+
+        public List<Automovel> Filtrar(Func<Automovel, bool> predicate)
+        {
+            return ObterRegistros()
+                .Where(predicate)
+                .ToList();
+        }
     }
 }

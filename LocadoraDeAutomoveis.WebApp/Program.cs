@@ -20,6 +20,7 @@ namespace LocadoraDeAutomoveis.WebApp
             builder.Services.AddScoped<IRepositorioAutomovel, RepositorioAutomovelEmOrm>();
 
             builder.Services.AddScoped<GrpAutomoveisService>();
+            builder.Services.AddScoped<Automovel>();
 
             builder.Services.AddAutoMapper(cfg =>
             {
