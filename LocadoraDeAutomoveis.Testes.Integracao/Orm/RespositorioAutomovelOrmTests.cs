@@ -1,18 +1,24 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
+using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoreDeAutomoveis.Infra.Compartilhado;
+using LocadoreDeAutomoveis.Infra.ModuloAutomovel;
+using LocadoreDeAutomoveis.Infra.ModuloGrpAutomoveis;
 
 namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
 {
     [TestClass]
     public class RespositorioAutomovelOrmTests
     {
-        private readonly LocadoraDeAutomoveisDbContext db;
+        private LocadoraDeAutomoveisDbContext db;
+        private RepositorioAutomovelEmOrm repositorioAutomovel;
 
-        public RespositorioAutomovelOrmTests()
+        [TestInitialize]
+        public void configurarTestes()
         {
             db = new LocadoraDeAutomoveisDbContext();
 
             db.Set<Automovel>().RemoveRange(db.Set<Automovel>());
+            db.Set<GrpAutomoveis>().RemoveRange(db.Set<GrpAutomoveis>());
 
             db.SaveChanges();
         }
@@ -20,23 +26,42 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         [TestMethod]
         public void Deve_inserir_automovel()
         {
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg");
+            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
+            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
+            repositorioGrpAuto.Inserir(grpoAuto);
 
-            var repositorio = new RepositorioAutomovelEmOrm(db);
+            var automovel = new Automovel
+            (
+                "Fusca", 
+                "Volkswagen", 
+                "Azul", 
+                "ABC-1234", 
+                "Gasolina",
+                1970, 
+                40, 
+                "fusca.jpg",
+                grpoAuto
+            );
 
-            repositorio.Inserir(automovel);
+            var repositorioAutomovel = new RepositorioAutomovelEmOrm(db);
 
+            repositorioAutomovel.Inserir(automovel);
             db.SaveChanges();
 
-            var automovelInserido = db.Set<Automovel>().Find(automovel.Id);
+            var automovelInserido  = repositorioAutomovel.SelecionarPorId(automovel.Id);
 
             Assert.IsNotNull(automovelInserido);
+            Assert.AreEqual(automovel, automovelInserido);
         }
 
         [TestMethod]
         public void Deve_alterar_automovel()
         {
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg");
+            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
+            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
+            repositorioGrpAuto.Inserir(grpoAuto);
+
+            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grpoAuto);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -46,7 +71,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
 
             automovel.Modelo = "Gol";
 
-            repositorio.Alterar(automovel);
+            repositorio.Editar(automovel);
 
             db.SaveChanges();
 
@@ -55,9 +80,14 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
             Assert.AreEqual("Gol", automovelAlterado.Modelo);
         }
 
+        [TestMethod]
         public void Deve_excluir_automovel()
         {
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg");
+            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
+            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
+            repositorioGrpAuto.Inserir(grpoAuto);
+
+            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grpoAuto);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -77,7 +107,11 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         [TestMethod]
         public void Deve_consultar_automovel_por_id()
         {
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg");
+            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
+            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
+            repositorioGrpAuto.Inserir(grpoAuto);
+
+            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grpoAuto);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -85,7 +119,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
 
             db.SaveChanges();
 
-            var automovelConsultado = repositorio.ConsultarPorId(automovel.Id);
+            var automovelConsultado = repositorio.SelecionarPorId(automovel.Id);
 
             Assert.IsNotNull(automovelConsultado);
         }
@@ -93,8 +127,12 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         [TestMethod]
         public void Deve_consultar_todos_automoveis()
         {
-            var automovel1 = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg");
-            var automovel2 = new Automovel("Gol", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "gol.jpg");
+            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
+            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
+            repositorioGrpAuto.Inserir(grpoAuto);
+
+            var automovel1 = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grpoAuto);
+            var automovel2 = new Automovel("Gol", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "gol.jpg", grpoAuto);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -103,7 +141,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
 
             db.SaveChanges();
 
-            var automoveis = repositorio.ConsultarTodos();
+            var automoveis = repositorio.SelecionarTodos();
 
             Assert.AreEqual(2, automoveis.Count);
         }

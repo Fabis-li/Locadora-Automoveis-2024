@@ -14,7 +14,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
         public int CapacidadeCombustivel { get; set; } //capacidade do tanque
         public string FotoVeiculo { get; set; }
 
-        public List<GrpAutomoveis> GrupoAutomoveis;
+        public GrpAutomoveis GrupoAutomoveis { get; set; }
 
         public Automovel()
         {
@@ -22,7 +22,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
         }
 
         public Automovel(string modelo, string marca, string cor, string placa, string combustivel, int ano,
-            int capacidadeCombustivel, string fotoVeiculo)
+            int capacidadeCombustivel, string fotoVeiculo, GrpAutomoveis grupoAutomoveis)
         {
             Modelo = modelo;
             Marca = marca;
@@ -32,6 +32,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
             Ano = ano;
             CapacidadeCombustivel = capacidadeCombustivel;
             FotoVeiculo = fotoVeiculo;
+            GrupoAutomoveis = grupoAutomoveis;
         }
 
         public List<string> Validar()
