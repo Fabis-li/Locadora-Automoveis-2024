@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeAutomovies.Aplica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeAutomoveis.Dominio", "LocadoraDeAutomoveis.Dominio\LocadoraDeAutomoveis.Dominio.csproj", "{AED90572-EE31-4C44-AB75-DD41CF03945F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoreDeAutomoveis.Infra", "LocadoreDeAutomoveis.Infra\LocadoreDeAutomoveis.Infra.csproj", "{780112FF-91A6-4FB6-9B67-48EA264945FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocadoraDeAutomoveis.Infra", "LocadoraDeAutomoveis.Infra\LocadoraDeAutomoveis.Infra.csproj", "{780112FF-91A6-4FB6-9B67-48EA264945FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes integração", "Testes integração", "{C02C037E-B70B-4C99-88F6-BE2253524AC2}"
 EndProject
