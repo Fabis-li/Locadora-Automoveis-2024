@@ -1,19 +1,19 @@
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
-using LocadoreDeAutomoveis.Infra.Compartilhado;
-using LocadoreDeAutomoveis.Infra.ModuloGrpAutomoveis;
+using LocadoraDeAutomoveis.Infra.Compartilhado;
+using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
 
 namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
 {
     [TestClass]
-    public class RepositorioGrpAutomoveisOrmTests
+    public class RepositorioGrupoAutomovelOrmTests
     {
         private readonly LocadoraDeAutomoveisDbContext db;
 
-        public RepositorioGrpAutomoveisOrmTests()
+        public RepositorioGrupoAutomovelOrmTests()
         {
             db = new LocadoraDeAutomoveisDbContext();
 
-            db.Set<GrpAutomoveis>().RemoveRange(db.Set<GrpAutomoveis>());
+            db.Set<GrupoAutomovel>().RemoveRange(db.Set<GrupoAutomovel>());
 
             db.SaveChanges();
         }
@@ -22,9 +22,9 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         public void Deve_inserir_nome_grpAutomoveis()
         {
             //Arrange
-            var grpAutomoveis = new GrpAutomoveis("Econômico");
+            var grpAutomoveis = new GrupoAutomovel("Econômico");
 
-            var repositorio = new RepositorioGrpAutomoveisEmOrm(db);
+            var repositorio = new RepositorioGrupoAutomovelEmOrm(db);
 
             //Act
             repositorio.Inserir(grpAutomoveis);
@@ -40,9 +40,9 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         [TestMethod]
         public void Deve_editar_nome_grpAutomoveis()
         {
-            var repositorio = new RepositorioGrpAutomoveisEmOrm(db);
+            var repositorio = new RepositorioGrupoAutomovelEmOrm(db);
             //Arrange
-            var grpAutomoveis = new GrpAutomoveis("Econômico");
+            var grpAutomoveis = new GrupoAutomovel("Econômico");
 
             repositorio.Inserir(grpAutomoveis);
             
@@ -65,8 +65,8 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         public void Deve_excluir_grpAutomoveis()
         {
             //Arrange
-            var repositorio = new RepositorioGrpAutomoveisEmOrm(db);
-            var grpAutomoveis = new GrpAutomoveis("Econômico");
+            var repositorio = new RepositorioGrupoAutomovelEmOrm(db);
+            var grpAutomoveis = new GrupoAutomovel("Econômico");
 
             repositorio.Inserir(grpAutomoveis);
 

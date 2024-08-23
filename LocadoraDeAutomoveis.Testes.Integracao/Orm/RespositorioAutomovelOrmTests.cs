@@ -1,8 +1,8 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
-using LocadoreDeAutomoveis.Infra.Compartilhado;
-using LocadoreDeAutomoveis.Infra.ModuloAutomovel;
-using LocadoreDeAutomoveis.Infra.ModuloGrpAutomoveis;
+using LocadoraDeAutomoveis.Infra.Compartilhado;
+using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
+using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
 
 namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
 {
@@ -10,7 +10,9 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
     public class RespositorioAutomovelOrmTests
     {
         private LocadoraDeAutomoveisDbContext db;
+
         private RepositorioAutomovelEmOrm repositorioAutomovel;
+        private RepositorioGrupoAutomovelEmOrm repositorioGrupoAutomovel;
 
         [TestInitialize]
         public void configurarTestes()
@@ -18,7 +20,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
             db = new LocadoraDeAutomoveisDbContext();
 
             db.Set<Automovel>().RemoveRange(db.Set<Automovel>());
-            db.Set<GrpAutomoveis>().RemoveRange(db.Set<GrpAutomoveis>());
+            db.Set<GrupoAutomovel>().RemoveRange(db.Set<GrupoAutomovel>());
 
             db.SaveChanges();
         }
@@ -26,9 +28,13 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         [TestMethod]
         public void Deve_inserir_automovel()
         {
-            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
-            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
-            repositorioGrpAuto.Inserir(grpoAuto);
+
+            var grpoAuto = new GrupoAutomovel("Passeio");
+
+            var repositorioGrupoAutomovel = new RepositorioGrupoAutomovelEmOrm(db);
+
+            repositorioGrupoAutomovel.Inserir(grpoAuto);
+
 
             var automovel = new Automovel
             (
@@ -36,11 +42,12 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
                 "Volkswagen", 
                 "Azul", 
                 "ABC-1234", 
-                "Gasolina",
+                TipoCombustivel.Alcool,
                 1970, 
                 40, 
                 "fusca.jpg",
-                grpoAuto
+                grpoAuto,
+                0
             );
 
             var repositorioAutomovel = new RepositorioAutomovelEmOrm(db);
@@ -57,11 +64,11 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         [TestMethod]
         public void Deve_alterar_automovel()
         {
-            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
-            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
+            GrupoAutomovel grpoAuto = new GrupoAutomovel("Passeio");
+            var repositorioGrpAuto = new RepositorioGrupoAutomovelEmOrm(db);
             repositorioGrpAuto.Inserir(grpoAuto);
 
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grpoAuto);
+            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grpoAuto,1);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -83,11 +90,11 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         [TestMethod]
         public void Deve_excluir_automovel()
         {
-            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
-            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
+            GrupoAutomovel grpoAuto = new GrupoAutomovel("Passeio");
+            var repositorioGrpAuto = new RepositorioGrupoAutomovelEmOrm(db);
             repositorioGrpAuto.Inserir(grpoAuto);
 
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grpoAuto);
+            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grpoAuto, 1);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -107,11 +114,11 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         [TestMethod]
         public void Deve_consultar_automovel_por_id()
         {
-            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
-            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
+            GrupoAutomovel grpoAuto = new GrupoAutomovel("Passeio");
+            var repositorioGrpAuto = new RepositorioGrupoAutomovelEmOrm(db);
             repositorioGrpAuto.Inserir(grpoAuto);
 
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grpoAuto);
+            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grpoAuto, 1);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -127,12 +134,12 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         [TestMethod]
         public void Deve_consultar_todos_automoveis()
         {
-            GrpAutomoveis grpoAuto = new GrpAutomoveis("Passeio");
-            var repositorioGrpAuto = new RepositorioGrpAutomoveisEmOrm(db);
+            GrupoAutomovel grpoAuto = new GrupoAutomovel("Passeio");
+            var repositorioGrpAuto = new RepositorioGrupoAutomovelEmOrm(db);
             repositorioGrpAuto.Inserir(grpoAuto);
 
-            var automovel1 = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grpoAuto);
-            var automovel2 = new Automovel("Gol", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "gol.jpg", grpoAuto);
+            var automovel1 = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grpoAuto, 1);
+            var automovel2 = new Automovel("Gol", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "gol.jpg", grpoAuto,1);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
