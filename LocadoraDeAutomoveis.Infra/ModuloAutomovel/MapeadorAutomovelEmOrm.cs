@@ -48,7 +48,7 @@ namespace LocadoreDeAutomoveis.Infra.ModuloAutomovel
 
             aBuilder.HasOne(a => a.GrupoAutomoveis)
                 .WithMany()
-                .HasForeignKey("Automovel_Id")
+                .HasForeignKey("GrupoAutomovel_Id")
                 .OnDelete(DeleteBehavior.Restrict);
 
         }

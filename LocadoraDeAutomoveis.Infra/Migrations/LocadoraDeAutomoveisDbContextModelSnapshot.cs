@@ -33,9 +33,6 @@ namespace LocadoreDeAutomoveis.Infra.Migrations
                     b.Property<int>("Ano")
                         .HasColumnType("int");
 
-                    b.Property<int>("Automovel_Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("CapacidadeCombustivel")
                         .HasColumnType("int");
 
@@ -51,6 +48,12 @@ namespace LocadoreDeAutomoveis.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(250)");
 
+                    b.Property<int?>("GrpAutomoveisId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GrupoAutomovel_Id")
+                        .HasColumnType("int");
+
                     b.Property<string>("Marca")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
@@ -65,7 +68,9 @@ namespace LocadoreDeAutomoveis.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Automovel_Id");
+                    b.HasIndex("GrpAutomoveisId");
+
+                    b.HasIndex("GrupoAutomovel_Id");
 
                     b.ToTable("TBAutomovel", (string)null);
                 });
@@ -304,9 +309,13 @@ namespace LocadoreDeAutomoveis.Infra.Migrations
 
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAutomoveis.Automovel", b =>
                 {
+                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrpAutomoveis", null)
+                        .WithMany("Automoveis")
+                        .HasForeignKey("GrpAutomoveisId");
+
                     b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrpAutomoveis", "GrupoAutomoveis")
                         .WithMany()
-                        .HasForeignKey("Automovel_Id")
+                        .HasForeignKey("GrupoAutomovel_Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -362,6 +371,11 @@ namespace LocadoreDeAutomoveis.Infra.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrpAutomoveis", b =>
+                {
+                    b.Navigation("Automoveis");
                 });
 #pragma warning restore 612, 618
         }
