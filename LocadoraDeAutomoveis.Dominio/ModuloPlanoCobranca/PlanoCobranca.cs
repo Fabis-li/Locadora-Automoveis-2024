@@ -12,6 +12,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca
         public decimal ValorKm { get; set; }
 
         public int QuantidadeDias { get; set; }
+
         public int GrupoAutomoveis_Id { get; set; }
 
         public GrupoAutomovel GrpAutomoveis { get; set; }
