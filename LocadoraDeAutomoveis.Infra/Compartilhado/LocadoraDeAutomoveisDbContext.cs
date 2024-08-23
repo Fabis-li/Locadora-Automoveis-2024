@@ -1,13 +1,13 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
-using LocadoreDeAutomoveis.Infra.ModuloAutomovel;
-using LocadoreDeAutomoveis.Infra.ModuloGrupoAutomoveis;
+using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
+using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace LocadoreDeAutomoveis.Infra.Compartilhado
+namespace LocadoraDeAutomoveis.Infra.Compartilhado
 {
     public class LocadoraDeAutomoveisDbContext : IdentityDbContext
     {
