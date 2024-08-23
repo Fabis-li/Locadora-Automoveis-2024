@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class TBGrupoAutomotivoTBAutomovel : Migration
+    public partial class TBGrupoAutmoveleTBAutomovel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -181,18 +181,18 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     Marca = table.Column<string>(type: "varchar(100)", nullable: false),
                     Cor = table.Column<string>(type: "varchar(50)", nullable: false),
                     Placa = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Combustivel = table.Column<string>(type: "varchar(50)", nullable: false),
+                    TipoCombustivel = table.Column<int>(type: "int", nullable: false),
                     Ano = table.Column<int>(type: "int", nullable: false),
                     CapacidadeCombustivel = table.Column<int>(type: "int", nullable: false),
                     FotoVeiculo = table.Column<string>(type: "varchar(250)", nullable: false),
-                    Automovel_Id = table.Column<int>(type: "int", nullable: false)
+                    GrupoAutomovelId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TBAutomovel", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBAutomovel_TBGrpAutomoveis_Automovel_Id",
-                        column: x => x.Automovel_Id,
+                        name: "FK_TBAutomovel_TBGrpAutomoveis_GrupoAutomovelId",
+                        column: x => x.GrupoAutomovelId,
                         principalTable: "TBGrpAutomoveis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -248,9 +248,9 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TBAutomovel_Automovel_Id",
+                name: "IX_TBAutomovel_GrupoAutomovelId",
                 table: "TBAutomovel",
-                column: "Automovel_Id");
+                column: "GrupoAutomovelId");
         }
 
         /// <inheritdoc />
