@@ -47,7 +47,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
                 40, 
                 "fusca.jpg",
                 grpoAuto,
-                0
+                1
             );
 
             var repositorioAutomovel = new RepositorioAutomovelEmOrm(db);
@@ -65,7 +65,9 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         public void Deve_alterar_automovel()
         {
             GrupoAutomovel grpoAuto = new GrupoAutomovel("Passeio");
+
             var repositorioGrpAuto = new RepositorioGrupoAutomovelEmOrm(db);
+
             repositorioGrpAuto.Inserir(grpoAuto);
 
             var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grpoAuto,1);

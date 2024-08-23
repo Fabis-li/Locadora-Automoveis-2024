@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
+using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado;
 using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
@@ -83,7 +84,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             {
                 ApresentarMensagemFalha(resultadoGrupo.ToResult());
 
-                return RedirectToAction(nameof(Listar));
+                return null;
             }
 
             var automovel = resultado.Value;
@@ -106,7 +107,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
             var automovel = mapeador.Map<Automovel>(editarAutomovelVm);
 
-            var resultado = service.Editar(automovel);
+            var resultado = service.Editar(automovel, editarAutomovelVm.GrupoAutomovelId);
 
             if (resultado.IsFailed)
             {

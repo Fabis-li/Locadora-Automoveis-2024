@@ -1,3 +1,4 @@
+using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.Infra.Compartilhado;
 using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
@@ -14,6 +15,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
             db = new LocadoraDeAutomoveisDbContext();
 
             db.Set<GrupoAutomovel>().RemoveRange(db.Set<GrupoAutomovel>());
+            db.Set<Automovel>().RemoveRange(db.Set<Automovel>());
 
             db.SaveChanges();
         }

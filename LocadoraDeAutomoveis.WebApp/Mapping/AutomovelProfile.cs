@@ -14,7 +14,9 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping
             CreateMap<Automovel, EditarAutomovelViewModel>();
 
             CreateMap<Automovel, ListarAutomoveisViewModel>()
-                .ForMember(dest => dest.GrupoAutomovel, opt => opt.MapFrom(src => src.GrupoAutomoveis!.Nome));
+                .ForMember(dest => dest.GrupoAutomovel, 
+                    opt => opt.MapFrom(src => src.GrupoAutomoveis!.Nome)
+                );
 
             CreateMap<Automovel, DetalhesAutomovelViewModel>()
                 .ForMember(dest => dest.GrupoAutomovel, opt => opt.MapFrom(src => src.GrupoAutomoveis!.Nome));
