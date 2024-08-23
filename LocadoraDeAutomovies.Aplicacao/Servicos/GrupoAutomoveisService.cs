@@ -3,23 +3,23 @@ using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 
 namespace LocadoraDeAutomovies.Aplicacao.Servicos
 {
-    public class GrpAutomoveisService
+    public class GrupoAutomoveisService
     {
-        private readonly IRepositorioGrpAutomoveis repositorioGrpAutomoveis;
+        private readonly IRepositorioGrupoAutomovel repositorioGrpAutomoveis;
 
-        public GrpAutomoveisService(IRepositorioGrpAutomoveis repositorioGrpAutomoveis)
+        public GrupoAutomoveisService(IRepositorioGrupoAutomovel repositorioGrpAutomoveis)
         {
             this.repositorioGrpAutomoveis = repositorioGrpAutomoveis;
         }
 
-        public Result<GrpAutomoveis> Inserir(GrpAutomoveis grpAutomoveis)
+        public Result<GrupoAutomovel> Inserir(GrupoAutomovel grpAutomoveis)
         {
             repositorioGrpAutomoveis.Inserir(grpAutomoveis);
 
             return Result.Ok(grpAutomoveis);
         }
 
-        public Result<GrpAutomoveis> Editar(GrpAutomoveis grpAutomoveisAtualizado)
+        public Result<GrupoAutomovel> Editar(GrupoAutomovel grpAutomoveisAtualizado)
         {
             var grp = repositorioGrpAutomoveis.SelecionarPorId(grpAutomoveisAtualizado.Id);
 
@@ -33,7 +33,7 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(grp);
         }
 
-        public Result<GrpAutomoveis> Excluir(int grpId)
+        public Result<GrupoAutomovel> Excluir(int grpId)
         {
             var grp = repositorioGrpAutomoveis.SelecionarPorId(grpId);
 
@@ -45,7 +45,7 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(grp);
         }
 
-        public Result<GrpAutomoveis> SelecionarPorId(int grpId)
+        public Result<GrupoAutomovel> SelecionarPorId(int grpId)
         {
             var grp = repositorioGrpAutomoveis.SelecionarPorId(grpId);
 
@@ -55,7 +55,7 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(grp);
         }
 
-        public Result<List<GrpAutomoveis>> SelecionarTodos()
+        public Result<List<GrupoAutomovel>> SelecionarTodos()
         {
             var grps = repositorioGrpAutomoveis.SelecionarTodos();
 
