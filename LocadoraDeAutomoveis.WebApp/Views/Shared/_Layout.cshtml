@@ -2,6 +2,7 @@
     string caminho = Context.Request.Path;
 
     var grupoAutomoveisAtivo = caminho.StartsWith("/grupoAutomoveis") ? "nav-link active fw-semibold" : "nav-link";
+    var automovelAtivo = caminho.StartsWith("/automovel") ? "nav-link active fw-semibold" : "nav-link";
 
     MensagemViewModel? mensagem = ViewBag.Mensagem ?? null;
 }
@@ -48,11 +49,12 @@
         <main role="main" class="pb-3">
             <h1 class="fw-semibold">@ViewBag.Title</h1>
             <hr/>
+            <partial name="_Mensagem" model="mensagem"></partial>
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted ">
+    <footer class="border-top footer text-center mt-auto">
         <div class="container ">
             &copy; 2024 - Locadora De Automoveis 
         </div>
