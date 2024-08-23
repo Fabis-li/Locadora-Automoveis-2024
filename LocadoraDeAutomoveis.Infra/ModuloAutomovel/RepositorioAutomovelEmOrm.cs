@@ -1,8 +1,8 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
-using LocadoreDeAutomoveis.Infra.Compartilhado;
+using LocadoraDeAutomoveis.Infra.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 
-namespace LocadoreDeAutomoveis.Infra.ModuloAutomovel
+namespace LocadoraDeAutomoveis.Infra.ModuloAutomovel
 {
     public class RepositorioAutomovelEmOrm : RepositorioBaseEmOrm<Automovel>, IRepositorioAutomovel
     {
@@ -13,6 +13,20 @@ namespace LocadoreDeAutomoveis.Infra.ModuloAutomovel
         protected override DbSet<Automovel> ObterRegistros()
         {
             return dbContext.Automoveis;
+        }
+
+        public override Automovel? SelecionarPorId(int id)
+        {
+            return ObterRegistros()
+                .Include(a => a.GrupoAutomoveis)
+                .FirstOrDefault(a => a.Id == id);
+        }
+
+        public override List<Automovel> SelecionarTodos()
+        {
+            return ObterRegistros()
+                .Include(a => a.GrupoAutomoveis)
+                .ToList();
         }
 
         public List<Automovel> Filtrar(Func<Automovel, bool> predicate)

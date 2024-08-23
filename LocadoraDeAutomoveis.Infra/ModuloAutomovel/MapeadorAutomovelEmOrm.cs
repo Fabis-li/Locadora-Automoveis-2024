@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace LocadoreDeAutomoveis.Infra.ModuloAutomovel
+namespace LocadoraDeAutomoveis.Infra.ModuloAutomovel
 {
     public class MapeadorAutomovelEmOrm : IEntityTypeConfiguration<Automovel>
     {
@@ -30,9 +30,9 @@ namespace LocadoreDeAutomoveis.Infra.ModuloAutomovel
                 .IsRequired()
                 .HasColumnType("varchar(20)");
 
-            aBuilder.Property(a => a.Combustivel)
+            aBuilder.Property(a => a.TipoCombustivel)
                 .IsRequired()
-                .HasColumnType("varchar(50)");
+                .HasColumnType("int");
 
             aBuilder.Property(a => a.Ano)
                 .IsRequired()
@@ -46,9 +46,13 @@ namespace LocadoreDeAutomoveis.Infra.ModuloAutomovel
                 .IsRequired()
                 .HasColumnType("varchar(250)");
 
+            aBuilder.Property(a => a.GrupoAutomovelId)
+                .IsRequired()
+                .HasColumnType("int");
+
             aBuilder.HasOne(a => a.GrupoAutomoveis)
-                .WithMany()
-                .HasForeignKey("GrupoAutomovel_Id")
+                .WithMany(g => g.Automoveis)
+                .HasForeignKey(a => a.GrupoAutomovelId)
                 .OnDelete(DeleteBehavior.Restrict);
 
         }
