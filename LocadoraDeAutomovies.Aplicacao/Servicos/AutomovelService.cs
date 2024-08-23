@@ -30,7 +30,7 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             automovel.Marca = automovelAtualizado.Marca;
             automovel.Cor = automovelAtualizado.Cor;
             automovel.Placa = automovelAtualizado.Placa;
-            automovel.Combustivel = automovelAtualizado.Combustivel;
+            automovel.TipoCombustivel = automovelAtualizado.TipoCombustivel;
             automovel.Ano = automovelAtualizado.Ano;
             automovel.CapacidadeCombustivel = automovelAtualizado.CapacidadeCombustivel;
             automovel.FotoVeiculo = automovelAtualizado.FotoVeiculo;
