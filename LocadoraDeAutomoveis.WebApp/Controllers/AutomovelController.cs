@@ -11,10 +11,10 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
     public class AutomovelController : WebControllerBase
     {
         private readonly AutomovelService service;
-        private readonly GrpAutomoveisService serviceGrupo;
+        private readonly GrupoAutomoveisService serviceGrupo;
         private readonly IMapper mapeador;
 
-        public AutomovelController(AutomovelService service, IMapper mapeador, GrpAutomoveisService serviceGrupo)
+        public AutomovelController(AutomovelService service, IMapper mapeador, GrupoAutomoveisService serviceGrupo)
         {
             this.service = service;
             this.mapeador = mapeador;
@@ -77,9 +77,23 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return RedirectToAction(nameof(Listar));
             }
 
+            var resultadoGrupo = serviceGrupo.SelecionarTodos();
+
+            if(resultadoGrupo.IsFailed)
+            {
+                ApresentarMensagemFalha(resultadoGrupo.ToResult());
+
+                return RedirectToAction(nameof(Listar));
+            }
+
             var automovel = resultado.Value;
 
             var editarAutomovelVm = mapeador.Map<EditarAutomovelViewModel>(automovel);
+
+            var gruposDisponiveis = resultadoGrupo.Value;
+
+            editarAutomovelVm.GrupoAutomovel = gruposDisponiveis
+                .Select(g => new SelectListItem(g.Nome, g.Id.ToString()));
 
             return View(editarAutomovelVm);
         }
@@ -119,9 +133,9 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
             var automovel = resultado.Value;
 
-            var excluirAutomovelVm = mapeador.Map<DetalhesAutomovelViewModel>(automovel);
+            var detalhesAutomovelVm = mapeador.Map<DetalhesAutomovelViewModel>(automovel);
 
-            return RedirectToAction(nameof(Listar));
+            return View(detalhesAutomovelVm);
         }
 
         [HttpPost]
@@ -176,13 +190,13 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             {
                 var inserirAutomovelVm = new InserirAutomovelViewModel
                 {
-                    GrpAutomoveis = gruposDisponiveis
+                    GrupoAutomovel = gruposDisponiveis
                         .Select(g => new SelectListItem(g.Nome, g.Id.ToString()))
                 };
                 return inserirAutomovelVm;
             }
 
-            dadosPrevios.GrpAutomoveis = gruposDisponiveis
+            dadosPrevios.GrupoAutomovel = gruposDisponiveis
                 .Select(g => new SelectListItem(g.Nome, g.Id.ToString()));
 
             return dadosPrevios;

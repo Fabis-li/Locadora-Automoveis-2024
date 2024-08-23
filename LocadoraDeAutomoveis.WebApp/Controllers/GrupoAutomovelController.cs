@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraDeAutomoveis.WebApp.Controllers
 {
-    public class GrpAutomoveisController : WebControllerBase
+    public class GrupoAutomovelController : WebControllerBase
     {
-        private readonly GrpAutomoveisService servicoGrpAutomoveis;
+        private readonly GrupoAutomoveisService servicoGrpAutomoveis;
         private readonly IMapper mapeador;
 
-        public GrpAutomoveisController(GrpAutomoveisService servicoGrpAutomoveis, IMapper mapeador)
+        public GrupoAutomovelController(GrupoAutomoveisService servicoGrpAutomoveis, IMapper mapeador)
         {
             this.servicoGrpAutomoveis = servicoGrpAutomoveis;
             this.mapeador = mapeador;
@@ -32,7 +32,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
             var grpAutomoveis = grupos.Value;
 
-            var listarGrpAutomoveisVm = mapeador.Map<IEnumerable<ListarGrpAutomoveisViewModel>>(grpAutomoveis);
+            var listarGrpAutomoveisVm = mapeador.Map<IEnumerable<ListarGrupoAutomovelViewModel>>(grpAutomoveis);
 
             ViewBag.Mensagem = TempData.DesserializarMensagemViewModel();
 
@@ -45,9 +45,9 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inserir(InserirGrpAutomoveisViewModel inserirGrpAutomoveisVm)
+        public IActionResult Inserir(InserirGrupoAutomovelViewModel inserirGrpAutomoveisVm)
         {
-            var novoGrupo = mapeador.Map<GrpAutomoveis>(inserirGrpAutomoveisVm);
+            var novoGrupo = mapeador.Map<GrupoAutomovel>(inserirGrpAutomoveisVm);
 
             var resultado = servicoGrpAutomoveis.Inserir(novoGrupo);
 
@@ -74,15 +74,15 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return RedirectToAction(nameof(Listar));
             }
 
-            var editarGrupoViewModel = mapeador.Map<EditarGrpAutomoveisViewModel>(grupo.Value);
+            var editarGrupoViewModel = mapeador.Map<EditarGrupoAutomovelViewModel>(grupo.Value);
 
             return View(editarGrupoViewModel);
         }
 
         [HttpPost]
-        public IActionResult Editar(EditarGrpAutomoveisViewModel editarGrupoVm)
+        public IActionResult Editar(EditarGrupoAutomovelViewModel editarGrupoVm)
         {
-            var grupo = mapeador.Map<GrpAutomoveis>(editarGrupoVm);
+            var grupo = mapeador.Map<GrupoAutomovel>(editarGrupoVm);
 
             var resultado = servicoGrpAutomoveis.Editar(grupo);
 
@@ -109,13 +109,13 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return RedirectToAction(nameof(Listar));
             }
             
-            var detalhesGrpAutomoveisViewModel = mapeador.Map<DetalhesGrpAutomoveisViewModel>(resultado.Value);
+            var detalhesGrpAutomoveisViewModel = mapeador.Map<DetalhesGrupoAutomovelViewModel>(resultado.Value);
 
             return View(detalhesGrpAutomoveisViewModel);
         }
 
         [HttpPost]
-        public IActionResult Excluir(DetalhesGrpAutomoveisViewModel detalhesGrupoVm)
+        public IActionResult Excluir(DetalhesGrupoAutomovelViewModel detalhesGrupoVm)
         {
             var resultado = servicoGrpAutomoveis.Excluir(detalhesGrupoVm.Id);
 
@@ -142,7 +142,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return RedirectToAction(nameof(Listar));
             }
 
-            var detalhesGrpAutomoveisViewModel = mapeador.Map<DetalhesGrpAutomoveisViewModel>(grupo.Value);
+            var detalhesGrpAutomoveisViewModel = mapeador.Map<DetalhesGrupoAutomovelViewModel>(grupo.Value);
 
             return View(detalhesGrpAutomoveisViewModel);
         }

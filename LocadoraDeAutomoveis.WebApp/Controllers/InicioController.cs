@@ -5,9 +5,9 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 {
     public class InicioController : Controller
     {
-        private readonly IRepositorioGrpAutomoveis repositorioGrpAutomoveis;
+        private readonly IRepositorioGrupoAutomovel repositorioGrpAutomoveis;
 
-        public InicioController(IRepositorioGrpAutomoveis repositorioGrpAutomoveis)
+        public InicioController(IRepositorioGrupoAutomovel repositorioGrpAutomoveis)
         {
             this.repositorioGrpAutomoveis = repositorioGrpAutomoveis;
         }
