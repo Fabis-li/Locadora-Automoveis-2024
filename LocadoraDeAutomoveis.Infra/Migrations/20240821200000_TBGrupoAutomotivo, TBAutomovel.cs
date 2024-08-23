@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace LocadoreDeAutomoveis.Infra.Migrations
+namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     /// <inheritdoc />
     public partial class TBGrupoAutomotivoTBAutomovel : Migration

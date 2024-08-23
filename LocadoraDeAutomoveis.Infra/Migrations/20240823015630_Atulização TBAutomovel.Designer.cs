@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     [DbContext(typeof(LocadoraDeAutomoveisDbContext))]
-    [Migration("20240821200000_TBGrupoAutomotivo, TBAutomovel")]
-    partial class TBGrupoAutomotivoTBAutomovel
+    [Migration("20240823015630_Atulização TBAutomovel")]
+    partial class AtulizaçãoTBAutomovel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,15 +36,8 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.Property<int>("Ano")
                         .HasColumnType("int");
 
-                    b.Property<int>("Automovel_Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("CapacidadeCombustivel")
                         .HasColumnType("int");
-
-                    b.Property<string>("Combustivel")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Cor")
                         .IsRequired()
@@ -53,6 +46,9 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.Property<string>("FotoVeiculo")
                         .IsRequired()
                         .HasColumnType("varchar(250)");
+
+                    b.Property<int>("GrupoAutomovelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Marca")
                         .IsRequired()
@@ -66,14 +62,17 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(20)");
 
+                    b.Property<int>("TipoCombustivel")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("Automovel_Id");
+                    b.HasIndex("GrupoAutomovelId");
 
                     b.ToTable("TBAutomovel", (string)null);
                 });
 
-            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrpAutomoveis", b =>
+            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrupoAutomovel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -307,9 +306,9 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
 
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAutomoveis.Automovel", b =>
                 {
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrpAutomoveis", "GrupoAutomoveis")
-                        .WithMany()
-                        .HasForeignKey("Automovel_Id")
+                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrupoAutomovel", "GrupoAutomoveis")
+                        .WithMany("Automoveis")
+                        .HasForeignKey("GrupoAutomovelId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -365,6 +364,11 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrupoAutomovel", b =>
+                {
+                    b.Navigation("Automoveis");
                 });
 #pragma warning restore 612, 618
         }
