@@ -1,7 +1,7 @@
 ﻿@{
     string caminho = Context.Request.Path;
 
-    var grpAutomoveisAtivo = caminho.StartsWith("/grpAutomoveis") ? "nav-link active fw-semibold" : "nav-link";
+    var grupoAutomoveisAtivo = caminho.StartsWith("/grupoAutomoveis") ? "nav-link active fw-semibold" : "nav-link";
 
     MensagemViewModel? mensagem = ViewBag.Mensagem ?? null;
 }
@@ -15,6 +15,7 @@
     <title>@ViewBag.Title - Locadora De Automoveis</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LocadoraDeAutomoveis.WebApp.styles.css" asp-append-version="true" />
 </head>
@@ -32,7 +33,7 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1 justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="GrpAutomoveis" asp-action="Listar">Grupo de Veículos</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="GrupoAutomovel" asp-action="Listar">Grupo de Veículos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Automovel" asp-action="Listar">Automóveis</a>
