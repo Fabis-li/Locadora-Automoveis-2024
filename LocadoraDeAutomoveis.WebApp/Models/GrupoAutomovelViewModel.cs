@@ -2,7 +2,7 @@
 
 namespace LocadoraDeAutomoveis.WebApp.Models
 {
-    public class InserirGrpAutomoveisViewModel
+    public class InserirGrupoAutomovelViewModel
     {
         public int Id { get; set; }
 
@@ -10,7 +10,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Nome { get; set; }
     }
 
-    public class EditarGrpAutomoveisViewModel
+    public class EditarGrupoAutomovelViewModel
     {
         public int Id { get; set; }
 
@@ -18,13 +18,13 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Nome { get; set; }
     }
 
-    public class ListarGrpAutomoveisViewModel
+    public class ListarGrupoAutomovelViewModel
     {
         public int Id { get; set; }
         public string Nome { get; set; }
     }
 
-    public class DetalhesGrpAutomoveisViewModel
+    public class DetalhesGrupoAutomovelViewModel
     {
         public int Id { get; set; }
         public string Nome { get; set; }

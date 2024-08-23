@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LocadoraDeAutomoveis.WebApp.Models
@@ -22,12 +23,11 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Placa { get; set; }
 
         [Required(ErrorMessage = "O campo Combustível é obrigatório.")]
-        public string Combustivel { get; set; }
+        public int TipoCombustivel { get; set; }
 
         [Required(ErrorMessage = "O campo Ano é obrigatório.")]
         [Range(1900, 2100, ErrorMessage = "O ano deve ser entre 1900 e 2100")]
         [RegularExpression(@"^\d{4}$", ErrorMessage = "O ano deve conter 4 dígitos")]
-        [DataType(DataType.Date)]
         public int Ano { get; set; }
 
         [Required(ErrorMessage = "O campo Capacidade de Combustível é obrigatório.")]
@@ -38,9 +38,9 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string FotoVeiculo { get; set; }
 
         [Required(ErrorMessage = "O campo Grupo de Automóveis é obrigatório.")]
-        public int GrupoAutomoveisId { get; set; }
+        public int GrupoAutomovelId { get; set; }
 
-        public IEnumerable<SelectListItem>? GrpAutomoveis { get; set; }
+        public IEnumerable<SelectListItem>? GrupoAutomovel { get; set; }
     }
 
     public class EditarAutomovelViewModel
@@ -64,12 +64,11 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Placa { get; set; }
 
         [Required(ErrorMessage = "O campo Combustível é obrigatório.")]
-        public string Combustivel { get; set; }
+        public int TipoCombustivel { get; set; }
 
         [Required(ErrorMessage = "O campo Ano é obrigatório.")]
         [Range(1900, 2100, ErrorMessage = "O ano deve ser entre 1900 e 2100")]
         [RegularExpression(@"^\d{4}$", ErrorMessage = "O ano deve conter 4 dígitos")]
-        [DataType(DataType.Date)]
         public int Ano { get; set; }
 
         [Required(ErrorMessage = "O campo Capacidade de Combustível é obrigatório.")]
@@ -80,9 +79,9 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string FotoVeiculo { get; set; }
 
         [Required(ErrorMessage = "O campo Grupo de Automóveis é obrigatório.")]
-        public int GrupoAutomoveisId { get; set; }
+        public int GrupoAutomovelId { get; set; }
 
-        public IEnumerable<SelectListItem>? GrpAutomoveis { get; set; }
+        public IEnumerable<SelectListItem>? GrupoAutomovel { get; set; }
     }
 
     public class ListarAutomoveisViewModel
@@ -92,15 +91,15 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Modelo { get; set; }
         public string Cor { get; set; }
         public string Placa { get; set; }
-        public string Combustivel { get; set; }
+        public string tipoCombustivel { get; set; }
         public string FotoVeiculo { get; set; }
-        public string GrupoAutomoveis { get; set; }
+        public string GrupoAutomovel { get; set; }
     }
 
     public class AgrupamentoAutomovelViewModel
     {
-        public string GrupoAutomoveis { get; set; }
-        public IEnumerable<ListarAutomoveisViewModel> Automoveis { get; set; }
+        public string GrupoAutomovel { get; set; }
+        public IEnumerable<ListarAutomoveisViewModel> Automovel { get; set; }
     }
 
     public class DetalhesAutomovelViewModel
@@ -110,11 +109,11 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Modelo { get; set; }
         public string Cor { get; set; }
         public string Placa { get; set; }
-        public string Combustivel { get; set; }
+        public string TipoCombustivel { get; set; }
         public int Ano { get; set; }
         public int CapacidadeCombustivel { get; set; }
         public string FotoVeiculo { get; set; }
-        public string GrupoAutomoveis { get; set; }
+        public string GrupoAutomovel { get; set; }
     }
 
 }
