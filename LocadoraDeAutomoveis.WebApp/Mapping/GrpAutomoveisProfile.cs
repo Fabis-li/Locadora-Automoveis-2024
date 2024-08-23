@@ -8,11 +8,11 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping
     {
         public GrpAutomoveisProfile()
         {
-            CreateMap<InserirGrpAutomoveisViewModel, GrpAutomoveis>();
-            CreateMap<EditarGrpAutomoveisViewModel, GrpAutomoveis>();
-            CreateMap<GrpAutomoveis, ListarGrpAutomoveisViewModel>();
-            CreateMap<GrpAutomoveis, DetalhesGrpAutomoveisViewModel>();
-            CreateMap<GrpAutomoveis, EditarGrpAutomoveisViewModel>();
+            CreateMap<InserirGrupoAutomovelViewModel, GrupoAutomovel>();
+            CreateMap<EditarGrupoAutomovelViewModel, GrupoAutomovel>();
+            CreateMap<GrupoAutomovel, ListarGrupoAutomovelViewModel>();
+            CreateMap<GrupoAutomovel, DetalhesGrupoAutomovelViewModel>();
+            CreateMap<GrupoAutomovel, EditarGrupoAutomovelViewModel>();
         }
     }
 }
