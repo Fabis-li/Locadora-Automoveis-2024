@@ -4,6 +4,11 @@
     {
         public decimal PrecoDiaria { get; set; }
 
+        public PlanoLivre()
+        {
+            
+        }
+
         public PlanoLivre(decimal precoDiaria)
         {
             PrecoDiaria = precoDiaria;

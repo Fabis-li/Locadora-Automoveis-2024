@@ -5,12 +5,16 @@
         public decimal KmDisponivel { get; set; }
         public decimal PrecoDiaria { get; set; }
         public decimal PrecoPorkmExcedido { get; set; }
+        public TipoPlanoCobranca Tipo { get; set; }
+
+        public PlanoControlado() { } 
 
         public PlanoControlado(decimal kmDisponivel, decimal precoDiaria, decimal precoPorkmExcedido)
         {
             KmDisponivel = kmDisponivel;
             PrecoDiaria = precoDiaria;
             PrecoPorkmExcedido = precoPorkmExcedido;
+            Tipo = TipoPlanoCobranca.Controlado;
         }
 
         public List<string> Validar()

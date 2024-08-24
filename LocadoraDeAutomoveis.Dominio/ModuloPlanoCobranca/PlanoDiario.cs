@@ -5,6 +5,10 @@
         public decimal PrecoDiaria { get; set; }
         public decimal PrecoPorKm { get; set; }
 
+        public TipoPlanoCobranca Tipo => TipoPlanoCobranca.Diario;
+
+        public PlanoDiario() { }
+
         public PlanoDiario(decimal precoDiaria, decimal precoPorKm)
         {
             PrecoDiaria = precoDiaria;
