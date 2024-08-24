@@ -4,13 +4,13 @@
     {
         public decimal KmDisponivel { get; set; }
         public decimal PrecoDiaria { get; set; }
-        public decimal PrecoPorkmExtrapolado { get; set; }
+        public decimal PrecoPorkmExcedido { get; set; }
 
-        public PlanoControlado(decimal kmDisponivel, decimal precoDiaria, decimal precoPorkmExtrapolado)
+        public PlanoControlado(decimal kmDisponivel, decimal precoDiaria, decimal precoPorkmExcedido)
         {
             KmDisponivel = kmDisponivel;
             PrecoDiaria = precoDiaria;
-            PrecoPorkmExtrapolado = precoPorkmExtrapolado;
+            PrecoPorkmExcedido = precoPorkmExcedido;
         }
 
         public List<string> Validar()
@@ -23,7 +23,7 @@
             if (PrecoDiaria <= 0)
                 erros.Add("Preço da diária deve ser maior que zero");
 
-            if (PrecoPorkmExtrapolado <= 0)
+            if (PrecoPorkmExcedido <= 0)
                 erros.Add("Preço por km excedido deve ser maior que zero");
 
             return erros;

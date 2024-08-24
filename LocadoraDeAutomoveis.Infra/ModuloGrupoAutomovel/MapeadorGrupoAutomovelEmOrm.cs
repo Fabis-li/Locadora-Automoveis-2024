@@ -17,7 +17,7 @@ namespace LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis
             gBuilder.Property(g => g.Nome)
                 .IsRequired()
                 .HasColumnType("varchar(200)");
-
+            
             gBuilder.HasData(ObterRegistrosPadrao());
         }
 

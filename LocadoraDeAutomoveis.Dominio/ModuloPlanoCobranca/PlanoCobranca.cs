@@ -7,27 +7,17 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca
     {
         public string NomePlano { get; set; }
 
-        //public decimal ValorDiaria { get; set; }
+        public int GrupoAutomovelId { get; set; }
 
-        //public decimal ValorKm { get; set; }
+        public GrupoAutomovel GrupoAutomoveis { get; set; }
 
-        //public int QuantidadeDias { get; set; }
+        protected PlanoCobranca() { }
 
-        public int GrupoAutomoveis_Id { get; set; }
-
-        protected PlanoCobranca()
-        {
-            
-        }
-
-        public PlanoCobranca(string nomePlano, int grupoAutomoveis_Id)
+        public PlanoCobranca(string nomePlano, int grupoAutomovelId, GrupoAutomovel grupoAutomoveis)
         {
             NomePlano = nomePlano;
-            //ValorDiaria = valorDiaria;
-            //ValorKm = valorKm;
-            //QuantidadeDias = quantidadeDias;
-            GrupoAutomoveis_Id = grupoAutomoveis_Id;
-           
+            GrupoAutomovelId = grupoAutomovelId;
+            GrupoAutomoveis = grupoAutomoveis;
         }
 
         public List<string> Validar()
@@ -37,16 +27,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca
             if (string.IsNullOrEmpty(NomePlano))
                 erros.Add("O campo \"Nome do Plano\" é obrigatório");
 
-            //if (ValorDiaria <= 0)
-            //    erros.Add("O campo \"Valor da Diária\" é obrigatório");
-
-            //if (ValorKm <= 0)
-            //    erros.Add("O campo \"Valor do Km\" é obrigatório");
-
-            //if (QuantidadeDias <= 0)
-            //    erros.Add("O campo \"Quantidade de Dias\" é obrigatório");
-
-            if (GrupoAutomoveis_Id <= 0)
+            if (GrupoAutomovelId <= 0)
                 erros.Add("O campo \"Grupo de Automóveis\" é obrigatório");
 
             return erros;
