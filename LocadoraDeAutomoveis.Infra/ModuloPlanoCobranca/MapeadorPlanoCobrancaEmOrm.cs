@@ -12,10 +12,10 @@ namespace LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca
             pBuilder.ToTable("TBPlanoCobranca");
 
             // Configura o campo discriminador
-            pBuilder.HasDiscriminator<TipoPlanoCobranca>("TipoPlanoCobranca")
-                .HasValue<PlanoDiario>(TipoPlanoCobranca.Diario)
-                .HasValue<PlanoControlado>(TipoPlanoCobranca.Controlado) 
-                .HasValue<PlanoLivre>(TipoPlanoCobranca.Livre);
+            pBuilder.HasDiscriminator<string>("TipoPlanoCobranca")
+                .HasValue<PlanoDiario>("Diario")
+                .HasValue<PlanoControlado>("Controlado")
+                .HasValue<PlanoLivre>("Livre");
 
             // Configuração das propriedades comuns
             pBuilder.Property(p => p.NomePlano)
@@ -26,45 +26,32 @@ namespace LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca
                 .IsRequired()
                 .HasColumnType("int");
 
-            pBuilder.Property(p => p.TipoPlanoCobranca)
+            pBuilder.Property(p => p.PrecoDiaria)
                 .IsRequired()
-                .HasColumnName("TipoPlanoCobranca")
-                .HasColumnType("int");
+                .HasColumnType("decimal(18,2)");
 
-            pBuilder.HasOne(p => p.GrupoAutomoveis)
-                .WithMany(g => g.PlanosCobranca)
+            pBuilder.HasMany<PlanoControlado>()
+                .WithOne()
                 .HasForeignKey(p => p.GrupoAutomovelId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Configurações específicas para cada tipo derivado
-            pBuilder.HasKey(e => e.Id);
+            pBuilder.HasMany<PlanoDiario>()
+                .WithOne()
+                .HasForeignKey(p => p.GrupoAutomovelId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Configurações para PlanoControlado
-            pBuilder.Property<decimal?>("KmDisponivel")
-                .HasColumnName("KmDisponivel")
-                .HasPrecision(18, 2);
+            pBuilder.HasMany<PlanoLivre>()
+                .WithOne()
+                .HasForeignKey(p => p.GrupoAutomovelId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            pBuilder.Property<decimal?>("PrecoDiarioControlado")
-                .HasColumnName("PrecoDiariaControlado")
-                .HasPrecision(18, 2);
+            //pBuilder.Property<PlanoControlado>(p => p.KmDisponivel)
+            //    .IsRequired()
+            //    .HasColumnType("decimal(18,2)");
 
-            pBuilder.Property<decimal?>("PrecoProKmExcedido")
-                .HasColumnName("PrecoProKmExcedido")
-                .HasPrecision(18, 2);
 
-            // Configurações para PlanoDiario
-            pBuilder.Property<decimal?>("PrecoDiariaDiario")
-                .HasColumnName("PrecoDiariaDiario")
-                .HasPrecision(18, 2);
 
-            pBuilder.Property<decimal?>("PrecoPorKm")
-                .HasColumnName("PrecoPorKm")
-                .HasPrecision(18, 2);
 
-            // Configurações para PlanoLivre
-            pBuilder.Property<decimal?>("PrecoDiariaLivre")
-                .HasColumnName("PrecoDiariaLivre")
-                .HasPrecision(18, 2);
         }
 
     }

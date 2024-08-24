@@ -2,19 +2,24 @@
 {
     public class PlanoControlado : PlanoCobranca
     {
-        public decimal KmDisponivel { get; set; }
-        public decimal PrecoDiaria { get; set; }
-        public decimal PrecoPorkmExcedido { get; set; }
-        public TipoPlanoCobranca Tipo { get; set; }
-
-        public PlanoControlado() { } 
-
-        public PlanoControlado(decimal kmDisponivel, decimal precoDiaria, decimal precoPorkmExcedido)
+        public override string TipoPlanoCobranca { get; set; } = "Controlado";
+        public override decimal PrecoDiaria { get; set; }
+        public override decimal? PrecoPorKm
         {
-            KmDisponivel = kmDisponivel;
+            get => null;
+            set => throw new NotImplementedException();
+        }
+        public override decimal KmDisponivel { get; set; }
+        public override decimal? PrecoPorkmExcedido { get; set; }
+
+        public PlanoControlado() { }
+
+        public PlanoControlado(string nomePlano, int grupoAutomovelId, decimal precoDiaria, decimal kmDisponivel, decimal precoPorkmExcedido)
+            : base(nomePlano, grupoAutomovelId)
+        {
             PrecoDiaria = precoDiaria;
+            KmDisponivel = kmDisponivel;
             PrecoPorkmExcedido = precoPorkmExcedido;
-            Tipo = TipoPlanoCobranca.Controlado;
         }
 
         public List<string> Validar()

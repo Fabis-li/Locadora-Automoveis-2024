@@ -9,22 +9,22 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca
 
         public int GrupoAutomovelId { get; set; }
 
-        public TipoPlanoCobranca TipoPlanoCobranca { get; set; }
+        public abstract string TipoPlanoCobranca { get; set; }
+        public abstract decimal KmDisponivel { get; set; }
+        public abstract decimal PrecoDiaria { get; set; }
+        public abstract decimal? PrecoPorKm { get; set; }
+        public abstract decimal? PrecoPorkmExcedido { get; set; }
 
-        public GrupoAutomovel GrupoAutomoveis { get; set; }
+        //public GrupoAutomovel GrupoAutomoveis { get; set; }
 
-        protected PlanoCobranca()
-        {
-            
-        }
+        protected PlanoCobranca() { }
 
-        public PlanoCobranca(string nomePlano, int grupoAutomovelId, GrupoAutomovel grupoAutomoveis, TipoPlanoCobranca tipoPlanoCobranca)
+        protected PlanoCobranca(string nomePlano, int grupoAutomovelId)
         {
             NomePlano = nomePlano;
             GrupoAutomovelId = grupoAutomovelId;
-            GrupoAutomoveis = grupoAutomoveis;
-            TipoPlanoCobranca = tipoPlanoCobranca;
         }
+       
 
         public List<string> Validar()
         {

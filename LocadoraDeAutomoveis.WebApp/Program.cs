@@ -6,6 +6,7 @@ using LocadoraDeAutomovies.Aplicacao.Servicos;
 using LocadoraDeAutomoveis.Infra.Compartilhado;
 using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
 using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
+using LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca;
 
 namespace LocadoraDeAutomoveis.WebApp
 {
@@ -19,7 +20,8 @@ namespace LocadoraDeAutomoveis.WebApp
 
             builder.Services.AddScoped<IRepositorioGrupoAutomovel, RepositorioGrupoAutomovelEmOrm>();
             builder.Services.AddScoped<IRepositorioAutomovel, RepositorioAutomovelEmOrm>();
-            
+            builder.Services.AddScoped<IRepositorioPlanoCobranca, RepositorioPlanoCobrancaEmOrm>();
+
 
             builder.Services.AddScoped<GrupoAutomoveisService>();
             builder.Services.AddScoped<AutomovelService>();

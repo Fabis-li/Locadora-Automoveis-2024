@@ -2,14 +2,25 @@
 {
     public class PlanoDiario : PlanoCobranca
     {
-        public decimal PrecoDiaria { get; set; }
-        public decimal PrecoPorKm { get; set; }
+        public override string TipoPlanoCobranca { get; set; } = "Diário";
+        public override decimal PrecoDiaria { get; set; }
+        public override decimal? PrecoPorKm { get; set; }
+        public override decimal? KmDisponivel
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
 
-        public TipoPlanoCobranca Tipo => TipoPlanoCobranca.Diario;
+        public override decimal? PrecoPorkmExcedido
+        {
+            get => null;
+            set => throw new NotImplementedException();
+        }
 
         public PlanoDiario() { }
 
-        public PlanoDiario(decimal precoDiaria, decimal precoPorKm)
+        public PlanoDiario(string nomePlano, int grupoAutomovelId, decimal precoDiaria, decimal precoPorKm)
+            : base(nomePlano, grupoAutomovelId)
         {
             PrecoDiaria = precoDiaria;
             PrecoPorKm = precoPorKm;
