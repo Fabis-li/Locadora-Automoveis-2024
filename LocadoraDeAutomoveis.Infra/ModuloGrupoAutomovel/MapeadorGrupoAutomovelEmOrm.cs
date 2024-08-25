@@ -12,6 +12,7 @@ namespace LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis
 
             gBuilder.Property(g => g.Id)
                 .IsRequired()
+                .HasColumnType("int")
                 .ValueGeneratedOnAdd();
 
             gBuilder.Property(g => g.Nome)
