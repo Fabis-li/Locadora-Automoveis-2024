@@ -8,11 +8,10 @@ namespace LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca
     {
         public void Configure(EntityTypeBuilder<PlanoCobranca> pBuilder)
         {
-            pBuilder.ToTable("PlanoCobranca");
+            pBuilder.ToTable("TBPlanoCobranca");
 
             pBuilder.Property(p => p.Id)
                 .IsRequired()
-                .HasColumnType("int")
                 .ValueGeneratedOnAdd();
 
             pBuilder.Property(p => p.PrecoDiarioPlanoDiario)
@@ -25,7 +24,7 @@ namespace LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca
 
             pBuilder.Property(p => p.KmDisponivelPlanoControlado)
                 .IsRequired()
-                .HasColumnType("decimal(18,2");
+                .HasColumnType("decimal(18,2)");
 
             pBuilder.Property(p => p.PrecoDiarioPlanoControlado)
                 .IsRequired()
