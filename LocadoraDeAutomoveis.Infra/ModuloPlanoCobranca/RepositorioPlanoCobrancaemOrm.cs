@@ -22,30 +22,10 @@ namespace LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca
                 .ToList();
         }
 
-        public override PlanoCobranca SelecionarPorId(int id)
+        public override PlanoCobranca? SelecionarPorId(int id)
         {
             return ObterRegistros()
-                .FirstOrDefault(p => p.Id == id)!;
-        }
-
-        public PlanoControlado ObterPlanoControladoPorId(int id)
-        {
-            return ObterRegistros()
-                .OfType<PlanoControlado>()
-                .FirstOrDefault(p => p.Id == id)!;
-        }
-
-        public PlanoDiario ObterPlanoDiarioPorId(int id)
-        {
-            return ObterRegistros()
-                .OfType<PlanoDiario>()
-                .FirstOrDefault(p => p.Id == id)!;
-        }
-
-        public PlanoLivre ObterPlanoLivrePorId(int id)
-        {
-            return ObterRegistros()
-                .OfType<PlanoLivre>()
+                .Include(p => p.GrupoAutomovel)
                 .FirstOrDefault(p => p.Id == id)!;
         }
     }

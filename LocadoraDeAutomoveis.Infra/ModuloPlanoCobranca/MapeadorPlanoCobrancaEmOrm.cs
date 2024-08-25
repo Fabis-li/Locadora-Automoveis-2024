@@ -8,50 +8,45 @@ namespace LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca
     {
         public void Configure(EntityTypeBuilder<PlanoCobranca> pBuilder)
         {
-            // Mapeamento da tabela
-            pBuilder.ToTable("TBPlanoCobranca");
+            pBuilder.ToTable("PlanoCobranca");
 
-            // Configura o campo discriminador
-            pBuilder.HasDiscriminator<string>("TipoPlanoCobranca")
-                .HasValue<PlanoDiario>("Diario")
-                .HasValue<PlanoControlado>("Controlado")
-                .HasValue<PlanoLivre>("Livre");
-
-            // Configuração das propriedades comuns
-            pBuilder.Property(p => p.NomePlano)
+            pBuilder.Property(p => p.Id)
                 .IsRequired()
-                .HasColumnType("varchar(100)");
+                .HasColumnType("int")
+                .ValueGeneratedOnAdd();
+
+            pBuilder.Property(p => p.PrecoDiarioPlanoDiario)
+                .IsRequired()
+                .HasColumnType("decimal(18,2)");
+
+            pBuilder.Property(p => p.PrecoPorKmPlanoDiario)
+                .IsRequired()
+                .HasColumnType("decimal(18,2)");
+
+            pBuilder.Property(p => p.KmDisponivelPlanoControlado)
+                .IsRequired()
+                .HasColumnType("decimal(18,2");
+
+            pBuilder.Property(p => p.PrecoDiarioPlanoControlado)
+                .IsRequired()
+                .HasColumnType("decimal(18,2)");
+
+            pBuilder.Property(p => p.PrecoPorKmExcedido)
+                .IsRequired()
+                .HasColumnType("decimal(18,2)");
+
+            pBuilder.Property(p => p.PrecoDiarioPlanoLivre)
+                .IsRequired()
+                .HasColumnType("decimal(18,2)");
 
             pBuilder.Property(p => p.GrupoAutomovelId)
                 .IsRequired()
                 .HasColumnType("int");
 
-            pBuilder.Property(p => p.PrecoDiaria)
-                .IsRequired()
-                .HasColumnType("decimal(18,2)");
-
-            pBuilder.HasMany<PlanoControlado>()
-                .WithOne()
+            pBuilder.HasOne(p => p.GrupoAutomovel)
+                .WithMany()
                 .HasForeignKey(p => p.GrupoAutomovelId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            pBuilder.HasMany<PlanoDiario>()
-                .WithOne()
-                .HasForeignKey(p => p.GrupoAutomovelId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            pBuilder.HasMany<PlanoLivre>()
-                .WithOne()
-                .HasForeignKey(p => p.GrupoAutomovelId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //pBuilder.Property<PlanoControlado>(p => p.KmDisponivel)
-            //    .IsRequired()
-            //    .HasColumnType("decimal(18,2)");
-
-
-
-
         }
 
     }
