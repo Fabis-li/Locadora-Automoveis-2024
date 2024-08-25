@@ -3,41 +3,44 @@ using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 
 namespace LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca
 {
-    public abstract class PlanoCobranca : EntidadeBase
+    public class PlanoCobranca : EntidadeBase
     {
-        public string NomePlano { get; set; }
-
         public int GrupoAutomovelId { get; set; }
+        public GrupoAutomovel? GrupoAutomovel { get; set; }
 
-        public abstract string TipoPlanoCobranca { get; set; }
-        public abstract decimal KmDisponivel { get; set; }
-        public abstract decimal PrecoDiaria { get; set; }
-        public abstract decimal? PrecoPorKm { get; set; }
-        public abstract decimal? PrecoPorkmExcedido { get; set; }
-
-        //public GrupoAutomovel GrupoAutomoveis { get; set; }
+        public decimal PrecoDiarioPlanoDiario { get; set; }
+        public decimal PrecoPorKmPlanoDiario { get; set; }
+        public decimal KmDisponivelPlanoControlado { get; set; }
+        public decimal PrecoDiarioPlanoControlado { get; set; }
+        public decimal PrecoPorKmExcedido { get; set; }
+        public decimal PrecoDiarioPlanoLivre { get; set; }
 
         protected PlanoCobranca() { }
 
-        protected PlanoCobranca(string nomePlano, int grupoAutomovelId)
+        public PlanoCobranca(int grupoAutomovelId, decimal precoDiarioPlanoDiario, decimal precoPorKmPlanoDiario, decimal kmDisponivelPlanoControlado, decimal precoDiarioPlanoControlado, decimal precoPorKmExcedido, decimal precoDiarioPlanoLivre)
         {
-            NomePlano = nomePlano;
             GrupoAutomovelId = grupoAutomovelId;
+
+            PrecoDiarioPlanoDiario = precoDiarioPlanoDiario;
+            PrecoPorKmPlanoDiario = precoPorKmPlanoDiario;
+
+            KmDisponivelPlanoControlado = kmDisponivelPlanoControlado;
+            PrecoDiarioPlanoControlado = precoDiarioPlanoControlado;
+            PrecoPorKmExcedido = precoPorKmExcedido;
+
+            PrecoDiarioPlanoLivre = precoDiarioPlanoLivre;
         }
-       
 
         public List<string> Validar()
         {
-            List<string> erros = new List<string>();
+            List<string> erros = [];
 
-            if (string.IsNullOrEmpty(NomePlano))
-                erros.Add("O campo \"Nome do Plano\" é obrigatório");
-
-            if (GrupoAutomovelId <= 0)
-                erros.Add("O campo \"Grupo de Automóveis\" é obrigatório");
-
+            if(GrupoAutomovelId == 0)
+                erros.Add("Grupo de automóvel inválido");
+            
             return erros;
         }
+
     }
 
     
