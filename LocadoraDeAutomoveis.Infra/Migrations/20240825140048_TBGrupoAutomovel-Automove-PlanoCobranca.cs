@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class TabelasGrupoAutomovelAutomovelPlanoCobranca : Migration
+    public partial class TBGrupoAutomovelAutomovePlanoCobranca : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

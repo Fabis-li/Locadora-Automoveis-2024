@@ -44,23 +44,23 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
         {
             var repositorio = new RepositorioGrupoAutomovelEmOrm(db);
             //Arrange
-            var grpAutomoveis = new GrupoAutomovel("Econômico");
+            var grupoAutomoveis = new GrupoAutomovel("Econômico");
 
-            repositorio.Inserir(grpAutomoveis);
+            repositorio.Inserir(grupoAutomoveis);
             
             //Act
-            var  grpAtualizado= repositorio.SelecionarPorId(grpAutomoveis.Id);
-            grpAtualizado.Nome = "SUV";
+            var  grupoAtualizado= repositorio.SelecionarPorId(grupoAutomoveis.Id);
+            grupoAtualizado.Nome = "SUV";
 
-            repositorio.Editar(grpAtualizado);
+            repositorio.Editar(grupoAtualizado);
 
             db.SaveChanges();
 
             //assert
-            var grpEncontrado = repositorio.SelecionarPorId(grpAutomoveis.Id);
+            var grpEncontrado = repositorio.SelecionarPorId(grupoAutomoveis.Id);
 
             Assert.IsNotNull(grpEncontrado);
-            Assert.AreEqual(grpAtualizado.Nome, grpEncontrado.Nome);
+            Assert.AreEqual(grupoAtualizado.Nome, grpEncontrado.Nome);
         }
 
         [TestMethod]

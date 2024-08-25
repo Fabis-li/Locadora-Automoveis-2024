@@ -8,16 +8,17 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis
     {
         public string Nome { get; set; }
         public List<Automovel> Automoveis { get; set; }
-        public List<PlanoCobranca> PlanosCobranca { get; set; }
+        //public PlanoCobranca PlanosCobranca { get; set; }
 
-        public GrupoAutomovel() { }
+        public GrupoAutomovel()
+        {
+           
+        }
 
         public GrupoAutomovel(string nome)
         {
             Nome = nome;
             Automoveis = new List<Automovel>();
-            PlanosCobranca = new List<PlanoCobranca>();
-
         }
 
         public List<string> Validar()
