@@ -26,7 +26,7 @@ namespace LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca
         {
             return ObterRegistros()
                 .Include(p => p.GrupoAutomovel)
-                .FirstOrDefault(p => p.Id == id)!;
+                .FirstOrDefault(p => p.Id == id);
         }
     }
 }
