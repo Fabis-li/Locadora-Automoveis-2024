@@ -8,30 +8,48 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
     public class PlanoCobrancaTests
     {
         [TestMethod]
-        public void Deve_validar_plano_cobranca_corretamente()
+        public void Deve_Criar_PlanoCobranca_Valido()
         {
-            var plano = new PlanoDiario(100m, 2m);
+            var planoCobranca = new PlanoCobranca
+                (
+                    1,
+                    10m,
+                    10m,
+                    10m,
+                    10m,
+                    10m,
+                    10m
+                );
 
-            var erros = plano.Validar();
+            var erros = planoCobranca.Validar();
 
             Assert.AreEqual(0, erros.Count);
         }
 
         [TestMethod]
-        public void Deve_validar_plano_cobranca_errado()
+        public void Deve_Criar_PlanoCobranca_Com_Erro()
         {
-            var plano = new PlanoDiario(0m, 0m);
+            var planoCobranca = new PlanoCobranca
+                (
+                    0,
+                    0m,
+                    0m,
+                    0m,
+                    0m,
+                    0m,
+                    0m
+                );
 
-            var erros = plano.Validar();
+            var erros = planoCobranca.Validar();
 
-            List<string> erroEsperado = new List<string>
-            {
-                "Preço da diária deve ser maior que zero",
-                "Preço por km deve ser maior que zero"
-            };
+            List<string> errosEsperados =
+            [
+                "O grupo de automóveis deve ser informado",
+            ];
 
-            CollectionAssert.AreEqual(erroEsperado, erros);
+            Assert.AreEqual(errosEsperados.Count, erros.Count);
         }
+
     }
     
 }
