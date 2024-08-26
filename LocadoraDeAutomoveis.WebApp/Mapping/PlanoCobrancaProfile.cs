@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
+using LocadoraDeAutomoveis.WebApp.Mapping.Resolvers;
 using LocadoraDeAutomoveis.WebApp.Models;
 
 namespace LocadoraDeAutomoveis.WebApp.Mapping
@@ -10,7 +11,7 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping
         {
             CreateMap<InserirPlanoCobrancaViewModel, PlanoCobranca>();
             CreateMap<EditarPlanoCobrancaViewModel, PlanoCobranca>();
-
+            
             CreateMap<PlanoCobranca, ListarPlanoCobrancaViewModel>()
                 .ForMember(
                     dest => dest.GrupoAutomovel, 
@@ -23,7 +24,8 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping
                     opt => opt.MapFrom(src => src.GrupoAutomovel!.Nome)
                 );
 
-            CreateMap<PlanoCobranca, EditarPlanoCobrancaViewModel>();
+            CreateMap<PlanoCobranca, EditarPlanoCobrancaViewModel>()
+                .ForMember(v => v.GrupoAutomovel, opt => opt.MapFrom<GrupoAutomoveisResolver>());
         }
     }
 }

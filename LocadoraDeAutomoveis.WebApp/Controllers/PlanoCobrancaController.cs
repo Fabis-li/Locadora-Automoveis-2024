@@ -77,11 +77,12 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return RedirectToAction(nameof(Listar));
             }
 
+            var grupos = serviceGrupo.SelecionarTodos().Value;
+
             var planoCobranca = resultado.Value;
 
             var editarPlanoCobrancaVm = mapeador.Map<EditarPlanoCobrancaViewModel>(planoCobranca);
 
-            var grupos = serviceGrupo.SelecionarTodos().Value;
 
             editarPlanoCobrancaVm.GrupoAutomovel = grupos
                 .Select(g => new SelectListItem(g.Nome, g.Id.ToString()));
@@ -93,7 +94,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         public IActionResult Editar(EditarPlanoCobrancaViewModel editarPlanoCobrancaVm)
         {
             if (!ModelState.IsValid)
-                return View(CarregarDados(editarPlanoCobrancaVm));
+                return View(editarPlanoCobrancaVm);
 
             var planoCobranca = mapeador.Map<PlanoCobranca>(editarPlanoCobrancaVm);
 
@@ -148,7 +149,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             return RedirectToAction(nameof(Listar));
         }
 
-        private InserirPlanoCobrancaViewModel? CarregarDados(InserirPlanoCobrancaViewModel? dadosPrevios = null)
+        private InserirPlanoCobrancaViewModel? CarregarDados(InserirPlanoCobrancaViewModel dadosPrevios = null)
         {
             var resultadoGrupo = serviceGrupo.SelecionarTodos();
 
@@ -159,12 +160,15 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return null;
             }
 
+            var grupoAutomovelLista = resultadoGrupo.Value
+                .Select(g => new SelectListItem(g.Nome, g.Id.ToString()))
+                .ToList();
+
             if (dadosPrevios is null)
             {
                 var inserirPlanoCobrancaVm = new InserirPlanoCobrancaViewModel
                 {
-                    GrupoAutomovel = resultadoGrupo.Value
-                        .Select(g => new SelectListItem(g.Nome, g.Id.ToString()))
+                    GrupoAutomovel = grupoAutomovelLista
                 };
 
                 return inserirPlanoCobrancaVm;
