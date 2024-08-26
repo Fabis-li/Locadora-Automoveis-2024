@@ -7,6 +7,7 @@ using LocadoraDeAutomoveis.Infra.Compartilhado;
 using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
 using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
 using LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca;
+using LocadoraDeAutomoveis.WebApp.Mapping.Resolvers;
 
 namespace LocadoraDeAutomoveis.WebApp
 {
@@ -26,6 +27,8 @@ namespace LocadoraDeAutomoveis.WebApp
             builder.Services.AddScoped<GrupoAutomoveisService>();
             builder.Services.AddScoped<AutomovelService>();
             builder.Services.AddScoped<PlanoCobrancaService>();
+
+            builder.Services.AddScoped<GrupoAutomoveisResolver>();
 
             builder.Services.AddAutoMapper(cfg =>
             {

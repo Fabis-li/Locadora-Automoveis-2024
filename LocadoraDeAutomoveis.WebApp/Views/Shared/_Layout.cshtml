@@ -3,6 +3,7 @@
 
     var grupoAutomoveisAtivo = caminho.StartsWith("/grupoAutomoveis") ? "nav-link active fw-semibold" : "nav-link";
     var automovelAtivo = caminho.StartsWith("/automovel") ? "nav-link active fw-semibold" : "nav-link";
+    var planoCobrancaAtivo = caminho.StartsWith("/planoCobranca") ? "nav-link active fw-semibold" : "nav-link";
 
     MensagemViewModel? mensagem = ViewBag.Mensagem ?? null;
 }
@@ -13,7 +14,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewBag.Title - Locadora De Automoveis</title>
+    <title>@ViewBag.Title - Locadora De Automóveis</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
@@ -39,6 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Automovel" asp-action="Listar">Automóveis</a>
                     </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="PlanoCobranca" asp-action="Listar">Planos de Cobrança</a>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -56,7 +60,7 @@
 
     <footer class="border-top footer text-center mt-auto">
         <div class="container ">
-            &copy; 2024 - Locadora De Automoveis 
+            &copy; 2024 - Locadora De Automóveis 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
