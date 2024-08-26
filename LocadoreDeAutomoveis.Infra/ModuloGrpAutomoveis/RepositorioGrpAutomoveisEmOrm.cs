@@ -14,6 +14,12 @@ namespace LocadoreDeAutomoveis.Infra.ModuloGrpAutomoveis
         {
             return dbContext.GrpAutomoveis;
         }
-      
+
+        public List<GrpAutomoveis> Filtrar(Func<GrpAutomoveis, bool> predicate)
+        {
+            return ObterRegistros()
+                .Where(predicate)
+                .ToList();
+        }
     }
 }

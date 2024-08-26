@@ -1,0 +1,103 @@
+﻿@model InserirAutomovelViewModel
+@{
+    ViewBag.Title = "Inserir Novo Automóvel";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Inserir">
+
+            <!-- Marca -->
+            <div>
+                <label class="control-label fw-semibold mb-1">Marca</label>
+                <input class="form-control mb-1" asp-for="Marca"/>
+                <span class="text-danger fs-6" asp-validation-for="Marca"></span>
+            </div>
+
+            <!-- Modelo -->
+            <div>
+                <label class="control-label fw-semibold mb-1">Modelo</label>
+                <input class="form-control mb-1" asp-for="Modelo"/>
+                <span class="text-danger fs-6" asp-validation-for="Modelo"></span>
+            </div>
+
+            <!-- Cor -->
+            <div>
+                <label class="control-label fw-semibold mb-1">Cor</label>
+                <input class="form-control mb-1" asp-for="Cor"/>
+                <span class="text-danger fs-6" asp-validation-for="Cor"></span>
+            </div>
+
+            <!-- Placa -->
+            <div>
+                <label class="control-label fw-semibold mb-1">Placa</label>
+                <input class="form-control mb-1" asp-for="Placa"/>
+                <span class="text-danger fs-6" asp-validation-for="Placa"></span>
+            </div>
+
+            <!-- Combustível -->
+            <div>
+                <label class="control-label fw-semibold mb-1">Combustível</label>
+                <input class="form-control mb-1" asp-for="Combustivel"/>
+                <span class="text-danger fs-6" asp-validation-for="Combustivel"></span>
+            </div>
+
+            <!-- Ano -->
+            <div>
+                <label class="control-label fw-semibold mb-1">Ano</label>
+                <input class="form-control mb-1" asp-for="Ano"/>
+                <span class="text-danger fs-6" asp-validation-for="Ano"></span>
+            </div>
+
+            <!-- Capacidade de Combustível -->
+            <div>
+                <label class="control-label fw-semibold mb-1">Capacidade de Combustível</label>
+                <input class="form-control mb-1" asp-for="CapacidadeCombustivel"/>
+                <span class="text-danger fs-6" asp-validation-for="CapacidadeCombustivel"></span>
+            </div>
+
+            <!-- Foto do Veículo -->
+            <div>
+                <label class="control-label fw-semibold mb-1">Foto do Veículo</label>
+                <input type="file" class="form-control mb-1" asp-for="FotoVeiculo" accept="image/*" onchange="previewImage(event)" />
+                <span class="text-danger fs-6" asp-validation-for="FotoVeiculo"></span>
+            </div>
+            
+            <!-- Pré-visualização da Imagem -->
+            <div>
+                <img id="imgPreview" src="#" alt="Pré-visualização da imagem" style="display:none; max-width: 100%; height: auto; margin-top: 10px;" />
+            </div>
+
+            <!-- Grupo de Automóveis -->
+            <div>
+                <label class="control-label fw-semibold mb-1">Grupo de Automóveis</label>
+                <select class="form-control mb-1" asp-for="GrupoAutomoveisId" asp-items="Model.GrpAutomoveis"></select>
+                <span class="text-danger fs-6" asp-validation-for="GrupoAutomoveisId"></span>
+            </div>
+            
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" href="/automovel/Listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('imgPreview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

@@ -5,9 +5,9 @@
 }
 
 <div class="col">
-    <a class="btn btn-primary px-4 mt-3" href="/grpAutomoveis/inserir">
+    <a class="btn btn-primary px-4 mt-3" href="/GrpAutomoveis/Inserir">
         <i class="bi bi-circle-add"></i>
-        Inserir Nova Sala
+        Inserir Novo Grupo de Automóveis
     </a>
 
     <div class="row gap-2 my-3 my-xl-5">
@@ -21,26 +21,26 @@
                         <a
                             title="Detalhes"
                             class="text-info-emphasis fs-5"
-                            href="/grpAutomoveis/detalhes/@grpVm.Id">
+                            href="/GrpAutomoveis/Detalhes/@grpVm.Id">
                             <i class="bi bi-search"></i>
                         </a>
                         <a
                             title="Editar"
                             class="text-info-emphasis fs-5"
-                            href="/grpAutomoveis/editar/@grpVm.Id">
+                            href="/GrpAutomoveis/Editar/@grpVm.Id">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                         <a
                             title="Excluir"
-                            class="text-info-emphasis fs-5" href="/grpAutomoveis/excluir/@grpVm.Id">
+                            class="text-info-emphasis fs-5" href="/GrpAutomoveis/Excluir/@grpVm.Id">
                             <i class="bi bi-trash-fill"></i>
                         </a>
                     </div>
                 </div>
 
-                <div class="card-body d-grid ga-2">
+                <div class="card-body d-grid ga-2 justify-content-center">
                     <h5 class="card-title">Grupo de Carros: @grpVm.Nome</h5>
-                    <label>Capacidade: @grpVm.Nome</label>
+                    @* <label>Grupo de Carros: @grpVm.Nome</label> *@
                 </div>
             </div>
         }
