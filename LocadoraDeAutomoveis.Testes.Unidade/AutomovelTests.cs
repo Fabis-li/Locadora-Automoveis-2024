@@ -11,10 +11,10 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         public void Deve_validar_automovel_corretamente()
         {
             //Arrange
-            GrpAutomoveis grupoAutomoveis = new GrpAutomoveis("Econômico");
+            GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
             
 
-            Automovel automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grupoAutomoveis);
+            Automovel automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234",TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grupoAutomoveis, 1);
 
             //Act
             List<string> erros = automovel.Validar();
@@ -28,9 +28,9 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         public void Deve_validar_modelo_corretamente()
         {
             //Arrange
-            GrpAutomoveis grupoAutomoveis = new GrpAutomoveis("Econômico");
+            GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
 
-            Automovel automovelInvalido = new Automovel("", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grupoAutomoveis);
+            Automovel automovelInvalido = new Automovel("", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -47,9 +47,9 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         public void Deve_validar_marca_corretamente()
         {
             //Arrange
-            GrpAutomoveis grupoAutomoveis = new GrpAutomoveis("Econômico");
+            GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
 
-            Automovel automovelInvalido = new Automovel("Fusca", "", "Azul", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grupoAutomoveis);
+            Automovel automovelInvalido = new Automovel("Fusca", "", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -66,9 +66,9 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         public void Deve_validar_cor_corretamente()
         {
             //Arrange
-            GrpAutomoveis grupoAutomoveis = new GrpAutomoveis("Econômico");
+            GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
 
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "", "ABC-1234", "Gasolina", 1970, 40, "fusca.jpg", grupoAutomoveis);
+            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -85,8 +85,9 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         public void Deve_validar_placa_corretamente()
         {
             //Arrange
-            GrpAutomoveis grupoAutomoveis = new GrpAutomoveis("Econômico");
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "", "Gasolina", 1970, 40, "fusca.jpg", grupoAutomoveis);
+            GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
+            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "", TipoCombustivel.Alcool, 1970,
+                40, "fusca.jpg", grupoAutomoveis, 1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -100,29 +101,11 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         }
 
         [TestMethod]
-        public void Deve_validar_combustivel_corretamente()
-        {
-            //Arrange
-            GrpAutomoveis grupoAutomoveis = new GrpAutomoveis("Econômico");
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "", 1970, 40, "fusca.jpg", grupoAutomoveis);
-
-            //Act
-            List<string> erros = automovelInvalido.Validar();
-
-            //Assert
-            List<string> erroEsperado =
-            [
-                "O campo \"Combustível\" é obrigatório"
-            ];
-            CollectionAssert.AreEqual(erroEsperado, erros);
-        }
-
-        [TestMethod]
         public void Deve_validar_ano_corretamente()
         {
             //Arrange
-            GrpAutomoveis grupoAutomoveis = new GrpAutomoveis("Econômico");
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", -1, 40, "fusca.jpg", grupoAutomoveis);
+            GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
+            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, -1, 40, "fusca.jpg", grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -139,8 +122,8 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         public void Deve_validar_capacidade_combustivel_corretamente()
         {
             //Arrange
-            GrpAutomoveis grupoAutomoveis = new GrpAutomoveis("Econômico");
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 0, "fusca.jpg", grupoAutomoveis);
+            GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
+            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 0, "fusca.jpg", grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -157,8 +140,8 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         public void Deve_validar_foto_veiculo_corretamente()
         {
             //Arrange
-            GrpAutomoveis grupoAutomoveis = new GrpAutomoveis("Econômico");
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", "Gasolina", 1970, 40, "", grupoAutomoveis);
+            GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
+            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "", grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();

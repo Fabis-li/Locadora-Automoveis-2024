@@ -1,0 +1,96 @@
+﻿@model EditarPlanoCobrancaViewModel
+@{
+    ViewBag.Title = "Editar Plano de Cobrança";
+}
+
+<form asp-action="Editar">
+    <div>
+        <label class="control-label fw-semibold mb-1">Grupo de Automóveis </label>
+        <select class="form-control mb-1" asp-for="GrupoAutomovelId" asp-items="Model.GrupoAutomovel"></select>
+        <span class="text-danger fs-6" asp-validation-for="GrupoAutomovelId"></span>
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Plano Diário</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Plano Controlado</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Plano Livre</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <!--Plano Diario-->
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Diário:</label>
+                <input class="form-control mb-1" asp-for="PrecoDiarioPlanoDiario" type="number" step="0.01" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoDiarioPlanoDiario"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Por Km:</label>
+                <input class="form-control mb-1" asp-for="PrecoPorKmPlanoDiario" type="number" step="0.01" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoPorKmPlanoDiario"></span>
+            </div>
+        </div>
+
+        <!--Plano Controlado-->
+        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <div>
+                <label class="control-label fw-semibold mb-1">Km Disponível:</label>
+                <input class="form-control mb-1" asp-for="KmDisponivelPlanoControlado" type="number" step="0.01" />
+                <span class="text-danger fs-6" asp-validation-for="KmDisponivelPlanoControlado"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Diária:</label>
+                <input class="form-control mb-1" asp-for="PrecoDiarioPlanoControlado" type="number" step="0.01" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoDiarioPlanoControlado"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Por Km Excedido:</label>
+                <input class="form-control mb-1" asp-for="PrecoPorKmExcedido" type="number" step="0.01" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoPorKmExcedido"></span>
+            </div>
+        </div>
+
+        <!--Plano Livre-->
+        <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+            <div>
+                <label class="control-label fw-semibold mb-1">Preço Diária:</label>
+                <input class="form-control mb-1" asp-for="PrecoDiarioPlanoLivre" type="number" step="0.01" />
+                <span class="text-danger fs-6" asp-validation-for="PrecoDiarioPlanoLivre"></span>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-block mt-4">
+            <button class="btn btn-primary px-5">
+                <i class="bi bi-floppy-fill me-1"></i>
+                Gravar
+            </button>
+
+            <a class="btn btn-outline-primary px-5" href="/PlanoCobranca/Listar">
+                <i class="bi bi-arrow-return-left me-1"></i>
+                Voltar
+            </a>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    const triggerTabList = document.querySelectorAll('#myTab button')
+    triggerTabList.forEach(triggerEl => {
+        const tabTrigger = new bootstrap.Tab(triggerEl)
+
+        triggerEl.addEventListener('click', event => {
+            event.preventDefault()
+            tabTrigger.show()
+        })
+    })
+</script>

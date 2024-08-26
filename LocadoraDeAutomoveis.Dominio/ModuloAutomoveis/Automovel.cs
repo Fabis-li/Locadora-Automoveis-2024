@@ -9,30 +9,28 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
         public string Marca { get; set; }
         public string Cor { get; set; }
         public string Placa { get; set; }
-        public string Combustivel { get; set; }
+        public TipoCombustivel TipoCombustivel { get; set; }
         public int Ano { get; set; }
         public int CapacidadeCombustivel { get; set; } //capacidade do tanque
         public string FotoVeiculo { get; set; }
+        public int GrupoAutomovelId { get; set; }
+        public GrupoAutomovel? GrupoAutomoveis { get; set; }
 
-        public GrpAutomoveis GrupoAutomoveis { get; set; }
+        public Automovel() { }
 
-        public Automovel()
-        {
-
-        }
-
-        public Automovel(string modelo, string marca, string cor, string placa, string combustivel, int ano,
-            int capacidadeCombustivel, string fotoVeiculo, GrpAutomoveis grupoAutomoveis)
+        public Automovel(string modelo, string marca, string cor, string placa, TipoCombustivel tipoCombustivel, int ano,
+            int capacidadeCombustivel, string fotoVeiculo, GrupoAutomovel grupoAutomoveis, int grupoAutomovelId )
         {
             Modelo = modelo;
             Marca = marca;
             Cor = cor;
             Placa = placa;
-            Combustivel = combustivel;
+            TipoCombustivel = tipoCombustivel;
             Ano = ano;
             CapacidadeCombustivel = capacidadeCombustivel;
             FotoVeiculo = fotoVeiculo;
             GrupoAutomoveis = grupoAutomoveis;
+            GrupoAutomovelId = grupoAutomovelId;
         }
 
         public List<string> Validar()
@@ -50,9 +48,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
 
             if (string.IsNullOrEmpty(Placa))
                 erros.Add("O campo \"Placa\" é obrigatório");
-
-            if (string.IsNullOrEmpty(Combustivel))
-                erros.Add("O campo \"Combustível\" é obrigatório");
 
             if (Ano < 0)
                 erros.Add("O campo \"Ano\" é obrigatório");

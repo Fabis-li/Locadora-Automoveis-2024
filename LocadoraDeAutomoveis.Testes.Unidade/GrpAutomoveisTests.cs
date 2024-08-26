@@ -10,7 +10,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         public void Deve_validar_nome_Grp_Corretamente()
         {
             //Arrange
-            GrpAutomoveis grupoInvalido = new GrpAutomoveis("");
+            GrupoAutomovel grupoInvalido = new GrupoAutomovel("");
 
             //Act
             List<string> erros = grupoInvalido.Validar();

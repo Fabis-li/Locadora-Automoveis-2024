@@ -1,4 +1,6 @@
-﻿@model InserirAutomovelViewModel
+﻿@using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model InserirAutomovelViewModel
 @{
     ViewBag.Title = "Inserir Novo Automóvel";
 }
@@ -37,9 +39,9 @@
 
             <!-- Combustível -->
             <div>
-                <label class="control-label fw-semibold mb-1">Combustível</label>
-                <input class="form-control mb-1" asp-for="Combustivel"/>
-                <span class="text-danger fs-6" asp-validation-for="Combustivel"></span>
+                <label class="control-label fw-semibold mb-1">Tipo de Combustível</label>
+                <select class="form-control mb-1" asp-for="TipoCombustivel" asp-items="Html.GetEnumSelectList<TipoCombustivel>()"></select>
+                <span class="text-danger fs-6" asp-validation-for="TipoCombustivel"></span>
             </div>
 
             <!-- Ano -->
@@ -55,14 +57,14 @@
                 <input class="form-control mb-1" asp-for="CapacidadeCombustivel"/>
                 <span class="text-danger fs-6" asp-validation-for="CapacidadeCombustivel"></span>
             </div>
-
-            <!-- Foto do Veículo -->
+            
+            <!-- Foto Veículo -->
             <div>
-                <label class="control-label fw-semibold mb-1">Foto do Veículo</label>
-                <input type="file" class="form-control mb-1" asp-for="FotoVeiculo" accept="image/*" onchange="previewImage(event)" />
+                <label class="control-label fw-semibold mb-1">URL da Foto do Veículo</label>
+                <input type="url" class="form-control mb-1" asp-for="FotoVeiculo" placeholder="Digite a URL da imagem" oninput="updateImagePreview()" />
                 <span class="text-danger fs-6" asp-validation-for="FotoVeiculo"></span>
             </div>
-            
+
             <!-- Pré-visualização da Imagem -->
             <div>
                 <img id="imgPreview" src="#" alt="Pré-visualização da imagem" style="display:none; max-width: 100%; height: auto; margin-top: 10px;" />
@@ -71,8 +73,8 @@
             <!-- Grupo de Automóveis -->
             <div>
                 <label class="control-label fw-semibold mb-1">Grupo de Automóveis</label>
-                <select class="form-control mb-1" asp-for="GrupoAutomoveisId" asp-items="Model.GrpAutomoveis"></select>
-                <span class="text-danger fs-6" asp-validation-for="GrupoAutomoveisId"></span>
+                <select class="form-control mb-1" asp-for="GrupoAutomovelId" asp-items="Model.GrupoAutomovel"></select>
+                <span class="text-danger fs-6" asp-validation-for="GrupoAutomovelId"></span>
             </div>
             
             <div class="d-grid gap-2 d-md-block mt-4">
@@ -81,7 +83,7 @@
                     Gravar
                 </button>
 
-                <a class="btn btn-outline-primary px-5" href="/automovel/Listar">
+                <a class="btn btn-outline-primary px-5" href="/Automovel/Listar">
                     <i class="bi bi-arrow-return-left me-1"></i>
                     Voltar
                 </a>
@@ -91,13 +93,16 @@
 </div>
 
 <script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function () {
-            var output = document.getElementById('imgPreview');
-            output.src = reader.result;
-            output.style.display = 'block';
-        };
-        reader.readAsDataURL(event.target.files[0]);
+    function updateImagePreview() {
+        const url = document.querySelector('input[asp-for="FotoVeiculo"]').value;
+        const imgPreview = document.getElementById('imgPreview');
+
+        if (url) {
+            imgPreview.src = url;
+            imgPreview.style.display = 'block';
+        } else {
+            imgPreview.src = '#';
+            imgPreview.style.display = 'none';
+        }
     }
 </script>

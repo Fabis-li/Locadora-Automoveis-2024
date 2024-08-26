@@ -19,7 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\LocadoraDeAutomoveis.Dominio\LocadoraDeAutomoveis.Dominio.csproj" />
     <ProjectReference Include="..\LocadoraDeAutomovies.Aplicacao\LocadoraDeAutomovies.Aplicacao.csproj" />
-    <ProjectReference Include="..\LocadoreDeAutomoveis.Infra\LocadoreDeAutomoveis.Infra.csproj" />
+    <ProjectReference Include="..\LocadoraDeAutomoveis.Infra\LocadoraDeAutomoveis.Infra.csproj" />
   </ItemGroup>
 
 </Project>
