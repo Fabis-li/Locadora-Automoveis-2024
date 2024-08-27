@@ -13,7 +13,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
                 (
                     "Cliente 1",
                     "123456",
-                    123456,
+                    "123456",
                     "123456",
                     "123456",
                     "Cidade 1",
@@ -36,7 +36,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
                 (
                     "",
                     "123456",
-                    123456,
+                    "123456",
                     "123456",
                     "123456",
                     "Cidade 1",

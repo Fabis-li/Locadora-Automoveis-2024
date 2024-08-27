@@ -6,7 +6,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
     {
         public string Nome { get; set; }
         public string Rg { get; set; }
-        public int Cnh { get; set; }
+        public string Cnh { get; set; }
         public string NumeroDocumento { get; set; }
         public string Telefone { get; set; }
         public string Cidade { get; set; }
@@ -18,7 +18,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
 
         protected Cliente() { }
         
-        public Cliente(string nome, string rg, int cnh, string numeroDocumento,string telefone, string cidade, string estado, string bairro, string rua, string numero, TipoClienteEnum tipoCliente) :this()
+        public Cliente(string nome, string rg, string cnh, string numeroDocumento,string telefone, string cidade, string estado, string bairro, string rua, string numero, TipoClienteEnum tipoCliente) :this()
         {
             Nome = nome;
             Rg = rg;
@@ -43,7 +43,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
             if (string.IsNullOrWhiteSpace(Rg))
                 erros.Add("O RG é obrigatório");
 
-            if (Cnh == 0)
+            if (string.IsNullOrWhiteSpace(Cnh))
                 erros.Add("A CNH é obrigatória");
 
             if (string.IsNullOrWhiteSpace(NumeroDocumento))
