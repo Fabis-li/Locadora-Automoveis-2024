@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
+using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,7 +42,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
                 return View(inserirVm);
             }
 
-            var taxa = mapeador.Map<Taxa>(inserirTaxaViewModel);
+            var taxa = mapeador.Map<Taxa>(inserirVm);
 
             var resultado = taxaService.Inserir(taxa);
 
