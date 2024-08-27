@@ -11,6 +11,13 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
         private readonly TaxaService taxaService;
         private readonly IMapper mapeador;
 
+        public TaxaController(TaxaService taxaService, IMapper mapeador)
+        {
+            this.taxaService = taxaService;
+            this.mapeador = mapeador;
+        }
+
+
         public IActionResult Listar()
         {
             var resultado = taxaService.SelecionarTodos();
@@ -24,14 +31,14 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
 
             var taxas = resultado.Value;
 
-            var taxasViewModel = mapeador.Map<List<TaxaViewModel>>(taxas);
+            var taxasVm = mapeador.Map<IEnumerable<ListarTaxaViewModel>>(taxas);
 
-            return View(taxasViewModel);
+            return View(taxasVm);
         }
 
         public IActionResult Inserir()
         {
-            return View(new InserirTaxaViewModel);
+            return View(new InserirTaxaViewModel());
         }
 
         [HttpPost]
@@ -55,7 +62,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
 
             ApresentarMensagemSucesso($"O registro ID [{taxa.Id}] foi inserido com sucesso!");
 
-            return RedirectToAction(nameof("Listar"));
+            return RedirectToAction(nameof(Listar));
         }
 
         public IActionResult Editar(int id)

@@ -23,7 +23,7 @@ namespace LocadoraDeAutomoveis.Infra.ModuloTaxa
                 .HasColumnType("decimal(18,2)")
                 .IsRequired();
 
-            tBuilder.Property(t => t.TipoCobrancaEnum)
+            tBuilder.Property(t => t.TipoCobranca)
                 .HasColumnType("int")
                 .IsRequired();
         }
