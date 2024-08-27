@@ -5,6 +5,7 @@
     var automovelAtivo = caminho.StartsWith("/automovel") ? "nav-link active fw-semibold" : "nav-link";
     var planoCobrancaAtivo = caminho.StartsWith("/planoCobranca") ? "nav-link active fw-semibold" : "nav-link";
     var taxaAtivo = caminho.StartsWith("/taxa") ? "nav-link active fw-semibold" : "nav-link";
+    var clienteAtivo = caminho.StartsWith("/cliente") ? "nav-link active fw-semibold" : "nav-link";
 
     MensagemViewModel? mensagem = ViewBag.Mensagem ?? null;
 }
@@ -46,6 +47,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Taxa" asp-action="Listar">Taxa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Cliente" asp-action="Listar">Cliente</a>
                     </li>
                 </ul>
             </div>

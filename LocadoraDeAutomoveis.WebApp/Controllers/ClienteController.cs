@@ -11,11 +11,13 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
     {
         private readonly ClienteService service;
         private readonly IMapper mapeador;
+
         public ClienteController(ClienteService service, IMapper mapeador)
         {
             this.service = service;
             this.mapeador = mapeador;
         }
+
         public IActionResult Listar()
         {
             var resultado = service.SelecionarTodos();
@@ -65,7 +67,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         {
             var resultado = service.SelecionarPorId(id);
 
-            if(resultado.IsFailed)
+            if (resultado.IsFailed)
             {
                 ApresentarMensagemFalha(resultado.ToResult());
 
@@ -112,7 +114,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return RedirectToAction(nameof(Listar));
 
             }
-            
+
             var cliente = resultado.Value;
 
             var detalhesVm = mapeador.Map<DetalhesClienteViewModel>(cliente);
@@ -154,4 +156,5 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
             return View(detalhesVm);
         }
+    }
 }

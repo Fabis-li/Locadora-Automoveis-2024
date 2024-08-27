@@ -76,9 +76,6 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
         {
             var clientes = repositorioCliente.SelecionarTodos();
 
-            if (clientes.Count == 0)
-                return Result.Fail("Nenhum cliente encontrado!");
-
             return Result.Ok(clientes);
         }
     }
