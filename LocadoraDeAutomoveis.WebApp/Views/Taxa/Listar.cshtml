@@ -19,12 +19,12 @@
                     <div class="text-end d-flex align-items-center gap-3">
                         <a title="Detalhes"
                            class="text-info-emphasis fs-5"
-                           href="/GrupoAutomovel/Detalhes/@taxaVm.Id">
+                           href="/Taxa/Detalhes/@taxaVm.Id">
                             <i class="bi bi-search"></i>
                         </a>
                         <a title="Editar"
                            class="text-info-emphasis fs-5"
-                           href="/GrupoAutomovel/Editar/@taxaVm.Id">
+                           href="/Taxa/Editar/@taxaVm.Id">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                         <a title="Excluir"
@@ -35,7 +35,11 @@
                 </div>
 
                 <div class="card-body d-grid ga-2 justify-content-center">
-                    <h5 class="card-title">Grupo de Carros: @taxaVm.Nome</h5>
+                    <h5 class="card-title">@taxaVm.Nome</h5>
+                    <p class="card-text">
+                        Valor: @taxaVm.Valor.ToString("C") <br />
+                        Tipo de Cobrança: @taxaVm.TipoCobranca
+                    </p>
                 </div>
             </div>
         }
