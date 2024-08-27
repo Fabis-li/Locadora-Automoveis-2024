@@ -5,6 +5,7 @@ using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
 using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
 using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
 using LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca;
+using LocadoraDeAutomoveis.Infra.ModuloTaxa;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
