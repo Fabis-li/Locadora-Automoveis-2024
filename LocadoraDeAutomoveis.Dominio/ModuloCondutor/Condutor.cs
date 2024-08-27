@@ -1,4 +1,5 @@
 ﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
+using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 
 namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
 {
@@ -11,9 +12,12 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
         public DateTime ValidaCnh { get; set; }
         public string Telefone { get; set; }
 
+        public int ClienteId { get; set; }
+        public Cliente Cliente { get; set; }
+
         protected Condutor() { }
 
-        public Condutor(string nome, string email, string cpf, string cnh, DateTime validaCnh, string telefone)
+        public Condutor(string nome, string email, string cpf, string cnh, DateTime validaCnh, string telefone, int clienteId, Cliente cliente)
         {
             Nome = nome;
             Email = email;
@@ -21,6 +25,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
             Cnh = cnh;
             ValidaCnh = validaCnh;
             Telefone = telefone;
+            ClienteId = clienteId;
+            Cliente = cliente;
         }
 
         public List<string> Validar()
