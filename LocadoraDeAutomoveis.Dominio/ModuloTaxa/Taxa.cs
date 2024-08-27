@@ -15,7 +15,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloTaxa
 
         public string Nome { get; set; }
         public decimal Valor { get; set; }
-        public TipoCobrancaEnum TipoCobrancaEnum { get; set; }
+        public TipoCobrancaEnum TipoCobranca { get; set; }
 
         protected Taxa() { }
         
@@ -23,7 +23,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloTaxa
         {
             Nome = nome;
             Valor = valor;
-            TipoCobrancaEnum = tipoCobrancaEnum;
+            TipoCobranca = tipoCobrancaEnum;
         }
 
         public List<string> Validar()
