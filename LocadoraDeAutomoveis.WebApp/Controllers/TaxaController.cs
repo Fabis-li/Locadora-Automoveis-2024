@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
+using LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado;
 using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
+namespace LocadoraDeAutomoveis.WebApp.Controllers
 {
     public class TaxaController : WebControllerBase
     {
@@ -26,7 +27,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
             {
                 ApresentarMensagemFalha(resultado.ToResult());
 
-                return RedirectToAction("Index","Inicio");
+                return RedirectToAction("Index", "Inicio");
             }
 
             var taxas = resultado.Value;
@@ -122,7 +123,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
 
             var detalhesVm = mapeador.Map<DetalhesTaxaViewModel>(taxa);
 
-            return View (detalhesVm);
+            return View(detalhesVm);
         }
 
         [HttpPost]
@@ -160,5 +161,5 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
             return View(detalhesVm);
         }
     }
-    
+
 }
