@@ -1,12 +1,14 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
+using LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
 using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
 using LocadoraDeAutomoveis.Infra.ModuloCleinte;
 using LocadoraDeAutomoveis.Infra.ModuloCondutor;
+using LocadoraDeAutomoveis.Infra.ModuloConfiguracao;
 using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
 using LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Infra.ModuloTaxa;
@@ -24,6 +26,7 @@ namespace LocadoraDeAutomoveis.Infra.Compartilhado
         public DbSet<Taxa> Taxas { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Condutor> Condutores { get; set; }
+        public DbSet<Configuracao> Configuracoes { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -49,6 +52,7 @@ namespace LocadoraDeAutomoveis.Infra.Compartilhado
             modelBuilder.ApplyConfiguration(new MapeadorTaxaEmOrm());
             modelBuilder.ApplyConfiguration(new MapeadorClienteEmOrm());
             modelBuilder.ApplyConfiguration(new MapeadorCondutorEmOrm());
+            modelBuilder.ApplyConfiguration(new MapeadorConfiguracaoEmOrm());
 
             base.OnModelCreating(modelBuilder);
         }
