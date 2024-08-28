@@ -1,0 +1,71 @@
+﻿@model InserirCondutorViewModel
+@{
+    ViewBag.Title = "Inserir Condutor";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Inserir">
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Cliente</label>
+                <select class="form-control mb-1" asp-for="ClienteId" asp-items="Model.Cliente"></select>
+                <span class="text-danger fs-6" asp-validation-for="ClienteId"></span>
+            </div>
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Nome</label>
+                <input class="form-control mb-1" asp-for="Nome"/>
+                <span class="text-danger fs-6" asp-validation-for="Nome"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Email</label>
+                <input class="form-control mb-1" asp-for="Email" type="email"/>
+                <span class="text-danger fs-6" asp-validation-for="Email"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">CPF</label>
+                <input class="form-control mb-1" asp-for="Cpf"/>
+                <span class="text-danger fs-6" asp-validation-for="Cpf"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">CNH</label>
+                <input class="form-control mb-1" asp-for="Cnh"/>
+                <span class="text-danger fs-6" asp-validation-for="Cnh"></span>
+            </div>
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Validade da CNH</label>
+                <input class="form-control mb-1" asp-for="ValidaCnh"/>
+                <span class="text-danger fs-6" asp-validation-for="ValidaCnh"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Telefone</label>
+                <input class="form-control mb-1" asp-for="Telefone"/>
+                <span class="text-danger fs-6" asp-validation-for="Telefone"></span>
+            </div>
+            
+            <div class="form-check">
+                <input class="form-check-input mb-1" type="checkbox" asp-for="ClienteCondutor"/>
+                <label class="form-check-label mb-1">Cliente Condutor</label>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" href="/Cliente/listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
