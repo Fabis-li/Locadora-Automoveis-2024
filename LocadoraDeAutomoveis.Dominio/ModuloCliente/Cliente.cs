@@ -1,4 +1,5 @@
 ﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 
 namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
 {
@@ -15,6 +16,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
         public string Rua { get; set; }
         public string Numero { get; set; }
         public TipoClienteEnum TipoCliente { get; set; }
+
+        public List<Condutor> Condutores { get; set; }
 
         protected Cliente() { }
         

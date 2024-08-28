@@ -11,13 +11,16 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
         public string Cnh { get; set; }
         public DateTime ValidaCnh { get; set; }
         public string Telefone { get; set; }
-
+        public bool ClienteCondutor { get; set; } = false;
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
-        protected Condutor() { }
+        protected Condutor()
+        {
+            
+        }
 
-        public Condutor(string nome, string email, string cpf, string cnh, DateTime validaCnh, string telefone, int clienteId, Cliente cliente)
+        public Condutor(string nome, string email, string cpf, string cnh, DateTime validaCnh, string telefone, int clienteId, Cliente cliente, bool clienteCondutor)
         {
             Nome = nome;
             Email = email;
@@ -27,6 +30,14 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
             Telefone = telefone;
             ClienteId = clienteId;
             Cliente = cliente;
+            ClienteCondutor = clienteCondutor;
+        }
+
+        public bool ClienteEhCondutor()
+        {
+            bool clienteEhCondutor = true;
+
+            return clienteEhCondutor;
         }
 
         public List<string> Validar()
@@ -34,7 +45,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
             var erros = new List<string>();
 
             if (string.IsNullOrEmpty(Nome))
-                erros.Add("Nome é obrigatório!");
+                erros.Add("O nome é obrigatório!");
 
             if (string.IsNullOrEmpty(Email))
                 erros.Add("Email é obrigatório!");
