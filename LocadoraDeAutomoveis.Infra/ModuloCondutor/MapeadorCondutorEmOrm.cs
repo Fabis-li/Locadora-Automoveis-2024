@@ -25,15 +25,15 @@ namespace LocadoraDeAutomoveis.Infra.ModuloCondutor
 
             cBuilder.Property(c => c.Cpf)
                 .IsRequired()
-                .HasColumnType("varchar(11)");
+                .HasColumnType("varchar(20)");
 
             cBuilder.Property(c => c.Cnh)
                 .IsRequired()
-                .HasColumnType("varchar(11)");
+                .HasColumnType("varchar(20)");
 
-            cBuilder.Property(c => c.ValidaCnh)
+            cBuilder.Property(c => c.ValidadeCnh)
                 .IsRequired()
-                .HasColumnType("datetime");
+                .HasColumnType("datetim2");
 
             cBuilder.Property(c => c.Telefone)
                 .IsRequired()
@@ -49,7 +49,6 @@ namespace LocadoraDeAutomoveis.Infra.ModuloCondutor
 
             cBuilder.HasOne(c => c.Cliente)
                 .WithMany(c => c.Condutores)
-                .HasForeignKey(c => c.ClienteId)
                 .HasForeignKey(c => c.ClienteId)
                 .OnDelete(DeleteBehavior.Restrict);
         }

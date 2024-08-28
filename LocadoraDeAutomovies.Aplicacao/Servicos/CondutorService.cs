@@ -30,11 +30,9 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             condutor.Email = condutoratualizado.Email;
             condutor.Cpf = condutoratualizado.Cpf;
             condutor.Cnh = condutoratualizado.Cnh;
-            condutor.ValidaCnh = condutoratualizado.ValidaCnh;
+            condutor.ValidadeCnh = condutoratualizado.ValidadeCnh;
             condutor.Telefone = condutoratualizado.Telefone;
             condutor.ClienteId = condutoratualizado.ClienteId;
-            condutor.Cliente = condutoratualizado.Cliente;
-            condutor.ClienteCondutor = condutoratualizado.ClienteCondutor;
 
             repositorioCondutor.Editar(condutor);
 
@@ -53,9 +51,9 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(condutor);
         }
 
-        public Result<Condutor> SelecionarPorId(int condutorid)
+        public Result<Condutor> SelecionarPorId(int condutorId)
         {
-            var condutor = repositorioCondutor.SelecionarPorId(condutorid);
+            var condutor = repositorioCondutor.SelecionarPorId(condutorId);
 
             if (condutor is null)
                 return Result.Fail("O condutor não foi encontrado!");

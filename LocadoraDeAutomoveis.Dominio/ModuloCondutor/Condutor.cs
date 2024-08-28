@@ -9,27 +9,26 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
         public string Email { get; set; }
         public string Cpf { get; set; }
         public string Cnh { get; set; }
-        public DateTime ValidaCnh { get; set; }
+        public DateTime ValidadeCnh { get; set; }
         public string Telefone { get; set; }
         public bool ClienteCondutor { get; set; } = false;
         public int ClienteId { get; set; }
-        public Cliente Cliente { get; set; }
+        public Cliente? Cliente { get; set; }
 
         protected Condutor()
         {
             
         }
 
-        public Condutor(string nome, string email, string cpf, string cnh, DateTime validaCnh, string telefone, int clienteId, Cliente cliente, bool clienteCondutor)
+        public Condutor(string nome, string email, string cpf, string cnh, DateTime validadeCnh, string telefone, int clienteId, bool clienteCondutor) :this()
         {
             Nome = nome;
             Email = email;
             Cpf = cpf;
             Cnh = cnh;
-            ValidaCnh = validaCnh;
+            ValidadeCnh = validadeCnh;
             Telefone = telefone;
             ClienteId = clienteId;
-            Cliente = cliente;
             ClienteCondutor = clienteCondutor;
         }
 
@@ -56,7 +55,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor
             if (string.IsNullOrEmpty(Cnh))
                 erros.Add("Cnh é obrigatório!");
 
-            if (ValidaCnh == DateTime.MinValue)
+            if (ValidadeCnh == DateTime.MinValue)
                 erros.Add("Validade da Cnh é obrigatório!");
 
             if (string.IsNullOrEmpty(Telefone))

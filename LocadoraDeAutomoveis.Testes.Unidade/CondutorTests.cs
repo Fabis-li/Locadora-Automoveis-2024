@@ -12,28 +12,14 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         {
             var condutor = new Condutor
             (
-                "João",
-                "joao.Silva@gmail.com",
-                "12345678910",
-                "12345678910",
-                DateTime.Now,
-                "1197856748",
-                1,
-                new Cliente
-                (
-                    "Cliente 1",
-                    "123456",
-                    "123456",
-                    "123456",
-                    "123456",
-                    "Cidade 1",
-                    "Estado 1",
-                    "Bairro 1",
-                    "Rua 1",
-                    "123",
-                    TipoClienteEnum.CPF
-                ),
-                true
+                nome: "João",
+                email: "joao.Silva@gmail.com",
+                cpf: "12345678910",
+                cnh: "12345678910",
+                validadeCnh: DateTime.Today.AddYears(1),
+                telefone: "1197856748",
+                clienteId: 1,
+                clienteCondutor: true
             );
             
             var erros = condutor.Validar();
@@ -46,28 +32,14 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         {
             var condutor = new Condutor
             (
-                "",
-                "joao.Silva@gmail.com",
-                "12345678910",
-                "12345678910",
-                DateTime.Now,
-                "1197856748",
-                1,
-                new Cliente
-                (
-                    "Cliente 1",
-                    "123456",
-                    "123456",
-                    "123456",
-                    "123456",
-                    "Cidade 1",
-                    "Estado 1",
-                    "Bairro 1",
-                    "Rua 1",
-                    "123",
-                    TipoClienteEnum.CPF
-                ),
-                true
+                nome: "",
+                email: "joao.Silva@gmail.com",
+                cpf: "12345678910",
+                cnh: "12345678910",
+                validadeCnh: DateTime.Today.AddYears(1),
+                telefone: "1197856748",
+                clienteId: 1,
+                clienteCondutor: true
             );
 
             var erros = condutor.Validar();

@@ -4,18 +4,21 @@ using LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado;
 using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LocadoraDeAutomoveis.WebApp.Controllers
 {
     public class CondutorController : WebControllerBase
     {
         private readonly CondutorService serviceCondutor;
+        private readonly ClienteService seriveCliente;
         private readonly IMapper mapeador;
 
-        public CondutorController(CondutorService serviceCondutor, IMapper mapeador)
+        public CondutorController(CondutorService serviceCondutor, IMapper mapeador, ClienteService seriveCliente)
         {
             this.serviceCondutor = serviceCondutor;
             this.mapeador = mapeador;
+            this.seriveCliente = seriveCliente;
         }
 
         public IActionResult Listar()
@@ -36,9 +39,62 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             return View(listaCondutoresVm);
         }
 
-        public IActionResult Inserir()
+        public IActionResult SelecionarCliente()
         {
-            return View(new InserirCondutorViewModel());
+            var resultado = seriveCliente.SelecionarTodos();
+
+            if (resultado.IsFailed)
+            {
+                ApresentarMensagemFalha(resultado.ToResult());
+
+                return RedirectToAction("Index", "Inicio");
+            }
+
+            var clientes = resultado.Value;
+
+            var selecionarVm = new SelecionarClienteViewModel()
+            {
+                Clientes = clientes.Select(c => new SelectListItem(c.Nome, c.Id.ToString()))
+            };
+
+            return View(selecionarVm);
+        }
+
+        [HttpPost]
+        public IActionResult SelecionarCliente(SelecionarClienteViewModel selecionarVm)
+        {
+            if (!ModelState.IsValid)
+                return View(selecionarVm);
+
+            int clienteId = selecionarVm.ClienteId;
+            bool clienteCondutor = selecionarVm.ClienteCondutor;
+
+            return RedirectToAction("Inserir", new { clienteId, clienteCondutor });
+        }
+
+        public IActionResult Inserir(int clienteId, bool clienteCondutor)
+        {
+            var clienteResult = seriveCliente.SelecionarPorId(clienteId);
+
+            if(clienteResult.IsFailed)
+                return RedirectToAction("SelecionarCliente");
+
+            var cliente = clienteResult.Value;
+
+            var viewModel = new InserirCondutorViewModel();
+
+            if (clienteCondutor)
+            {
+                viewModel.ClienteId = clienteId;
+                viewModel.ClienteCondutor = clienteCondutor;
+                viewModel.Nome = cliente.Nome;
+                viewModel.Telefone = cliente.Telefone;
+                viewModel.Cpf = cliente.NumeroDocumento;
+            }
+
+            ViewBag.ClienteSelecionado = cliente.Nome;
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -57,52 +113,10 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             {
                 ApresentarMensagemFalha(resultado.ToResult());
 
-                return View(inserirVm);
-            }
-
-            ApresentarMensagemSucesso($"O condutor ID [{condutor.Id}] foi inserido com sucesso!");
-
-            return RedirectToAction(nameof(Listar));
-        }
-
-        public IActionResult Editar(int id)
-        {
-            var resultado = serviceCondutor.SelecionarPorId(id);
-
-            if (resultado.IsFailed)
-            {
-                ApresentarMensagemFalha(resultado.ToResult());
-
                 return RedirectToAction(nameof(Listar));
             }
 
-            var condutor = resultado.Value;
-
-            var editarVm = mapeador.Map<EditarCondutorViewModel>(condutor);
-
-            return View(editarVm);
-        }
-
-        [HttpPost]
-        public IActionResult Editar(EditarCondutorViewModel editarVm)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(editarVm);
-            }
-
-            var condutor = mapeador.Map<Condutor>(editarVm);
-
-            var resultado = serviceCondutor.Editar(condutor);
-
-            if (resultado.IsFailed)
-            {
-                ApresentarMensagemFalha(resultado.ToResult());
-
-                return View(editarVm);
-            }
-
-            ApresentarMensagemSucesso($"O condutor ID [{condutor.Id}] foi editado com sucesso!");
+            ApresentarMensagemSucesso($"O condutor ID [{condutor.Id}] foi inserido com sucesso!");
 
             return RedirectToAction(nameof(Listar));
         }

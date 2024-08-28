@@ -1,6 +1,8 @@
 ﻿@model InserirCondutorViewModel
 @{
-    ViewBag.Title = "Inserir Condutor";
+    ViewBag.Title = $"Inserir Condutor para {ViewBag.ClienteSelecionado}";
+
+    var campoSomenteLeitura = Model.ClienteCondutor;
 }
 
 <div class="col">
@@ -11,6 +13,12 @@
                 <label class="control-label fw-semibold mb-1">Cliente</label>
                 <select class="form-control mb-1" asp-for="ClienteId" asp-items="Model.Cliente"></select>
                 <span class="text-danger fs-6" asp-validation-for="ClienteId"></span>
+            </div>
+            
+            <div class="form-check">
+                <input class="form-check-input mb-1" type="checkbox" asp-for="ClienteCondutor"/>
+                <label class="form-check-label mb-1">Cliente será o Condutor</label>
+                <span class="text-danger fs-6" asp-validation-for="ClienteCondutor"></span>
             </div>
             
             <div>
@@ -39,8 +47,8 @@
             
             <div>
                 <label class="control-label fw-semibold mb-1">Validade da CNH</label>
-                <input class="form-control mb-1" asp-for="ValidaCnh"/>
-                <span class="text-danger fs-6" asp-validation-for="ValidaCnh"></span>
+                <input class="form-control mb-1" asp-for="ValidadeCnh"/>
+                <span class="text-danger fs-6" asp-validation-for="ValidadeCnh"></span>
             </div>
 
             <div>
@@ -49,10 +57,7 @@
                 <span class="text-danger fs-6" asp-validation-for="Telefone"></span>
             </div>
             
-            <div class="form-check">
-                <input class="form-check-input mb-1" type="checkbox" asp-for="ClienteCondutor"/>
-                <label class="form-check-label mb-1">Cliente Condutor</label>
-            </div>
+           
 
             <div class="d-grid gap-2 d-md-block mt-4">
                 <button class="btn btn-primary px-5">

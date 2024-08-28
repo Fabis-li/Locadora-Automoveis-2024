@@ -3,6 +3,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LocadoraDeAutomoveis.WebApp.Models
 {
+    public class SelecionarClienteViewModel
+    {
+        [Required(ErrorMessage = "O campo Cliente é obrigatório.")]
+        public int ClienteId { get; set; }
+        public bool ClienteCondutor { get; set; }
+
+        public IEnumerable<SelectListItem>? Clientes { get; set; }
+    }
+
     public class InserirCondutorViewModel
     {
         [Required(ErrorMessage = "O campo Nome é obrigatório.")]
@@ -22,14 +31,14 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Cnh { get; set; }
 
         [Required(ErrorMessage = "O campo Validação da CNH é obrigatório.")]
-        [DataType(DataType.Date)]
-        public string ValidaCnh { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "A validade da CNH deve ser uma data válida")]
+        public string ValidadeCnh { get; set; }
 
         [Required(ErrorMessage = "O campo Telefone é obrigatório.")]
         [Phone(ErrorMessage = "O telefone deve ser válido")]
         public string Telefone { get; set; }
 
-        [Required(ErrorMessage = "O campo Cliente Condutor é obrigatório.")]
+        
         public bool ClienteCondutor { get; set; }
 
         [Required(ErrorMessage = "O campo Cliente é obrigatório.")]
@@ -59,8 +68,8 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Cnh { get; set; }
 
         [Required(ErrorMessage = "O campo Validação da CNH é obrigatório.")]
-        [DataType(DataType.Date)]
-        public string ValidaCnh { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "A validade da CNH deve ser uma data válida")]
+        public string ValidadeCnh { get; set; }
 
         [Required(ErrorMessage = "O campo Telefone é obrigatório.")]
         [Phone(ErrorMessage = "O telefone deve ser válido")]
@@ -82,7 +91,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Email { get; set; }
         public string Cpf { get; set; }
         public string Cnh { get; set; }
-        public string ValidaCnh { get; set; }
+        public string ValidadeCnh { get; set; }
         public string Telefone { get; set; }
         public bool ClienteCondutor { get; set; }
         public int ClienteId { get; set; }
@@ -96,7 +105,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Email { get; set; }
         public string Cpf { get; set; }
         public string Cnh { get; set; }
-        public string ValidaCnh { get; set; }
+        public string ValidadeCnh { get; set; }
         public string Telefone { get; set; }
         public bool ClienteCondutor { get; set; }
         public int ClienteId { get; set; }
