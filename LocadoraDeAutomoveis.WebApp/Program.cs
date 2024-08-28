@@ -1,6 +1,7 @@
 using System.Reflection;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
@@ -8,6 +9,7 @@ using LocadoraDeAutomovies.Aplicacao.Servicos;
 using LocadoraDeAutomoveis.Infra.Compartilhado;
 using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
 using LocadoraDeAutomoveis.Infra.ModuloCliente;
+using LocadoraDeAutomoveis.Infra.ModuloCondutor;
 using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
 using LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Infra.ModuloTaxa;
@@ -28,12 +30,14 @@ namespace LocadoraDeAutomoveis.WebApp
             builder.Services.AddScoped<IRepositorioPlanoCobranca, RepositorioPlanoCobrancaEmOrm>();
             builder.Services.AddScoped<IRepositorioTaxa, RepositorioTaxaEmOrm>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioClienteEmOrm>();
+            builder.Services.AddScoped<IRepositorioCondutor, RepositorioCondutorEmOrm>();
 
             builder.Services.AddScoped<GrupoAutomoveisService>();
             builder.Services.AddScoped<AutomovelService>();
             builder.Services.AddScoped<PlanoCobrancaService>();
             builder.Services.AddScoped<TaxaService>();
             builder.Services.AddScoped<ClienteService>();
+            builder.Services.AddScoped<CondutorService>();
 
             builder.Services.AddScoped<GrupoAutomoveisResolver>();
 
