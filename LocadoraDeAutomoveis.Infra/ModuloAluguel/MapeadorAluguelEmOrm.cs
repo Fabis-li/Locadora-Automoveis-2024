@@ -23,6 +23,10 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAluguel
                 .IsRequired()
                 .HasColumnType("int");
 
+            aBuilder.Property(a => a.TipoPlanoCobranca)
+                .IsRequired()
+                .HasColumnType("int");
+
             aBuilder.Property(a => a.PlanoCobrancaId)
                 .IsRequired()
                 .HasColumnType("int");
@@ -38,6 +42,14 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAluguel
             aBuilder.Property(a => a.ValorEntrada)
                 .IsRequired()
                 .HasColumnType("decimal(18,2)");
+
+            aBuilder.Property(a => a.KmRodado)
+                .IsRequired()
+                .HasColumnType("int");
+
+            aBuilder.Property(a => a.MarcadorCombustivel)
+                .IsRequired()
+                .HasColumnType("int");
 
             aBuilder.Property(a => a.Status)
                 .IsRequired()
@@ -57,6 +69,13 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAluguel
                 .WithMany()
                 .HasForeignKey(a => a.PlanoCobrancaId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            aBuilder.HasMany(a => a.TaxasEscolhidas)
+                .WithMany(t => t.Alugueis)
+                .UsingEntity(j => j.ToTable("TBAluguelTaxa"));
+
+
+
 
         }
     }
