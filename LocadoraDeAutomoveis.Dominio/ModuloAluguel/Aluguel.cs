@@ -1,8 +1,8 @@
 ﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
-using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
+using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
 
 namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
 {
@@ -15,9 +15,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
         public int AutomovelId { get; set; }
         public Automovel Automovel { get; set; }
 
-        //public int GrupoAutomvel { get; set; }
-        //public GrupoAutomovel GrupoAutomovel { get; set; }
-
         public int PlanoCobrancaId { get; set; }
         public PlanoCobranca PlanoCobranca { get; set; }
 
@@ -26,24 +23,84 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
         public DateTime? DataRetorno { get; set; }
         public decimal ValorEntrada { get; set; }
 
+        public int KmRodado { get; set; }
+        public MarcadorCombustivelEnum MarcadorCombustivel { get; set; }
+
         public StatusAluguelEnum Status { get; set; }
+        public TipoPlanoCobrancaEnum TipoPlanoCobranca { get; set; }
 
-        protected Aluguel() { }
+        public List<Taxa> TaxasEscolhidas { get; set; }
 
-        public Aluguel(int condutorId, Condutor condutor, int automovelId, Automovel autonoAutomovel,int planoCobrancaId, PlanoCobranca planoCobranca,DateTime dataSaida, DateTime? dataRetorno, decimal valorEntrada, StatusAluguelEnum status)
+        protected Aluguel()
+        {
+            TaxasEscolhidas = new List<Taxa>();
+            MarcadorCombustivel = MarcadorCombustivelEnum.Completo;
+            DataRetorno = null;
+        }
+
+        public Aluguel(int condutorId, int automovelId, int planoCobrancaId, DateTime dataSaida, DateTime? dataRetorno, decimal valorEntrada, StatusAluguelEnum status, TipoPlanoCobrancaEnum planoCobranca): this()
         {
             CondutorId = condutorId;
-            Condutor = condutor;
             AutomovelId = automovelId;
-            Automovel = autonoAutomovel;
-            //GrupoAutomvel = grupoAutomvel;
-            //GrupoAutomovel = grupoAutomovel;
             PlanoCobrancaId = planoCobrancaId;
-            PlanoCobranca = planoCobranca;
             DataSaida = dataSaida;
-            DataRetorno = dataRetorno;
             ValorEntrada = valorEntrada;
             Status = status;
+            TipoPlanoCobranca = planoCobranca;
+        }
+
+        public void Devolucao()
+        {
+            DataRetorno = DateTime.Now;
+
+            if (Automovel is null)
+                return;
+
+            Automovel.Desocupar();
+        }
+
+        public bool TemMulta()
+        {
+            int diasAlugado = (DataRetorno - DataSaida).Value.Days;
+
+            if (DataRetorno is null)
+                return (DateTime.Now - DataSaida).Days > diasAlugado;
+
+            return (DataRetorno - DataSaida).Value.Days > diasAlugado;
+        }
+
+        public decimal CalcularValorTotal()
+        {
+            decimal valorTotal = 0;
+
+            if (TipoPlanoCobranca == TipoPlanoCobrancaEnum.Diario)
+            {
+                decimal valorDiaria = PlanoCobranca.PrecoDiarioPlanoDiario * (DataRetorno - DataSaida).Value.Days;
+
+                decimal valorKm = PlanoCobranca.PrecoPorKmPlanoDiario * KmRodado;
+
+                valorTotal = valorDiaria + valorKm;
+            }
+            else if (TipoPlanoCobranca == TipoPlanoCobrancaEnum.Controlado)
+            {
+                decimal valorDiaria = PlanoCobranca.PrecoDiarioPlanoControlado * (DataRetorno - DataSaida).Value.Days;
+
+                if(PlanoCobranca.KmDisponivelPlanoControlado < KmRodado)
+                {
+                    decimal valorKmExcedido = (KmRodado - PlanoCobranca.KmDisponivelPlanoControlado) * PlanoCobranca.PrecoPorKmExcedido;
+                    valorTotal = valorDiaria + valorKmExcedido;
+                }
+                else
+                {
+                    valorTotal = valorDiaria;
+                }
+            }
+            else if (TipoPlanoCobranca == TipoPlanoCobrancaEnum.Livre)
+            {
+                valorTotal = PlanoCobranca.PrecoDiarioPlanoLivre * (DataRetorno - DataSaida).Value.Days;
+            }
+
+            return valorTotal;
         }
 
         public List<string> Validar()
@@ -55,10 +112,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
 
             if (AutomovelId == 0)
                 erros.Add("O campo \"AutomovelId\" é obrigatório");
-
-            //if (GrupoAutomvel == 0)
-            //    erros.Add("O campo \"GrupoAutomvel\" é obrigatório");
-
+            
             if (PlanoCobrancaId == 0)
                 erros.Add("O campo \"PlanoCobrancaId\" é obrigatório");
 
