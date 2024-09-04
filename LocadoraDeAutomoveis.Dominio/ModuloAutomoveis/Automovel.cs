@@ -16,6 +16,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
         public int GrupoAutomovelId { get; set; }
         public GrupoAutomovel? GrupoAutomoveis { get; set; }
 
+        public bool Alugado { get; set; }
+
         public Automovel() { }
 
         public Automovel(string modelo, string marca, string cor, string placa, TipoCombustivel tipoCombustivel, int ano,
@@ -31,6 +33,15 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
             FotoVeiculo = fotoVeiculo;
             GrupoAutomoveis = grupoAutomoveis;
             GrupoAutomovelId = grupoAutomovelId;
+        }
+
+        public void Alugar()
+        {
+            Alugado = true;
+        }
+        public void Desocupar()
+        {
+            Alugado = false;
         }
 
         public List<string> Validar()
