@@ -22,6 +22,21 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AluguelTaxa", b =>
+                {
+                    b.Property<int>("AlugueisId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaxasEscolhidasId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AlugueisId", "TaxasEscolhidasId");
+
+                    b.HasIndex("TaxasEscolhidasId");
+
+                    b.ToTable("TBAluguelTaxa", (string)null);
+                });
+
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAluguel.Aluguel", b =>
                 {
                     b.Property<int>("Id")
@@ -43,10 +58,19 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.Property<DateTime>("DataSaida")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("KmRodado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MarcadorCombustivel")
+                        .HasColumnType("int");
+
                     b.Property<int>("PlanoCobrancaId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoPlanoCobranca")
                         .HasColumnType("int");
 
                     b.Property<decimal>("ValorEntrada")
@@ -70,6 +94,9 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Alugado")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Ano")
                         .HasColumnType("int");
@@ -526,9 +553,24 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AluguelTaxa", b =>
+                {
+                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloAluguel.Aluguel", null)
+                        .WithMany()
+                        .HasForeignKey("AlugueisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloTaxa.Taxa", null)
+                        .WithMany()
+                        .HasForeignKey("TaxasEscolhidasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAluguel.Aluguel", b =>
                 {
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloAutomoveis.Automovel", "Automoveis")
+                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloAutomoveis.Automovel", "Automovel")
                         .WithMany()
                         .HasForeignKey("AutomovelId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -546,7 +588,7 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Automoveis");
+                    b.Navigation("Automovel");
 
                     b.Navigation("Condutor");
 
