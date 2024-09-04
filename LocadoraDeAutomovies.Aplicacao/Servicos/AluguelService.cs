@@ -1,11 +1,14 @@
 ﻿using FluentResults;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
+using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
+using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
 
 namespace LocadoraDeAutomovies.Aplicacao.Servicos
 {
     public class AluguelService
     {
         private readonly IRepositorioAluguel repositorioAluguel;
+        private readonly IRepositorioAutomovel repositorioAutomovel;
 
         public AluguelService(IRepositorioAluguel repositorioAluguel)
         {
@@ -78,7 +81,27 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(alugueis);
         }
 
-        
+        public Result<Aluguel> Concluir(Aluguel aluguelDevolucao)
+        {
+            if(aluguelDevolucao.DataRetorno is not null)
+                return Result.Fail("Aluguel já foi concluído!");
 
+            ConcluirDevolucao(aluguelDevolucao);
+
+            repositorioAluguel.Editar(aluguelDevolucao);
+
+            return Result.Ok(aluguelDevolucao);
+        }
+
+        private void ConcluirDevolucao(Aluguel aluguel)
+        {
+            var automovelSelecionado = repositorioAutomovel.SelecionarPorId(aluguel.Id);
+
+            aluguel.Automovel = automovelSelecionado;
+
+            aluguel.Devolucao();
+
+            repositorioAutomovel.Editar(aluguel.Automovel!);
+        }
     }
 }

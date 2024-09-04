@@ -45,6 +45,7 @@ namespace LocadoraDeAutomoveis.WebApp
             builder.Services.AddScoped<ClienteService>();
             builder.Services.AddScoped<CondutorService>();
             builder.Services.AddScoped<ConfiguracaoService>();
+            builder.Services.AddScoped<AluguelService>();
 
             builder.Services.AddScoped<GrupoAutomoveisResolver>();
 

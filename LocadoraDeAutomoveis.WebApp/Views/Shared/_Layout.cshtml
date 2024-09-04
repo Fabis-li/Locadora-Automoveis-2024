@@ -8,6 +8,7 @@
     var clienteAtivo = caminho.StartsWith("/cliente") ? "nav-link active fw-semibold" : "nav-link";
     var condutorAtivo = caminho.StartsWith("/condutor") ? "nav-link active fw-semibold" : "nav-link";
     var configuracaoAtivo = caminho.StartsWith("/configuracao") ? "nav-link active fw-semibold" : "nav-link";
+    var aluguelAtivo = caminho.StartsWith("/aluguel") ? "nav-link active fw-semibold" : "nav-link";
 
 
     MensagemViewModel? mensagem = ViewBag.Mensagem ?? null;
@@ -59,6 +60,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Configuracao" asp-action="Inserir">Configuração</a>
                     </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Aluguel" asp-action="Inserir">Aluguel</a>
+                        </li>
                 </ul>
             </div>
         </div>
