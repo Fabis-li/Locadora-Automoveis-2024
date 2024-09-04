@@ -1,8 +1,15 @@
 ﻿using AutoMapper;
+using FluentResults;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
+using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
+using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
+using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
 using LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado;
+using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LocadoraDeAutomoveis.WebApp.Controllers
 {
@@ -14,9 +21,10 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         private readonly PlanoCobrancaService servicePlanoCobranca;
         private readonly CondutorService serviceCondutor;
         private readonly GrupoAutomoveisService serviceGrupoAutomovel;
+        private readonly TaxaService serviceTaxa;
         private readonly IMapper mapeador;
 
-        public AluguelController(AluguelService servico, ClienteService serviceCliente, AutomovelService serviceAutomovel, PlanoCobrancaService servicePlanoCobranca, CondutorService serviceCondutor, GrupoAutomoveisService serviceGrupoAutomovel, IMapper mapeador)
+        public AluguelController(AluguelService servico, ClienteService serviceCliente, AutomovelService serviceAutomovel, PlanoCobrancaService servicePlanoCobranca, CondutorService serviceCondutor, GrupoAutomoveisService serviceGrupoAutomovel, IMapper mapeador, TaxaService serviceTaxa)
         {
             this.servico = servico;
             this.serviceCliente = serviceCliente;
@@ -25,6 +33,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             this.serviceCondutor = serviceCondutor;
             this.serviceGrupoAutomovel = serviceGrupoAutomovel;
             this.mapeador = mapeador;
+            this.serviceTaxa = serviceTaxa;
         }
 
         public IActionResult Listar()
@@ -40,14 +49,14 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
             var alugueis = resultado.Value;
 
-            var listarAlugueisVm = mapeador.Map<ListarAluguelViewModel>(alugueis);
+            var listarAlugueisVm = mapeador.Map<IEnumerable<ListarAluguelViewModel>>(alugueis);
 
             return View(listarAlugueisVm);
         }
 
         public IActionResult Inserir()
         {
-            return View(new InserirAluguelViewModel());
+            return View(CarregarDados());
         }
 
         [HttpPost]
@@ -177,12 +186,14 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             return View(concluirVm);
         }
 
+        [HttpPost]
         public IActionResult Concluir(ConcluirAluguelViewModel concluirVm)
         {
-            if(!ModelState.IsValid)
-                return View(concluirVm);
+            var AluguelOriginal = servico.SelecionarPorId(concluirVm.Id).Value;
 
-            var resultado = servico.Concluir(concluirVm.Id, concluirVm.KmFinal);
+            var AluguelAtualizado = mapeador.Map<ConcluirAluguelViewModel, Aluguel>(concluirVm, AluguelOriginal);
+
+            var resultado = servico.Concluir(AluguelAtualizado);
 
             if (resultado.IsFailed)
             {
@@ -191,14 +202,28 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return View(concluirVm);
             }
 
-            var aluguel = resultado.Value;
-
-            
-
-            ApresentarMensagemSucesso("Aluguel concluído com sucesso!");
+            ApresentarMensagemSucesso($"O Aluguel ID [{AluguelAtualizado.Id}] foi concluído com sucesso!");
 
             return RedirectToAction(nameof(Listar));
+            
+        }
+
+        private InserirAluguelViewModel CarregarDados(InserirAluguelViewModel? dadosPrevisto = null)
+        {
+            var condutores = serviceCondutor.SelecionarTodos().Value;
+            var automoveis = serviceAutomovel.SelecionarTodos().Value;
+            var taxas = serviceTaxa.SelecionarTodos().Value;
+
+            if(dadosPrevisto is null)
+                dadosPrevisto = new InserirAluguelViewModel();
+
+            dadosPrevisto.Condutores = condutores.Select(c => new SelectListItem(c.Nome, c.Id.ToString()));
+            dadosPrevisto.Automoveis = automoveis.Select(c => new SelectListItem(c.Modelo, c.Id.ToString()));
+            dadosPrevisto.TaxasEscolhidas= taxas.Select(c => new SelectListItem(c.ToString(), c.Id.ToString()));
+
+            return dadosPrevisto;
         }
 
     }
+
 }
