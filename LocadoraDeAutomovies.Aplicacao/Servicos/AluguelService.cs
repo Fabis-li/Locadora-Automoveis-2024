@@ -41,7 +41,6 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
 
             aluguel.CondutorId = aluguelAtualizado.CondutorId;
             aluguel.AutomovelId = aluguelAtualizado.AutomovelId;
-            aluguel.PlanoCobrancaId = aluguelAtualizado.PlanoCobrancaId;
             aluguel.DataSaida = aluguelAtualizado.DataSaida;
             aluguel.DataRetorno = aluguelAtualizado.DataRetorno;
             aluguel.ValorEntrada = aluguelAtualizado.ValorEntrada;
