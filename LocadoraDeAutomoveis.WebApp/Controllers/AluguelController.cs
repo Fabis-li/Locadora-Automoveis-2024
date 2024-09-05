@@ -1,10 +1,5 @@
 ﻿using AutoMapper;
-using FluentResults;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
-using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
-using LocadoraDeAutomoveis.Dominio.ModuloCliente;
-using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
-using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
 using LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado;
 using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
@@ -16,22 +11,16 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
     public class AluguelController : WebControllerBase
     {
         private readonly AluguelService servico;
-        private readonly ClienteService serviceCliente;
         private readonly AutomovelService serviceAutomovel;
-        private readonly PlanoCobrancaService servicePlanoCobranca;
         private readonly CondutorService serviceCondutor;
-        private readonly GrupoAutomoveisService serviceGrupoAutomovel;
         private readonly TaxaService serviceTaxa;
         private readonly IMapper mapeador;
 
         public AluguelController(AluguelService servico, ClienteService serviceCliente, AutomovelService serviceAutomovel, PlanoCobrancaService servicePlanoCobranca, CondutorService serviceCondutor, GrupoAutomoveisService serviceGrupoAutomovel, IMapper mapeador, TaxaService serviceTaxa)
         {
             this.servico = servico;
-            this.serviceCliente = serviceCliente;
             this.serviceAutomovel = serviceAutomovel;
-            this.servicePlanoCobranca = servicePlanoCobranca;
             this.serviceCondutor = serviceCondutor;
-            this.serviceGrupoAutomovel = serviceGrupoAutomovel;
             this.mapeador = mapeador;
             this.serviceTaxa = serviceTaxa;
         }
@@ -44,7 +33,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             {
                 ApresentarMensagemFalha(resultado.ToResult());
 
-                return RedirectToAction("Index", "Inicio");
+                return RedirectToAction("Index", "Home");
             }
 
             var alugueis = resultado.Value;
