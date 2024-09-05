@@ -91,9 +91,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
             var aluguel = Builder<Aluguel>
                 .CreateNew()
                 .With(a => a.Id = 0)
-                .With(a => a.Condutor = condutor)
-                .With(a => a.Automovel = automovel)
-                .With(a => a.PlanoCobranca = planoCobranca)
+                .With(a => a.Condutor = condutor).With(a => a.Automovel = automovel)
                 .Build();
 
             repositorioAluguel.Inserir(aluguel);
@@ -142,7 +140,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
                 .With(a => a.Id = 0)
                 .With(a => a.Condutor = condutor)
                 .With(a => a.Automovel = automovel)
-                .With(a => a.PlanoCobranca = planoCobranca)
+                
                 .Persist();
 
             aluguel.Condutor = condutor;
@@ -194,7 +192,6 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
                 .With(a => a.Id = 0)
                 .With(a => a.Condutor = condutor)
                 .With(a => a.Automovel = automovel)
-                .With(a => a.PlanoCobranca = planoCobranca)
                 .Persist();
 
             repositorioAluguel.Excluir(aluguel);
