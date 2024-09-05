@@ -43,5 +43,10 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloTaxa
 
             return erros;
         }
+
+        public override string ToString()
+        {
+            return $"{Nome}\t{Valor.ToString("C2")}\t{TipoCobranca.ToString()}";
+        }
     }
 }
