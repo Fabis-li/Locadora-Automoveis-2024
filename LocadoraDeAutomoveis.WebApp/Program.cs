@@ -48,7 +48,7 @@ namespace LocadoraDeAutomoveis.WebApp
             builder.Services.AddScoped<AluguelService>();
 
             builder.Services.AddScoped<GrupoAutomoveisResolver>();
-
+            builder.Services.AddScoped<AutomovelValueResolver>();
             builder.Services.AddAutoMapper(cfg =>
             {
                 cfg.AddMaps(Assembly.GetExecutingAssembly());
