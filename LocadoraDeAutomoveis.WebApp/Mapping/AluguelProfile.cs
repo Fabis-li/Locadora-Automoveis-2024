@@ -11,14 +11,14 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping
         {
             CreateMap<InserirAluguelViewModel, Aluguel>()
                 .ForMember(dest => dest.TaxasEscolhidas, opt => opt.MapFrom(t => t.TaxasEscolhidas));
+                
 
             CreateMap<EditarAluguelViewModel, Aluguel>();
 
             CreateMap<Aluguel, ListarAluguelViewModel>()
-                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Condutor.Cliente.Nome))
-                .ForMember(dest => dest.Automovel, opt => opt.MapFrom(src => src.Automovel.Modelo))
-                .ForMember(dest => dest.TipoPlanoCobranca, opt => opt.MapFrom(src => src.TipoPlanoCobranca.ToString()))
-                .ForMember(dest => dest.ValorTotal, opt => opt.MapFrom(src => src.ValorEntrada));
+                .ForMember(dest => dest.Automovel, opt => opt.MapFrom(src => src.Automovel!.Modelo))
+                .ForMember(dest => dest.Condutor, opt => opt.MapFrom(src => src.Condutor!.Nome))
+                .ForMember(dest => dest.TipoPlanoCobranca, opt => opt.MapFrom(src => src.TipoPlanoCobranca.ToString()));
 
             CreateMap<Aluguel, EditarAluguelViewModel>();
 
