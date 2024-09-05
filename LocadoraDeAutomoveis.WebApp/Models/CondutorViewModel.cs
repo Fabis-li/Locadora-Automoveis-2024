@@ -23,7 +23,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
 
         [Required(ErrorMessage = "O campo Validação da CNH é obrigatório.")]
         [DataType(DataType.Date)]
-        public string ValidaCnh { get; set; }
+        public DateTime ValidaCnh { get; set; }
 
         [Required(ErrorMessage = "O campo Telefone é obrigatório.")]
         [Phone(ErrorMessage = "O telefone deve ser válido")]
@@ -35,7 +35,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         [Required(ErrorMessage = "O campo Cliente é obrigatório.")]
         public int ClienteId { get; set; }
 
-        public IEnumerable<SelectListItem>? Cliente { get; set; }
+        public IEnumerable<SelectListItem>? Clientes { get; set; }
     }
 
     public class EditarCondutorViewModel
@@ -82,7 +82,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         public string Email { get; set; }
         public string Cpf { get; set; }
         public string Cnh { get; set; }
-        public string ValidaCnh { get; set; }
+        public DateTime ValidaCnh { get; set; }
         public string Telefone { get; set; }
         public bool ClienteCondutor { get; set; }
         public int ClienteId { get; set; }

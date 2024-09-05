@@ -17,8 +17,8 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         [Required(ErrorMessage = "O campo Automóvel é obrigatório")]
         public int AutomovelId { get; set; }
 
-        [Required(ErrorMessage = "O campo Plano de Cobrança é obrigatório")]
-        public int PlanoCobrancaId { get; set; }
+        //[Required(ErrorMessage = "O campo Plano de Cobrança é obrigatório")]
+        //public int PlanoCobrancaId { get; set; }
 
         [Required(ErrorMessage = "O campo Condutor é obrigatório")]
         public int CondutorId { get; set; }
@@ -33,6 +33,9 @@ namespace LocadoraDeAutomoveis.WebApp.Models
 
         [Required(ErrorMessage = "O campo Valor Total é obrigatório")]
         public decimal ValorTotal { get; set; }
+
+        [Required(ErrorMessage = "O campo Valor Entrada é obrigatório")]
+        public decimal ValorEntrada { get; set; }
 
         [Required(ErrorMessage = "O marcador de combustível é obrigatório")]
         public MarcadorCombustivelEnum MarcadorCombustivel { get; set; }
@@ -98,12 +101,12 @@ namespace LocadoraDeAutomoveis.WebApp.Models
     public class ListarAluguelViewModel
     {
         public int Id { get; set; }
-        public int Cliente { get; set; }
-        public int Automovel { get; set; }
-        public int PlanoCobranca { get; set; }
-        public int Condutor { get; set; }
+        public string Cliente { get; set; }
+        public string Automovel { get; set; }
+        public string Condutor { get; set; }
         public DateTime DataSaida { get; set; }
-        public DateTime? DataRetorno { get; set; }
+        public DateTime DataRetorno { get; set; }
+        public decimal ValorEntrada { get; set; }
         public decimal ValorTotal { get; set; }
         public string TipoPlanoCobranca { get; set; }
         public string MarcadorCombustivel { get; set; }
@@ -113,10 +116,10 @@ namespace LocadoraDeAutomoveis.WebApp.Models
     public class DetalhesAluguelViewModel
     {
         public int Id { get; set; }
-        public int Cliente { get; set; }
-        public int Automovel { get; set; }
-        public int PlanoCobranca { get; set; }
-        public int Condutor { get; set; }
+        public string Cliente { get; set; }
+        public string Automovel { get; set; }
+        //public string PlanoCobranca { get; set; }
+        public string Condutor { get; set; }
         public DateTime DataSaida { get; set; }
         public DateTime DataRetorno { get; set; }
         public decimal ValorTotal { get; set; }
