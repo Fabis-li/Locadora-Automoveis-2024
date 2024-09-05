@@ -50,7 +50,6 @@ namespace LocadoraDeAutomoveis.Infra.ModuloCondutor
             cBuilder.HasOne(c => c.Cliente)
                 .WithMany(c => c.Condutores)
                 .HasForeignKey(c => c.ClienteId)
-                .HasForeignKey(c => c.ClienteId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
