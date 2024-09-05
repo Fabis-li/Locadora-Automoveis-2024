@@ -13,7 +13,6 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             var aluguel = new Aluguel(
                 condutorId: 1,
                 automovelId: 1,
-                planoCobrancaId: 1,
                 dataSaida: DateTime.Now,
                 dataRetorno: DateTime.Now.AddDays(3),
                 valorEntrada: 1000.00m,
@@ -34,7 +33,6 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             var aluguel = new Aluguel(
                 condutorId: 0,
                 automovelId: 0,
-                planoCobrancaId: 0,
                 dataSaida: DateTime.Now,
                 dataRetorno: DateTime.Now.AddDays(3),
                 valorEntrada: 1000.00m,
