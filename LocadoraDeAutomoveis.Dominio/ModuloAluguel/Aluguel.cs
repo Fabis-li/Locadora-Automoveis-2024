@@ -15,8 +15,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
         public int AutomovelId { get; set; }
         public Automovel Automovel { get; set; }
 
-        public int PlanoCobrancaId { get; set; }
-        public PlanoCobranca PlanoCobranca { get; set; }
+        //public int PlanoCobrancaId { get; set; }
+        //public PlanoCobranca PlanoCobranca { get; set; }
 
 
         public DateTime DataSaida { get; set; }
@@ -38,11 +38,11 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
             DataRetorno = null;
         }
 
-        public Aluguel(int condutorId, int automovelId, int planoCobrancaId, DateTime dataSaida, DateTime? dataRetorno, decimal valorEntrada, StatusAluguelEnum status, TipoPlanoCobrancaEnum planoCobranca): this()
+        public Aluguel(int condutorId, int automovelId, DateTime dataSaida, DateTime? dataRetorno, decimal valorEntrada, StatusAluguelEnum status, TipoPlanoCobrancaEnum planoCobranca): this()
         {
             CondutorId = condutorId;
             AutomovelId = automovelId;
-            PlanoCobrancaId = planoCobrancaId;
+            //PlanoCobrancaId = planoCobrancaId;
             DataSaida = dataSaida;
             ValorEntrada = valorEntrada;
             Status = status;
@@ -69,25 +69,25 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
             return (DataRetorno - DataSaida).Value.Days > diasAlugado;
         }
 
-        public decimal CalcularValorTotal()
+        public decimal CalcularValorTotal(PlanoCobranca planoCobranca)
         {
             decimal valorTotal = 0;
 
             if (TipoPlanoCobranca == TipoPlanoCobrancaEnum.Diario)
             {
-                decimal valorDiaria = PlanoCobranca.PrecoDiarioPlanoDiario * (DataRetorno - DataSaida).Value.Days;
+                decimal valorDiaria = planoCobranca.PrecoDiarioPlanoDiario * (DataRetorno - DataSaida).Value.Days;
 
-                decimal valorKm = PlanoCobranca.PrecoPorKmPlanoDiario * KmRodado;
+                decimal valorKm = planoCobranca.PrecoPorKmPlanoDiario * KmRodado;
 
                 valorTotal = valorDiaria + valorKm;
             }
             else if (TipoPlanoCobranca == TipoPlanoCobrancaEnum.Controlado)
             {
-                decimal valorDiaria = PlanoCobranca.PrecoDiarioPlanoControlado * (DataRetorno - DataSaida).Value.Days;
+                decimal valorDiaria = planoCobranca.PrecoDiarioPlanoControlado * (DataRetorno - DataSaida).Value.Days;
 
-                if(PlanoCobranca.KmDisponivelPlanoControlado < KmRodado)
+                if(planoCobranca.KmDisponivelPlanoControlado < KmRodado)
                 {
-                    decimal valorKmExcedido = (KmRodado - PlanoCobranca.KmDisponivelPlanoControlado) * PlanoCobranca.PrecoPorKmExcedido;
+                    decimal valorKmExcedido = (KmRodado - planoCobranca.KmDisponivelPlanoControlado) * planoCobranca.PrecoPorKmExcedido;
                     valorTotal = valorDiaria + valorKmExcedido;
                 }
                 else
@@ -97,7 +97,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
             }
             else if (TipoPlanoCobranca == TipoPlanoCobrancaEnum.Livre)
             {
-                valorTotal = PlanoCobranca.PrecoDiarioPlanoLivre * (DataRetorno - DataSaida).Value.Days;
+                valorTotal = planoCobranca.PrecoDiarioPlanoLivre * (DataRetorno - DataSaida).Value.Days;
             }
 
             return valorTotal;
@@ -112,9 +112,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
 
             if (AutomovelId == 0)
                 erros.Add("O campo \"AutomovelId\" é obrigatório");
-            
-            if (PlanoCobrancaId == 0)
-                erros.Add("O campo \"PlanoCobrancaId\" é obrigatório");
 
             if (DataSaida == null)
                 erros.Add("O campo \"DataSaída\" é obrigatório");
