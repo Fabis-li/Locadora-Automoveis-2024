@@ -33,11 +33,11 @@
                         </a>
                         <a title="Editar"
                            class="text-info-emphasis fs-5"
-                           href="/Condutor/Editar/@aluguelVm.Id">
+                           href="/Aluguel/Editar/@aluguelVm.Id">
                             <i class="bi bi-pencil-fill"></i>
                         </a>
                         <a title="Excluir"
-                           class="text-info-emphasis fs-5" href="/Condutor/Excluir/@aluguelVm.Id">
+                           class="text-info-emphasis fs-5" href="/Aluguel/Excluir/@aluguelVm.Id">
                             <i class="bi bi-trash-fill"></i>
                         </a>
                     </div>
@@ -47,9 +47,9 @@
                     <h5 class="card-title">@aluguelVm.Automovel</h5>
                     <p class="card-text">Nome do Condutor: @aluguelVm.Condutor</p>
                     <p class="card-text">Tipo Plano: @aluguelVm.TipoPlanoCobranca</p>
-                    <p class="card-text">Data de Saída: @aluguelVm.DataSaida</p>
-                    <p class="card-text">Retorno Previsto: @aluguelVm.DataRetorno</p>
-                    <p class="card-text">Valor Total: @aluguelVm.ValorTotal</p>
+                    <p class="card-text">Data de Saída: @aluguelVm.DataSaida.ToShortDateString()</p>
+                    <p class="card-text">Retorno Previsto: @aluguelVm.DataRetorno.ToShortDateString()</p>
+                    <p class="card-text">Valor Entrada R$: @aluguelVm.ValorEntrada</p>
                 </div>
             </div>
         }

@@ -36,10 +36,14 @@
 
                 <div class="card-body d-grid ga-2 justify-content-center">
                     <h5 class="card-title">@condutorVm.Nome</h5>
-                    <p class="card-text">Nome do Cliente: @condutorVm.Cliente</p>
+                        @if(condutorVm.ClienteCondutor is false)
+                        {
+                            <span>Cliente: @condutorVm.Cliente<br/></span>
+                        }
+                    @* <p class="card-text">Nome do Cliente: @condutorVm.Cliente</p> *@
                     <p class="card-text">CPF: @condutorVm.Cpf</p>
                     <p class="card-text">CNH: @condutorVm.Cnh</p>
-                    <p class="card-text">Validade: @condutorVm.ValidaCnh</p>
+                    <p class="card-text">Validade: @condutorVm.ValidaCnh.ToShortDateString()</p>
                 </div>
             </div>
         }
