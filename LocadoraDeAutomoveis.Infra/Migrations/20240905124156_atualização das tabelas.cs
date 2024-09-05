@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class TabelasAtualizadas : Migration
+    public partial class atualizaçãodastabelas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -312,7 +312,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CondutorId = table.Column<int>(type: "int", nullable: false),
                     AutomovelId = table.Column<int>(type: "int", nullable: false),
-                    PlanoCobrancaId = table.Column<int>(type: "int", nullable: false),
                     DataSaida = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataRetorno = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ValorEntrada = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -334,12 +333,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         name: "FK_TBAluguel_TBCondutor_CondutorId",
                         column: x => x.CondutorId,
                         principalTable: "TBCondutor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TBAluguel_TBPlanoCobranca_PlanoCobrancaId",
-                        column: x => x.PlanoCobrancaId,
-                        principalTable: "TBPlanoCobranca",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -428,11 +421,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 column: "CondutorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TBAluguel_PlanoCobrancaId",
-                table: "TBAluguel",
-                column: "PlanoCobrancaId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TBAluguelTaxa_TaxasEscolhidasId",
                 table: "TBAluguelTaxa",
                 column: "TaxasEscolhidasId");
@@ -478,6 +466,9 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 name: "TBConfiguracao");
 
             migrationBuilder.DropTable(
+                name: "TBPlanoCobranca");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -496,13 +487,10 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 name: "TBCondutor");
 
             migrationBuilder.DropTable(
-                name: "TBPlanoCobranca");
+                name: "TBGrpAutomoveis");
 
             migrationBuilder.DropTable(
                 name: "TBCliente");
-
-            migrationBuilder.DropTable(
-                name: "TBGrpAutomoveis");
         }
     }
 }

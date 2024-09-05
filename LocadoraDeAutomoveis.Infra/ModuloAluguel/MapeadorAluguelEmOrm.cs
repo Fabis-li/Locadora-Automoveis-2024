@@ -27,10 +27,6 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAluguel
                 .IsRequired()
                 .HasColumnType("int");
 
-            aBuilder.Property(a => a.PlanoCobrancaId)
-                .IsRequired()
-                .HasColumnType("int");
-
             aBuilder.Property(a => a.DataSaida)
                 .IsRequired()
                 .HasColumnType("datetime2");
@@ -63,11 +59,6 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAluguel
             aBuilder.HasOne(a => a.Automovel)
                 .WithMany()
                 .HasForeignKey(a => a.AutomovelId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            aBuilder.HasOne(a => a.PlanoCobranca)
-                .WithMany()
-                .HasForeignKey(a => a.PlanoCobrancaId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             aBuilder.HasMany(a => a.TaxasEscolhidas)

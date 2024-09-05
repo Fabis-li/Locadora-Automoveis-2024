@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     [DbContext(typeof(LocadoraDeAutomoveisDbContext))]
-    [Migration("20240904130655_Tabelas Atualizadas")]
-    partial class TabelasAtualizadas
+    [Migration("20240905124156_atualização das tabelas")]
+    partial class atualizaçãodastabelas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,9 +67,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.Property<int>("MarcadorCombustivel")
                         .HasColumnType("int");
 
-                    b.Property<int>("PlanoCobrancaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -84,8 +81,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.HasIndex("AutomovelId");
 
                     b.HasIndex("CondutorId");
-
-                    b.HasIndex("PlanoCobrancaId");
 
                     b.ToTable("TBAluguel", (string)null);
                 });
@@ -585,17 +580,9 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca.PlanoCobranca", "PlanoCobranca")
-                        .WithMany()
-                        .HasForeignKey("PlanoCobrancaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Automovel");
 
                     b.Navigation("Condutor");
-
-                    b.Navigation("PlanoCobranca");
                 });
 
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAutomoveis.Automovel", b =>

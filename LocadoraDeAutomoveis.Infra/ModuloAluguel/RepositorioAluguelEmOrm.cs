@@ -25,7 +25,6 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAluguel
             return ObterRegistros()
                 .Include(a => a.Condutor)
                 .Include(a => a.Automovel)
-                .Include(a => a.PlanoCobranca)
                 .FirstOrDefault(a => a.Id == id);
         }
 
@@ -34,7 +33,6 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAluguel
             return ObterRegistros()
                 .Include(a => a.Condutor)
                 .Include(a => a.Automovel)
-                .Include(a => a.PlanoCobranca)
                 .ToList();
         }
     }

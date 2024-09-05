@@ -64,9 +64,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.Property<int>("MarcadorCombustivel")
                         .HasColumnType("int");
 
-                    b.Property<int>("PlanoCobrancaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -81,8 +78,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.HasIndex("AutomovelId");
 
                     b.HasIndex("CondutorId");
-
-                    b.HasIndex("PlanoCobrancaId");
 
                     b.ToTable("TBAluguel", (string)null);
                 });
@@ -582,17 +577,9 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca.PlanoCobranca", "PlanoCobranca")
-                        .WithMany()
-                        .HasForeignKey("PlanoCobrancaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Automovel");
 
                     b.Navigation("Condutor");
-
-                    b.Navigation("PlanoCobranca");
                 });
 
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAutomoveis.Automovel", b =>
