@@ -26,13 +26,15 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             if (condutor is null)
                 return Result.Fail("O condutor não foi encontrado!");
 
+            condutor.ClienteId = condutoratualizado.ClienteId;
             condutor.Nome = condutoratualizado.Nome;
             condutor.Email = condutoratualizado.Email;
             condutor.Cpf = condutoratualizado.Cpf;
             condutor.Cnh = condutoratualizado.Cnh;
             condutor.ValidadeCnh = condutoratualizado.ValidadeCnh;
             condutor.Telefone = condutoratualizado.Telefone;
-            condutor.ClienteId = condutoratualizado.ClienteId;
+            condutor.Cliente = condutoratualizado.Cliente;
+            condutor.ClienteCondutor = condutoratualizado.ClienteCondutor;
 
             repositorioCondutor.Editar(condutor);
 

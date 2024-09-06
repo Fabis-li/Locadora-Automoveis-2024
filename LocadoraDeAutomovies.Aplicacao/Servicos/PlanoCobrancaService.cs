@@ -67,5 +67,15 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
 
             return Result.Ok(planosCobranca);
         }
+
+        public Result<PlanoCobranca> SelecionarPorIdGrupoAutomovel(int grupoAutomovelId)
+        {
+            var planoCobranca = repositorioPlanoCobranca.FiltrarPlano(p => p.GrupoAutomovelId == grupoAutomovelId);
+
+            if (planoCobranca is null)
+                return Result.Fail("O plano de cobrança não foi encontrado!");
+
+            return Result.Ok(planoCobranca);
+        }
     }
 }

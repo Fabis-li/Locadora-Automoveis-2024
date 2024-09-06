@@ -30,7 +30,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             {
                 ApresentarMensagemFalha(resultado.ToResult());
 
-                return RedirectToAction("Index", "Inicio");
+                return RedirectToAction("Index", "Home");
             }
 
             var automoveis = resultado.Value;

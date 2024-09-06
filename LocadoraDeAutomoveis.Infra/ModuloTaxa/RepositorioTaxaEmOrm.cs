@@ -19,5 +19,12 @@ namespace LocadoraDeAutomoveis.Infra.ModuloTaxa
         {
             return ObterRegistros().Where(predicate).ToList();
         }
+
+        public List<Taxa> SelecionarMuito(List<int> idsTaxasEscolhidas)
+        {
+            return dbContext.Taxas
+                .Where(t => idsTaxasEscolhidas.Contains(t.Id))
+                .ToList();
+        }
     }
 }

@@ -33,5 +33,15 @@ namespace LocadoraDeAutomoveis.Infra.ModuloCondutor
         {
             return ObterRegistros().Where(predicate).ToList();
         }
+
+        public override Condutor? SelecionarPorId(int id)
+        {
+            return ObterRegistros().Include(c => c.Cliente).FirstOrDefault(c => c.Id == id);
+        }
+
+        public override List<Condutor> SelecionarTodos()
+        {
+            return ObterRegistros().Include(c => c.Cliente).ToList();
+        }
     }
 }

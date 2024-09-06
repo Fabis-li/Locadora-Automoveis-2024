@@ -30,7 +30,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             {
                 ApresentarMensagemFalha(resultado.ToResult());
 
-                return RedirectToAction("Index", "Inicio");
+                return RedirectToAction("Index", "Home");
             }
 
             var planosCobranca = resultado.Value;
@@ -147,6 +147,24 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             ApresentarMensagemSucesso($"O registro [{detalhesPlanoCobrancaVm.Id}] foi excluído com sucesso!");
 
             return RedirectToAction(nameof(Listar));
+        }
+
+        public IActionResult Detalhes(int id)
+        {
+            var resultado = service.SelecionarPorId(id);
+
+            if (resultado.IsFailed)
+            {
+                ApresentarMensagemFalha(resultado.ToResult());
+
+                return RedirectToAction(nameof(Listar));
+            }
+
+            var planoCobranca = resultado.Value;
+
+            var detalhesVm = mapeador.Map<DetalhesPlanoCobrancaViewModel>(planoCobranca);
+
+            return View(detalhesVm);
         }
 
         private InserirPlanoCobrancaViewModel? CarregarDados(InserirPlanoCobrancaViewModel dadosPrevios = null)

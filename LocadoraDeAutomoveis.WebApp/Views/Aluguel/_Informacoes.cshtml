@@ -1,0 +1,23 @@
+﻿@model DetalhesAluguelViewModel
+
+
+<div class="row gap-3 my-3 my-xl-5">
+    <label class="fs-4"><strong>Nome:</strong> @Model.Automovel</label>
+    <label class="fs-4"><strong>Nome do Condutor:</strong> @Model.Condutor</label>
+    <label class="fs-4"><strong>Tipo de Cobrança</strong> @Model.TipoPlanoCobranca</label>
+    <label class="fs-4"><strong>Marcador de Combustível</strong> @Model.MarcadorCombustivel</label>
+    <label class="fs-4"><strong>km Rodado</strong> @Model.KmRodado</label>
+    <label class="fs-4"><strong>Data do Aluguel</strong> @Model.DataSaida.ToShortDateString()</label>
+    <label class="fs-4"><strong>Data do Retorno</strong> @Model.DataRetorno.ToShortDateString()</label>
+    
+    @if(Model.DataRetorno < DateTime.Today)
+    {
+        <label class="fs-4 text-danger"><strong>Aluguel em atraso</strong></label>
+    }
+    else
+    {
+        <label class="fs-4 text-success"><strong>Aluguel em dia</strong></label>
+    }
+
+    <label class="fs-5"><strong>Id:</strong> [@Model.Id]</label>
+</div>

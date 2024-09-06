@@ -44,7 +44,7 @@ namespace LocadoraDeAutomoveis.WebApp.Models
         [Required(ErrorMessage = "O campo Cliente é obrigatório.")]
         public int ClienteId { get; set; }
 
-        public IEnumerable<SelectListItem>? Cliente { get; set; }
+        public IEnumerable<SelectListItem>? Clientes { get; set; }
     }
 
     public class EditarCondutorViewModel

@@ -1,0 +1,89 @@
+﻿@using LocadoraDeAutomoveis.Dominio.ModuloAluguel
+@model InserirAluguelViewModel
+@{
+    ViewBag.Title = "Inserir Aluguel";
+}
+
+<div class="col">
+    <div class="row gap-3 my-3 my-xl-5">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Inserir">
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Automóvel</label>
+                <select class="form-control mb-1" asp-for="AutomovelId" asp-items="Model.Automoveis">
+                    @if(Model.Automoveis is null || !Model.Automoveis.Any())
+                    {
+                        <option value ="0" disabled>Nenhum automóvel disponível </option>
+                    }
+                </select>
+                <span class="text-danger fs-6" asp-validation-for="AutomovelId"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Condutor</label>
+                <select class="form-control mb-1" asp-for="CondutorId" asp-items="Model.Condutores">
+                    @if(Model.Condutores is null || !Model.Condutores.Any())
+                    {
+                        <option value ="0" disabled>Nenhum automóvel disponível </option>
+                    }
+                </select>
+                <span class="text-danger fs-6" asp-validation-for="CondutorId"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Tipo de Plano</label>
+                <select class="form-control mb-1" asp-for="TipoPlanoCobranca" asp-items="Html.GetEnumSelectList<TipoPlanoCobrancaEnum>()" ></select>
+                <span class="text-danger fs-6" asp-validation-for="TipoPlanoCobranca"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Marcador de Combustível</label>
+                <select class="form-control mb-1" asp-for="MarcadorCombustivel" asp-items="Html.GetEnumSelectList<MarcadorCombustivelEnum>()" ></select>
+                <span class="text-danger fs-6" asp-validation-for="MarcadorCombustivel"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Km Rodado</label>
+                <input class="form-control mb-1" asp-for="KmRodado" type="number" />
+                <span class="text-danger fs-6" asp-validation-for="KmRodado"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Data da Locação</label>
+                <input class="form-control mb-1" asp-for="DataSaida" type="date" min="@DateTime.Today" />
+                <span class="text-danger fs-6" asp-validation-for="DataSaida"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Data da Devolução</label>
+                <input class="form-control mb-1" asp-for="DataRetorno"  type="date" min="@DateTime.Today"/>
+                <span class="text-danger fs-6" asp-validation-for="DataRetorno"></span>
+            </div>
+            
+            <div>
+                <label class="control-label fw-semibold mb-1">Valor de Entrada</label>
+                <input class="form-control mb-1" asp-for="ValorEntrada"  type="number" />
+                <span class="text-danger fs-6" asp-validation-for="ValorEntrada"></span>
+            </div>
+
+            <div>
+                <label class="control-label fw-semibold mb-1">Taxas e Serviços</label>
+                <select class="form-control mb-1" asp-for="TaxasEscolhidas" asp-items="Model.Taxas"></select>
+                <span class="text-danger fs-6" asp-validation-for="TaxasEscolhidas"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block mt-4">
+                <button class="btn btn-primary px-5">
+                    <i class="bi bi-floppy-fill me-1"></i>
+                    Gravar
+                </button>
+
+                <a class="btn btn-outline-primary px-5" asp-action="listar">
+                    <i class="bi bi-arrow-return-left me-1"></i>
+                    Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+

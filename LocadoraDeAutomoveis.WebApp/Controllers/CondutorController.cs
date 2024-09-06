@@ -11,14 +11,14 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
     public class CondutorController : WebControllerBase
     {
         private readonly CondutorService serviceCondutor;
-        private readonly ClienteService seriveCliente;
+        private readonly ClienteService serviceCliente;
         private readonly IMapper mapeador;
 
-        public CondutorController(CondutorService serviceCondutor, IMapper mapeador, ClienteService seriveCliente)
+        public CondutorController(CondutorService serviceCondutor, IMapper mapeador, ClienteService serviceCliente)
         {
             this.serviceCondutor = serviceCondutor;
             this.mapeador = mapeador;
-            this.seriveCliente = seriveCliente;
+            this.serviceCliente = serviceCliente;
         }
 
         public IActionResult Listar()
@@ -29,7 +29,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             {
                 ApresentarMensagemFalha(resultado.ToResult());
 
-                return RedirectToAction("Index", "Inicio");
+                return RedirectToAction("Index", "Home");
             }
 
             var condutores = resultado.Value;
@@ -41,7 +41,24 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         public IActionResult SelecionarCliente()
         {
-            var resultado = seriveCliente.SelecionarTodos();
+            var clientes = serviceCliente.SelecionarTodos();
+
+            if (clientes.IsFailed)
+            {
+                ApresentarMensagemFalha(clientes.ToResult());
+
+                return RedirectToAction("Index", "Inicio");
+            }
+
+            var clientesSelecionados = clientes.Value;
+
+            var inserirVm = new InserirCondutorViewModel()
+            {
+                Clientes = clientesSelecionados.Select(c => new SelectListItem(c.Nome, c.Id.ToString()))
+            };
+
+            return View(inserirVm);
+        }
 
             if (resultado.IsFailed)
             {

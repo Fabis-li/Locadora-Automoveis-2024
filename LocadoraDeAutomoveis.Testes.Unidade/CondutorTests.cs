@@ -24,6 +24,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             
             var erros = condutor.Validar();
 
+
             Assert.AreEqual(0, erros.Count);
         }
 

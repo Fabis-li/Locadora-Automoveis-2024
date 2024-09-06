@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using LocadoraDeAutomoveis.Dominio.Compartilhado;
+using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 
 namespace LocadoraDeAutomoveis.Dominio.ModuloTaxa
 {
@@ -16,8 +17,12 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloTaxa
         public string Nome { get; set; }
         public decimal Valor { get; set; }
         public TipoCobrancaEnum TipoCobranca { get; set; }
+        public List<Aluguel>? Alugueis { get; set; }
 
-        protected Taxa() { }
+        protected Taxa()
+        {
+            Alugueis = new List<Aluguel>();
+        }
         
         public Taxa(string nome, decimal valor, TipoCobrancaEnum tipoCobrancaEnum)
         {
@@ -37,6 +42,11 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloTaxa
                 erros.Add("O valor precisa ser ao menos 1");
 
             return erros;
+        }
+
+        public override string ToString()
+        {
+            return $"{Nome}\t{Valor.ToString("C2")}\t{TipoCobranca.ToString()}";
         }
     }
 }

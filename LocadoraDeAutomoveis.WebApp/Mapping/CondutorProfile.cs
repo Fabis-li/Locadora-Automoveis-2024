@@ -12,12 +12,14 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping
             CreateMap<EditarCondutorViewModel, Condutor>();
 
             CreateMap<Condutor, ListarCondutorViewModel>()
-                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Cliente!.Nome))
-                .ForMember(dest => dest.ValidadeCnh, opt => opt.MapFrom(src => src.ValidadeCnh.ToShortDateString()));
+                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Cliente!.Nome));
+              
 
             CreateMap<Condutor, DetalhesCondutorViewModel>()
-                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Cliente!.Nome))
-                .ForMember(dest => dest.ValidadeCnh, opt => opt.MapFrom(src => src.ValidadeCnh.ToShortDateString()));
+                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Cliente!.Nome));
+                
+
+            CreateMap<Condutor, EditarCondutorViewModel>();
         }
     }
 }

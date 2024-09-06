@@ -7,11 +7,12 @@
     var taxaAtivo = caminho.StartsWith("/taxa") ? "nav-link active fw-semibold" : "nav-link";
     var clienteAtivo = caminho.StartsWith("/cliente") ? "nav-link active fw-semibold" : "nav-link";
     var condutorAtivo = caminho.StartsWith("/condutor") ? "nav-link active fw-semibold" : "nav-link";
+    var configuracaoAtivo = caminho.StartsWith("/configuracao") ? "nav-link active fw-semibold" : "nav-link";
+    var aluguelAtivo = caminho.StartsWith("/aluguel") ? "nav-link active fw-semibold" : "nav-link";
 
 
     MensagemViewModel? mensagem = ViewBag.Mensagem ?? null;
 }
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +30,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Locadora De Automoveis</a>
+            <a class="navbar-brand" asp-controller="Inicio" asp-action="Index">Locadora De Automoveis</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +56,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Condutor" asp-action="Listar">Condutor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Configuracao" asp-action="Inserir">Configuração</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Aluguel" asp-action="Listar">Aluguel</a>
                     </li>
                 </ul>
             </div>
