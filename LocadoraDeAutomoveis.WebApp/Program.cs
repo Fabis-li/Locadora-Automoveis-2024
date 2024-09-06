@@ -49,6 +49,12 @@ namespace LocadoraDeAutomoveis.WebApp
 
             builder.Services.AddScoped<GrupoAutomoveisResolver>();
             builder.Services.AddScoped<AutomovelValueResolver>();
+            builder.Services.AddScoped<CondutoresValueResolver>();
+            builder.Services.AddScoped<TaxaEscolhidaValueResolver>();
+            builder.Services.AddScoped<TaxasValueResolver>();
+            builder.Services.AddScoped<ValorTotalValueResolver>();
+
+
             builder.Services.AddAutoMapper(cfg =>
             {
                 cfg.AddMaps(Assembly.GetExecutingAssembly());

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LocadoraDeAutomoveis.WebApp.Mapping.Resolvers
 {
-    public class AutomovelValueResolver : IValueResolver<Aluguel, ListarAluguelViewModel, IEnumerable<SelectListItem>>
+    public class AutomovelValueResolver : IValueResolver<Aluguel, FormularioViewModel, IEnumerable<SelectListItem>?>
     {
         private readonly AutomovelService serviceAutomovel;
 
@@ -15,7 +15,7 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping.Resolvers
             this.serviceAutomovel = serviceAutomovel;
         }
 
-        public IEnumerable<SelectListItem>? Resolve(Aluguel source, ListarAluguelViewModel destination, IEnumerable<SelectListItem>? destMember,
+        public IEnumerable<SelectListItem>? Resolve(Aluguel source, FormularioViewModel destination, IEnumerable<SelectListItem>? destMember,
             ResolutionContext context)
         {
             if (destination is ListarAutomoveisViewModel)
@@ -31,6 +31,5 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping.Resolvers
                 .Value
                 .Select(v => new SelectListItem(v.Modelo, v.Id.ToString()));
         }
-       
     }
 }
