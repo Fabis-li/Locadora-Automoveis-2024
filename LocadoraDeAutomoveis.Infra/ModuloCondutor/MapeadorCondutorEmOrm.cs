@@ -33,7 +33,7 @@ namespace LocadoraDeAutomoveis.Infra.ModuloCondutor
 
             cBuilder.Property(c => c.ValidadeCnh)
                 .IsRequired()
-                .HasColumnType("datetim2");
+                .HasColumnType("datetime2");
 
             cBuilder.Property(c => c.Telefone)
                 .IsRequired()
