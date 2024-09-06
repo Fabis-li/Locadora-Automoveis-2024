@@ -62,7 +62,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return View(inserirVm);
             }
 
-            ApresentarMensagemSucesso("Aluguel inserido com sucesso!");
+            ApresentarMensagemSucesso($"O Aluguel ID [{aluguel.Id}] foi inserido com sucesso!");
 
             return RedirectToAction("Listar");
         }
@@ -99,7 +99,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return View(editarVm);
             }
 
-            ApresentarMensagemSucesso("Aluguel editado com sucesso!");
+            ApresentarMensagemSucesso($"O Aluguel ID [{aluguel.Id}] foi editado com sucesso!");
 
             return RedirectToAction(nameof(Listar));
         }
@@ -134,7 +134,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return View(detalhesVm);
             }
 
-            ApresentarMensagemSucesso("Aluguel excluído com sucesso!");
+            ApresentarMensagemSucesso($"O Aluguel [{detalhesVm.Id}] excluído com sucesso!");
 
             return RedirectToAction(nameof(Listar));
         }
@@ -197,6 +197,56 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             
         }
 
+        public IActionResult Devolucao(int id)
+        {
+            var resultado = servico.SelecionarPorId(id);
+
+            if (resultado.IsFailed)
+            {
+                ApresentarMensagemFalha(resultado.ToResult());
+
+                return RedirectToAction(nameof(Listar));
+            }
+
+            var aluguel = resultado.Value;
+
+            var devolverVm = mapeador.Map<DevolucaoAluguelViewModel>(aluguel);
+
+            return View(devolverVm);
+        }
+
+        [HttpPost]
+        public IActionResult Devolucao(DevolucaoAluguelViewModel devolverVm)
+        {
+            var AluguelOriginal = servico.SelecionarPorId(devolverVm.Id).Value;
+
+            var AluguelAtualizado = mapeador.Map<DevolucaoAluguelViewModel, Aluguel>(devolverVm, AluguelOriginal);
+
+            var resultado = servico.Devolver(AluguelAtualizado);
+
+            if (resultado.IsFailed)
+            {
+                ApresentarMensagemFalha(resultado.ToResult());
+
+                return View(devolverVm);
+            }
+
+            var concluir = servico.Concluir(AluguelAtualizado);
+
+            if(concluir.IsFailed)
+            {
+                ApresentarMensagemFalha(concluir.ToResult());
+
+                return View(devolverVm);
+            }
+
+            ApresentarMensagemSucesso($"O Aluguel ID [{AluguelAtualizado.Id}] foi devolvido com sucesso!");
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+
+
         private InserirAluguelViewModel CarregarDados(InserirAluguelViewModel? dadosPrevisto = null)
         {
             var condutores = serviceCondutor.SelecionarTodos().Value;
@@ -208,7 +258,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
             dadosPrevisto.Condutores = condutores.Select(c => new SelectListItem(c.Nome, c.Id.ToString()));
             dadosPrevisto.Automoveis = automoveis.Select(c => new SelectListItem(c.Modelo, c.Id.ToString()));
-            dadosPrevisto.TaxasEscolhidas= taxas.Select(c => new SelectListItem(c.ToString(), c.Id.ToString()));
+            dadosPrevisto.Taxas= taxas.Select(c => new SelectListItem(c.ToString(), c.Id.ToString()));
 
             return dadosPrevisto;
         }
