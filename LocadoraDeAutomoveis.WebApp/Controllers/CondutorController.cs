@@ -39,7 +39,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             return View(listaCondutoresVm);
         }
 
-        public IActionResult SelecionarCliente()
+        public IActionResult Inserir()
         {
             var clientes = serviceCliente.SelecionarTodos();
 
@@ -47,7 +47,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             {
                 ApresentarMensagemFalha(clientes.ToResult());
 
-                return RedirectToAction("Index", "Inicio");
+                return RedirectToAction("Index", "Home");
             }
 
             var clientesSelecionados = clientes.Value;
@@ -58,60 +58,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             };
 
             return View(inserirVm);
-        }
 
-            if (resultado.IsFailed)
-            {
-                ApresentarMensagemFalha(resultado.ToResult());
-
-                return RedirectToAction("Index", "Inicio");
-            }
-
-            var clientes = resultado.Value;
-
-            var selecionarVm = new SelecionarClienteViewModel()
-            {
-                Clientes = clientes.Select(c => new SelectListItem(c.Nome, c.Id.ToString()))
-            };
-
-            return View(selecionarVm);
-        }
-
-        [HttpPost]
-        public IActionResult SelecionarCliente(SelecionarClienteViewModel selecionarVm)
-        {
-            if (!ModelState.IsValid)
-                return View(selecionarVm);
-
-            int clienteId = selecionarVm.ClienteId;
-            bool clienteCondutor = selecionarVm.ClienteCondutor;
-
-            return RedirectToAction("Inserir", new { clienteId, clienteCondutor });
-        }
-
-        public IActionResult Inserir(int clienteId, bool clienteCondutor)
-        {
-            var clienteResult = seriveCliente.SelecionarPorId(clienteId);
-
-            if(clienteResult.IsFailed)
-                return RedirectToAction("SelecionarCliente");
-
-            var cliente = clienteResult.Value;
-
-            var viewModel = new InserirCondutorViewModel();
-
-            if (clienteCondutor)
-            {
-                viewModel.ClienteId = clienteId;
-                viewModel.ClienteCondutor = clienteCondutor;
-                viewModel.Nome = cliente.Nome;
-                viewModel.Telefone = cliente.Telefone;
-                viewModel.Cpf = cliente.NumeroDocumento;
-            }
-
-            ViewBag.ClienteSelecionado = cliente.Nome;
-
-            return View(viewModel);
         }
 
         [HttpPost]
