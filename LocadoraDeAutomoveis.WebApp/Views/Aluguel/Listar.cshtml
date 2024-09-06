@@ -28,8 +28,8 @@
 
                         <a title="Devolução"
                            class="text-info-emphasis fs-5"
-                           href="/Aluguel/Detalhes/@aluguelVm.Id">
-                            <i class="bi bi-search"></i>
+                           href="/Aluguel/Devolucao/@aluguelVm.Id">
+                            <i class="bi bi-piggy-bank"></i>
                         </a>
                         <a title="Editar"
                            class="text-info-emphasis fs-5"
@@ -50,6 +50,7 @@
                     <p class="card-text">Data de Saída: @aluguelVm.DataSaida.ToShortDateString()</p>
                     <p class="card-text">Retorno Previsto: @aluguelVm.DataRetorno.ToShortDateString()</p>
                     <p class="card-text">Valor Entrada R$: @aluguelVm.ValorEntrada</p>
+                    <p class="card-text">Status: @aluguelVm.Status</p>
                 </div>
             </div>
         }
