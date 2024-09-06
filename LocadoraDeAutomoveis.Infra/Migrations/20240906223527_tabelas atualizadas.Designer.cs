@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     [DbContext(typeof(LocadoraDeAutomoveisDbContext))]
-    [Migration("20240905124156_atualização das tabelas")]
-    partial class atualizaçãodastabelas
+    [Migration("20240906223527_tabelas atualizadas")]
+    partial class tabelasatualizadas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -207,11 +207,11 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
 
                     b.Property<string>("Cnh")
                         .IsRequired()
-                        .HasColumnType("varchar(11)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("varchar(11)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -225,8 +225,8 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(20)");
 
-                    b.Property<DateTime>("ValidaCnh")
-                        .HasColumnType("datetime");
+                    b.Property<DateTime>("ValidadeCnh")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

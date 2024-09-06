@@ -204,11 +204,11 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
 
                     b.Property<string>("Cnh")
                         .IsRequired()
-                        .HasColumnType("varchar(11)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("varchar(11)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -222,8 +222,8 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(20)");
 
-                    b.Property<DateTime>("ValidaCnh")
-                        .HasColumnType("datetime");
+                    b.Property<DateTime>("ValidadeCnh")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

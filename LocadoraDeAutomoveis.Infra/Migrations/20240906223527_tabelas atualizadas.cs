@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class atualizaçãodastabelas : Migration
+    public partial class tabelasatualizadas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -233,9 +233,9 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Cpf = table.Column<string>(type: "varchar(11)", nullable: false),
-                    Cnh = table.Column<string>(type: "varchar(11)", nullable: false),
-                    ValidaCnh = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Cpf = table.Column<string>(type: "varchar(20)", nullable: false),
+                    Cnh = table.Column<string>(type: "varchar(20)", nullable: false),
+                    ValidadeCnh = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Telefone = table.Column<string>(type: "varchar(20)", nullable: false),
                     ClienteCondutor = table.Column<bool>(type: "bit", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false)
