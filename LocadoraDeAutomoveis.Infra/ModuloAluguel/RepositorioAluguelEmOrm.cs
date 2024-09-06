@@ -15,16 +15,14 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAluguel
             return dbContext.Alugueis;
         }
 
-        public List<Aluguel> Filtrar(Func<Aluguel, bool> predicate)
-        {
-            return ObterRegistros().Where(predicate).ToList();
-        }
+       
 
         public override Aluguel? SelecionarPorId(int id)
         {
             return ObterRegistros()
                 .Include(a => a.Condutor)
                 .Include(a => a.Automovel)
+                .Include(a => a.TaxasEscolhidas)
                 .FirstOrDefault(a => a.Id == id);
         }
 
@@ -34,6 +32,11 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAluguel
                 .Include(a => a.Condutor)
                 .Include(a => a.Automovel)
                 .ToList();
+        }
+
+        public List<Aluguel> Filtrar(Func<Aluguel, bool> predicate)
+        {
+            return ObterRegistros().Where(predicate).ToList();
         }
     }
 }
