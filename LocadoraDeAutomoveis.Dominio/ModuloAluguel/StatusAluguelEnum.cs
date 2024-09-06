@@ -3,6 +3,6 @@
     public enum StatusAluguelEnum
     {
         Aberto,
-        Conlcuido
+        Concluido
     }
 }

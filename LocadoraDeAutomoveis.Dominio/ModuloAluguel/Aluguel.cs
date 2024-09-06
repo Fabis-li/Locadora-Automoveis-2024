@@ -15,10 +15,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
         public int AutomovelId { get; set; }
         public Automovel Automovel { get; set; }
 
-        //public int PlanoCobrancaId { get; set; }
-        //public PlanoCobranca PlanoCobranca { get; set; }
-
-
         public DateTime DataSaida { get; set; }
         public DateTime? DataRetorno { get; set; }
         public decimal ValorEntrada { get; set; }
@@ -42,7 +38,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
         {
             CondutorId = condutorId;
             AutomovelId = automovelId;
-            //PlanoCobrancaId = planoCobrancaId;
             DataSaida = dataSaida;
             ValorEntrada = valorEntrada;
             Status = status;
@@ -99,6 +94,9 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel
             {
                 valorTotal = planoCobranca.PrecoDiarioPlanoLivre * (DataRetorno - DataSaida).Value.Days;
             }
+
+            if (TemMulta())
+                valorTotal += valorTotal * (10m / 100m);
 
             return valorTotal;
         }
