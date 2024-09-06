@@ -149,6 +149,24 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             return RedirectToAction(nameof(Listar));
         }
 
+        public IActionResult Detalhes(int id)
+        {
+            var resultado = service.SelecionarPorId(id);
+
+            if (resultado.IsFailed)
+            {
+                ApresentarMensagemFalha(resultado.ToResult());
+
+                return RedirectToAction(nameof(Listar));
+            }
+
+            var planoCobranca = resultado.Value;
+
+            var detalhesVm = mapeador.Map<DetalhesPlanoCobrancaViewModel>(planoCobranca);
+
+            return View(detalhesVm);
+        }
+
         private InserirPlanoCobrancaViewModel? CarregarDados(InserirPlanoCobrancaViewModel dadosPrevios = null)
         {
             var resultadoGrupo = serviceGrupo.SelecionarTodos();
