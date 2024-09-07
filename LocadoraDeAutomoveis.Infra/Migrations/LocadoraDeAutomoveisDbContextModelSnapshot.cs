@@ -171,9 +171,11 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("FotoVeiculo")
+                    b.Property<byte[]>("FotoVeiculo")
                         .IsRequired()
-                        .HasColumnType("varchar(250)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(max)")
+                        .HasDefaultValue(new byte[0]);
 
                     b.Property<int>("GrupoAutomovelId")
                         .HasColumnType("int");

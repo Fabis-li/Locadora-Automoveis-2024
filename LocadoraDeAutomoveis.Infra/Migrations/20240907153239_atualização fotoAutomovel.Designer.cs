@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     [DbContext(typeof(LocadoraDeAutomoveisDbContext))]
-    [Migration("20240907014228_add identity")]
-    partial class addidentity
+    [Migration("20240907153239_atualização fotoAutomovel")]
+    partial class atualizaçãofotoAutomovel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,9 +107,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("EmpresaId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -145,8 +142,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmpresaId");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -179,9 +174,11 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<string>("FotoVeiculo")
+                    b.Property<byte[]>("FotoVeiculo")
                         .IsRequired()
-                        .HasColumnType("varchar(250)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varbinary(max)")
+                        .HasDefaultValue(new byte[0]);
 
                     b.Property<int>("GrupoAutomovelId")
                         .HasColumnType("int");
@@ -331,6 +328,41 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TBConfiguracao", (string)null);
+                });
+
+            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloFuncionario.Funcionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Admissao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("EmpresaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NomeCompleto")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<decimal>("Salario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.ToTable("TBFuncionario", (string)null);
                 });
 
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrupoAutomovel", b =>
@@ -593,15 +625,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     b.Navigation("Condutor");
                 });
 
-            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAutenticacao.Usuario", b =>
-                {
-                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloAutenticacao.Usuario", "Empresa")
-                        .WithMany()
-                        .HasForeignKey("EmpresaId");
-
-                    b.Navigation("Empresa");
-                });
-
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloAutomoveis.Automovel", b =>
                 {
                     b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis.GrupoAutomovel", "GrupoAutomoveis")
@@ -622,6 +645,17 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloFuncionario.Funcionario", b =>
+                {
+                    b.HasOne("LocadoraDeAutomoveis.Dominio.ModuloAutenticacao.Usuario", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Empresa");
                 });
 
             modelBuilder.Entity("LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca.PlanoCobranca", b =>

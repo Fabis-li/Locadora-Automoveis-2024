@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeAutomoveis.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class addidentity : Migration
+    public partial class atualizaçãofotoAutomovel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmpresaId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -53,11 +52,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetUsers_EmpresaId",
-                        column: x => x.EmpresaId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -234,6 +228,30 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TBFuncionario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    EmpresaId = table.Column<int>(type: "int", nullable: false),
+                    NomeCompleto = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Email = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Admissao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Salario = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBFuncionario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TBFuncionario_AspNetUsers_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TBCondutor",
                 columns: table => new
                 {
@@ -272,7 +290,7 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                     TipoCombustivel = table.Column<int>(type: "int", nullable: false),
                     Ano = table.Column<int>(type: "int", nullable: false),
                     CapacidadeCombustivel = table.Column<int>(type: "int", nullable: false),
-                    FotoVeiculo = table.Column<string>(type: "varchar(250)", nullable: false),
+                    FotoVeiculo = table.Column<byte[]>(type: "varbinary(max)", nullable: false, defaultValue: new byte[0]),
                     GrupoAutomovelId = table.Column<int>(type: "int", nullable: false),
                     Alugado = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -412,11 +430,6 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_EmpresaId",
-                table: "AspNetUsers",
-                column: "EmpresaId");
-
-            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -449,6 +462,11 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 column: "ClienteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TBFuncionario_EmpresaId",
+                table: "TBFuncionario",
+                column: "EmpresaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TBPlanoCobranca_GrupoAutomovelId",
                 table: "TBPlanoCobranca",
                 column: "GrupoAutomovelId");
@@ -479,19 +497,22 @@ namespace LocadoraDeAutomoveis.Infra.Migrations
                 name: "TBConfiguracao");
 
             migrationBuilder.DropTable(
+                name: "TBFuncionario");
+
+            migrationBuilder.DropTable(
                 name: "TBPlanoCobranca");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "TBAluguel");
 
             migrationBuilder.DropTable(
                 name: "TBTaxa");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "TBAutomovel");
