@@ -44,8 +44,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
                 "ABC-1234", 
                 TipoCombustivel.Alcool,
                 1970, 
-                40, 
-                "fusca.jpg",
+                40,
                 grpoAuto,
                 1
             );
@@ -70,7 +69,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
 
             repositorioGrpAuto.Inserir(grpoAuto);
 
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grpoAuto,1);
+            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, grpoAuto,1);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -96,7 +95,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
             var repositorioGrpAuto = new RepositorioGrupoAutomovelEmOrm(db);
             repositorioGrpAuto.Inserir(grpoAuto);
 
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grpoAuto, 1);
+            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, grpoAuto, 1);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -120,7 +119,7 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
             var repositorioGrpAuto = new RepositorioGrupoAutomovelEmOrm(db);
             repositorioGrpAuto.Inserir(grpoAuto);
 
-            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grpoAuto, 1);
+            var automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, grpoAuto, 1);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
@@ -140,8 +139,8 @@ namespace LocadoraDeAutomoveis.Testes.Integracao.Orm
             var repositorioGrpAuto = new RepositorioGrupoAutomovelEmOrm(db);
             repositorioGrpAuto.Inserir(grpoAuto);
 
-            var automovel1 = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grpoAuto, 1);
-            var automovel2 = new Automovel("Gol", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "gol.jpg", grpoAuto,1);
+            var automovel1 = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, grpoAuto, 1);
+            var automovel2 = new Automovel("Gol", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, grpoAuto,1);
 
             var repositorio = new RepositorioAutomovelEmOrm(db);
 
