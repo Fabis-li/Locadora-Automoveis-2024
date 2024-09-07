@@ -12,7 +12,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
         public TipoCombustivel TipoCombustivel { get; set; }
         public int Ano { get; set; }
         public int CapacidadeCombustivel { get; set; } //capacidade do tanque
-        public string FotoVeiculo { get; set; }
+        public byte[] FotoVeiculo { get; set; }
         public int GrupoAutomovelId { get; set; }
         public GrupoAutomovel? GrupoAutomoveis { get; set; }
 
@@ -21,7 +21,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
         public Automovel() { }
 
         public Automovel(string modelo, string marca, string cor, string placa, TipoCombustivel tipoCombustivel, int ano,
-            int capacidadeCombustivel, string fotoVeiculo, GrupoAutomovel grupoAutomoveis, int grupoAutomovelId )
+            int capacidadeCombustivel, GrupoAutomovel grupoAutomoveis, int grupoAutomovelId )
         {
             Modelo = modelo;
             Marca = marca;
@@ -30,7 +30,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
             TipoCombustivel = tipoCombustivel;
             Ano = ano;
             CapacidadeCombustivel = capacidadeCombustivel;
-            FotoVeiculo = fotoVeiculo;
             GrupoAutomoveis = grupoAutomoveis;
             GrupoAutomovelId = grupoAutomovelId;
         }
@@ -65,9 +64,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloAutomoveis
 
             if (CapacidadeCombustivel < 1)
                 erros.Add("O campo \"CapacidadeCombustivel\" é obrigatório");
-
-            if (string.IsNullOrEmpty(FotoVeiculo))
-                erros.Add("O campo \"FotoVeiculo\" é obrigatório");
 
             return erros;
 
