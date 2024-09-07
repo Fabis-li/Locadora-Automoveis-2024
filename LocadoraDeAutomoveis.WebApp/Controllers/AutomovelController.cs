@@ -174,6 +174,23 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
             return View(detalhesAutomovelVm);
         }
 
+        public IActionResult ObterFoto(int id)
+        {
+            var resultado = service.SelecionarPorId(id);
+
+            if (resultado.IsFailed)
+            {
+                ApresentarMensagemFalha(resultado.ToResult());
+
+                return NotFound();
+            }
+
+            var automovel = resultado.Value;
+
+            return File(automovel.FotoVeiculo, "image/jpeg");
+        
+        }
+
         private InserirAutomovelViewModel? CarregarDados(InserirAutomovelViewModel? dadosPrevios = null)
         {
             var resultadoGrp = serviceGrupo.SelecionarTodos();
