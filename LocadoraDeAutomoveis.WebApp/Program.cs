@@ -5,6 +5,7 @@ using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
@@ -15,12 +16,14 @@ using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
 using LocadoraDeAutomoveis.Infra.ModuloCliente;
 using LocadoraDeAutomoveis.Infra.ModuloCondutor;
 using LocadoraDeAutomoveis.Infra.ModuloConfiguracao;
+using LocadoraDeAutomoveis.Infra.ModuloFuncionario;
 using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
 using LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Infra.ModuloTaxa;
 using LocadoraDeAutomoveis.WebApp.Mapping.Resolvers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using LocadoraDeAutomoveis.WebApp.Mapping;
 
 namespace LocadoraDeAutomoveis.WebApp
 {
@@ -40,6 +43,7 @@ namespace LocadoraDeAutomoveis.WebApp
             builder.Services.AddScoped<IRepositorioCondutor, RepositorioCondutorEmOrm>();
             builder.Services.AddScoped<IRepositorioConfiguracao, RepositorioConfiguracaoEmOrm>();
             builder.Services.AddScoped<IRepositorioAluguel, RepositorioAluguelEmOrm>();
+            builder.Services.AddScoped<IRepositorioFuncionario, RepositorioFuncionarioEmOrm>();
 
             builder.Services.AddScoped<GrupoAutomoveisService>();
             builder.Services.AddScoped<AutomovelService>();
@@ -49,6 +53,7 @@ namespace LocadoraDeAutomoveis.WebApp
             builder.Services.AddScoped<CondutorService>();
             builder.Services.AddScoped<ConfiguracaoService>();
             builder.Services.AddScoped<AluguelService>();
+            builder.Services.AddScoped<FuncionarioService>();
 
             builder.Services.AddScoped<GrupoAutomoveisResolver>();
             builder.Services.AddScoped<AutomovelValueResolver>();
@@ -56,6 +61,7 @@ namespace LocadoraDeAutomoveis.WebApp
             builder.Services.AddScoped<TaxaEscolhidaValueResolver>();
             builder.Services.AddScoped<TaxasValueResolver>();
             builder.Services.AddScoped<ValorTotalValueResolver>();
+            builder.Services.AddScoped<EmpresaIdValueResolver>();
 
             builder.Services.AddAutoMapper(cfg =>
             {
