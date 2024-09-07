@@ -57,6 +57,7 @@ namespace LocadoraDeAutomoveis.WebApp
 
             builder.Services.AddScoped<GrupoAutomoveisResolver>();
             builder.Services.AddScoped<AutomovelValueResolver>();
+            builder.Services.AddScoped<FotoValueRevolver>();
             builder.Services.AddScoped<CondutoresValueResolver>();
             builder.Services.AddScoped<TaxaEscolhidaValueResolver>();
             builder.Services.AddScoped<TaxasValueResolver>();
