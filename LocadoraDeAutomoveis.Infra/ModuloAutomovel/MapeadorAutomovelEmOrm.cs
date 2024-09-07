@@ -43,8 +43,8 @@ namespace LocadoraDeAutomoveis.Infra.ModuloAutomovel
                 .HasColumnType("int");
 
             aBuilder.Property(a => a.FotoVeiculo)
-                .IsRequired()
-                .HasColumnType("varchar(250)");
+                .HasColumnType("varbinary(max)")
+                .HasDefaultValue(Array.Empty<byte>());
 
             aBuilder.Property(a => a.GrupoAutomovelId)
                 .IsRequired()
