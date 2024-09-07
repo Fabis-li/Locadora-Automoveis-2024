@@ -14,7 +14,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
             
 
-            Automovel automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234",TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grupoAutomoveis, 1);
+            Automovel automovel = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234",TipoCombustivel.Alcool, 1970, 40,grupoAutomoveis, 1);
 
             //Act
             List<string> erros = automovel.Validar();
@@ -30,7 +30,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             //Arrange
             GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
 
-            Automovel automovelInvalido = new Automovel("", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grupoAutomoveis,1);
+            Automovel automovelInvalido = new Automovel("", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -49,7 +49,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             //Arrange
             GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
 
-            Automovel automovelInvalido = new Automovel("Fusca", "", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grupoAutomoveis,1);
+            Automovel automovelInvalido = new Automovel("Fusca", "", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -68,7 +68,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             //Arrange
             GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
 
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "fusca.jpg", grupoAutomoveis,1);
+            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -87,7 +87,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             //Arrange
             GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
             Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "", TipoCombustivel.Alcool, 1970,
-                40, "fusca.jpg", grupoAutomoveis, 1);
+                40, grupoAutomoveis, 1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -105,7 +105,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         {
             //Arrange
             GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, -1, 40, "fusca.jpg", grupoAutomoveis,1);
+            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, -1, 40, grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -123,7 +123,7 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
         {
             //Arrange
             GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 0, "fusca.jpg", grupoAutomoveis,1);
+            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 0, grupoAutomoveis,1);
 
             //Act
             List<string> erros = automovelInvalido.Validar();
@@ -135,23 +135,6 @@ namespace LocadoraDeAutomoveis.Testes.Unidade
             ];
             CollectionAssert.AreEqual(erroEsperado, erros);
         }
-
-        [TestMethod]
-        public void Deve_validar_foto_veiculo_corretamente()
-        {
-            //Arrange
-            GrupoAutomovel grupoAutomoveis = new GrupoAutomovel("Econômico");
-            Automovel automovelInvalido = new Automovel("Fusca", "Volkswagen", "Azul", "ABC-1234", TipoCombustivel.Alcool, 1970, 40, "", grupoAutomoveis,1);
-
-            //Act
-            List<string> erros = automovelInvalido.Validar();
-
-            //Assert
-            List<string> erroEsperado =
-            [
-                "O campo \"FotoVeiculo\" é obrigatório"
-            ];
-            CollectionAssert.AreEqual(erroEsperado, erros);
-        }
+       
     }
 }
