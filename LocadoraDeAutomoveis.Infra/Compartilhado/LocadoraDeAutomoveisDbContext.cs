@@ -1,4 +1,5 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
+using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
@@ -20,7 +21,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace LocadoraDeAutomoveis.Infra.Compartilhado
 {
-    public class LocadoraDeAutomoveisDbContext : IdentityDbContext
+    public class LocadoraDeAutomoveisDbContext : IdentityDbContext<Usuario, Perfil, int>
     {
         public DbSet<GrupoAutomovel> GrupoAutomoveis { get; set; }
         public DbSet<Automovel> Automoveis { get; set; }
