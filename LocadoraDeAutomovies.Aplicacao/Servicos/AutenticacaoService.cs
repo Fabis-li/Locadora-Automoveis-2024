@@ -1,4 +1,5 @@
-﻿using FluentResults;
+﻿using System.Security.Claims;
+using FluentResults;
 using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
 using Microsoft.AspNetCore.Identity;
 
@@ -73,6 +74,11 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             await signInManager.SignOutAsync();
 
             return Result.Ok();
+        }
+
+        public async Task<Usuario?> ObterUsuarioAsync(ClaimsPrincipal usuario)
+        {
+            return await userManager.GetUserAsync(usuario);
         }
     }
 }
