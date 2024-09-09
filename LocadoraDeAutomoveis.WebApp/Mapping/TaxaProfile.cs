@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
+using LocadoraDeAutomoveis.WebApp.Mapping.Resolvers;
 using LocadoraDeAutomoveis.WebApp.Models;
 
 namespace LocadoraDeAutomoveis.WebApp.Mapping
@@ -8,7 +9,9 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping
     {
         public TaxaProfile()
         {
-            CreateMap<InserirTaxaViewModel, Taxa>();
+            CreateMap<InserirTaxaViewModel, Taxa>()
+                .ForMember(dest => dest.EmpresaId, opt => opt.MapFrom<EmpresaIdValueResolver>());
+
             CreateMap<EditarTaxaViewModel, Taxa>();
 
             CreateMap<Taxa, ListarTaxaViewModel>()

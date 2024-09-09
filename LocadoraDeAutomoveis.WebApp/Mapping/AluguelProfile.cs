@@ -11,6 +11,7 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping
         public AluguelProfile()
         {
             CreateMap<InserirAluguelViewModel, Aluguel>()
+                .ForMember(dest => dest.EmpresaId, opt => opt.MapFrom<EmpresaIdValueResolver>())
                 .ForMember(dest => dest.TaxasEscolhidas, opt => opt.MapFrom<TaxaEscolhidaValueResolver>());
                 
 

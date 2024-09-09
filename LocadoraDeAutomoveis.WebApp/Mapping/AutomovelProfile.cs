@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
+using LocadoraDeAutomoveis.WebApp.Mapping.Resolvers;
 using LocadoraDeAutomoveis.WebApp.Models;
 
 namespace LocadoraDeAutomoveis.WebApp.Mapping
@@ -9,6 +10,7 @@ namespace LocadoraDeAutomoveis.WebApp.Mapping
         public AutomovelProfile()
         {
             CreateMap<InserirAutomovelViewModel, Automovel>()
+                .ForMember(dest => dest.EmpresaId, opt => opt.MapFrom<EmpresaIdValueResolver>())
                 .ForMember(dest => dest.FotoVeiculo, opt => opt.MapFrom<FotoValueRevolver>());
 
             CreateMap<EditarAutomovelViewModel, Automovel>()
