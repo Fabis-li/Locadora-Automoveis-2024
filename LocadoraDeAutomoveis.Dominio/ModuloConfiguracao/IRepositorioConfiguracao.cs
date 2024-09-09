@@ -4,5 +4,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloConfiguracao
 {
     public interface IRepositorioConfiguracao : IRepositorioBase<Configuracao>
     {
+       
     }
 }
