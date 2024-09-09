@@ -1,12 +1,29 @@
 ﻿using FluentResults;
 using LocadoraDeAutomoveis.WebApp.Extensions;
 using LocadoraDeAutomoveis.WebApp.Models;
+using LocadoraDeAutomovies.Aplicacao.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
 {
     public class WebControllerBase : Controller
     {
+        protected readonly AutenticacaoService serviceAutenticacao;
+
+        public int? EmpresaId
+        {
+            get
+            {
+                var empresaId = serviceAutenticacao.ObterIdEmpresaAsync(User).Result;
+
+                return empresaId;
+            }
+        }
+        protected WebControllerBase(AutenticacaoService serviceAutenticacao)
+        {
+            this.serviceAutenticacao = serviceAutenticacao;
+        }
+
         protected IActionResult MensagemRegistroNaoEncontrado(int idRegistro)
         {
             TempData.SerializarMensagemViewModel(new MensagemViewModel
@@ -15,7 +32,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado
                 Mensagem = $"Não foi possível encontrar o registro ID [{idRegistro}]!"
             });
 
-            return RedirectToAction("Index", "Inicio");
+            return RedirectToAction("Index", "Home");
         }
 
         protected void ApresentarMensagemFalha(Result resultado)
