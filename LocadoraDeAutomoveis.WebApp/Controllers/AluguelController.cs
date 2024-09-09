@@ -16,7 +16,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         private readonly TaxaService serviceTaxa;
         private readonly IMapper mapeador;
 
-        public AluguelController(AluguelService servico, ClienteService serviceCliente, AutomovelService serviceAutomovel, PlanoCobrancaService servicePlanoCobranca, CondutorService serviceCondutor, GrupoAutomoveisService serviceGrupoAutomovel, IMapper mapeador, TaxaService serviceTaxa)
+        public AluguelController(AutenticacaoService autenticacaoService,AluguelService servico ,AutomovelService serviceAutomovel, CondutorService serviceCondutor, IMapper mapeador, TaxaService serviceTaxa) : base(autenticacaoService)
         {
             this.servico = servico;
             this.serviceAutomovel = serviceAutomovel;
@@ -27,7 +27,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         public IActionResult Listar()
         {
-            var resultado = servico.SelecionarTodos();
+            var resultado = servico.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
             if (resultado.IsFailed)
             {
@@ -249,9 +249,9 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         private InserirAluguelViewModel CarregarDados(InserirAluguelViewModel? dadosPrevisto = null)
         {
-            var condutores = serviceCondutor.SelecionarTodos().Value;
-            var automoveis = serviceAutomovel.SelecionarTodos().Value;
-            var taxas = serviceTaxa.SelecionarTodos().Value;
+            var condutores = serviceCondutor.SelecionarTodos(EmpresaId.GetValueOrDefault()).Value;
+            var automoveis = serviceAutomovel.SelecionarTodos(EmpresaId.GetValueOrDefault()).Value;
+            var taxas = serviceTaxa.SelecionarTodos(EmpresaId.GetValueOrDefault()).Value;
 
             if(dadosPrevisto is null)
                 dadosPrevisto = new InserirAluguelViewModel();

@@ -12,22 +12,18 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
     public class FuncionarioController : WebControllerBase
     {
        private readonly FuncionarioService funcionarioService;
-       private readonly AutenticacaoService autenticacaoService;
+       
        private readonly IMapper mapeador;
 
-        public FuncionarioController(FuncionarioService funcionarioService, AutenticacaoService autenticacaoService, IMapper mapeador)
+        public FuncionarioController(FuncionarioService funcionarioService, AutenticacaoService autenticacaoService, IMapper mapeador) : base(autenticacaoService)
         {
             this.funcionarioService = funcionarioService;
-            this.autenticacaoService = autenticacaoService;
             this.mapeador = mapeador;
         }
 
         public async Task<IActionResult> Listar()
         {
-
-            var empresa = autenticacaoService.ObterUsuarioAsync(User);
-
-            var resultado = funcionarioService.SelecionarFuncionariosDaEmpresa(empresa!.Id);
+            var resultado = funcionarioService.SelecionarFuncionariosDaEmpresa(EmpresaId.GetValueOrDefault());
 
             if(resultado.IsFailed)
             {

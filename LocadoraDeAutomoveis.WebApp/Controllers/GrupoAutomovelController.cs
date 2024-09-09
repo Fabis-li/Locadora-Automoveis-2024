@@ -4,16 +4,18 @@ using LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado;
 using LocadoraDeAutomoveis.WebApp.Extensions;
 using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraDeAutomoveis.WebApp.Controllers
 {
+    [Authorize(Roles = "Empresa, Funcionario")]
     public class GrupoAutomovelController : WebControllerBase
     {
         private readonly GrupoAutomoveisService servicoGrpAutomoveis;
         private readonly IMapper mapeador;
 
-        public GrupoAutomovelController(GrupoAutomoveisService servicoGrpAutomoveis, IMapper mapeador)
+        public GrupoAutomovelController(AutenticacaoService autenticacaoService,GrupoAutomoveisService servicoGrpAutomoveis, IMapper mapeador) : base(autenticacaoService)
         {
             this.servicoGrpAutomoveis = servicoGrpAutomoveis;
             this.mapeador = mapeador;
@@ -21,7 +23,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         public IActionResult Listar()
         {
-            var grupos = servicoGrpAutomoveis.SelecionarTodos();
+            var grupos = servicoGrpAutomoveis.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
             if (grupos.IsFailed)
             {

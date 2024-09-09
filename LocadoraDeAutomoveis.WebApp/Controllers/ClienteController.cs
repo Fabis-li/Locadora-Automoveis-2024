@@ -12,7 +12,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         private readonly ClienteService service;
         private readonly IMapper mapeador;
 
-        public ClienteController(ClienteService service, IMapper mapeador)
+        public ClienteController(AutenticacaoService autenticacaoService,ClienteService service, IMapper mapeador) : base(autenticacaoService)
         {
             this.service = service;
             this.mapeador = mapeador;
@@ -20,7 +20,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         public IActionResult Listar()
         {
-            var resultado = service.SelecionarTodos();
+            var resultado = service.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
             if (resultado.IsFailed)
             {

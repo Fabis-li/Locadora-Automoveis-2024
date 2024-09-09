@@ -12,7 +12,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         private readonly ConfiguracaoService service;
         private readonly IMapper mapeador;
 
-        public ConfiguracaoController(ConfiguracaoService service, IMapper mapeador)
+        public ConfiguracaoController(AutenticacaoService autenticacaoService,ConfiguracaoService service, IMapper mapeador) : base(autenticacaoService)
         {
             this.service = service;
             this.mapeador = mapeador;

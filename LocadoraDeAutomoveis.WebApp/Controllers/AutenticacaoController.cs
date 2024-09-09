@@ -10,7 +10,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
     {
         private readonly AutenticacaoService autenticacaoService;
 
-        public AutenticacaoController(AutenticacaoService autenticacaoService)
+        public AutenticacaoController(AutenticacaoService autenticacaoService) : base(autenticacaoService)
         {
             this.autenticacaoService = autenticacaoService;
         }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using LocadoraDeAutomoveis.Dominio.ModuloAutomoveis;
-using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.WebApp.Controllers.Compartilhado;
 using LocadoraDeAutomoveis.WebApp.Models;
 using LocadoraDeAutomovies.Aplicacao.Servicos;
@@ -15,7 +14,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         private readonly GrupoAutomoveisService serviceGrupo;
         private readonly IMapper mapeador;
 
-        public AutomovelController(AutomovelService service, IMapper mapeador, GrupoAutomoveisService serviceGrupo)
+        public AutomovelController(AutenticacaoService autenticacaoService,AutomovelService service, IMapper mapeador, GrupoAutomoveisService serviceGrupo) : base(autenticacaoService)
         {
             this.service = service;
             this.mapeador = mapeador;
@@ -24,7 +23,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         public IActionResult Listar()
         {
-            var resultado = service.SelecionarTodos();
+            var resultado = service.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
             if (resultado.IsFailed)
             {
@@ -78,7 +77,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return RedirectToAction(nameof(Listar));
             }
 
-            var resultadoGrupo = serviceGrupo.SelecionarTodos();
+            var resultadoGrupo = serviceGrupo.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
             if(resultadoGrupo.IsFailed)
             {
@@ -193,7 +192,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         private InserirAutomovelViewModel? CarregarDados(InserirAutomovelViewModel? dadosPrevios = null)
         {
-            var resultadoGrp = serviceGrupo.SelecionarTodos();
+            var resultadoGrp = serviceGrupo.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
             if(resultadoGrp.IsFailed)
             {

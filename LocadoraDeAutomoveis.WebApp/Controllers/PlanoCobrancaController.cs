@@ -15,7 +15,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         private readonly IMapper mapeador;
 
 
-        public PlanoCobrancaController(PlanoCobrancaService service, GrupoAutomoveisService serviceGrupo, IMapper mapeador)
+        public PlanoCobrancaController(AutenticacaoService autenticacaoService,PlanoCobrancaService service, GrupoAutomoveisService serviceGrupo, IMapper mapeador) : base(autenticacaoService)
         {
             this.service = service;
             this.serviceGrupo = serviceGrupo;
@@ -24,7 +24,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         public IActionResult Listar()
         {
-            var resultado = service.SelecionarTodos();
+            var resultado = service.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
             if(resultado.IsFailed)
             {
@@ -77,7 +77,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
                 return RedirectToAction(nameof(Listar));
             }
 
-            var grupos = serviceGrupo.SelecionarTodos().Value;
+            var grupos = serviceGrupo.SelecionarTodos(EmpresaId.GetValueOrDefault()).Value;
 
             var planoCobranca = resultado.Value;
 
@@ -169,7 +169,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         private InserirPlanoCobrancaViewModel? CarregarDados(InserirPlanoCobrancaViewModel dadosPrevios = null)
         {
-            var resultadoGrupo = serviceGrupo.SelecionarTodos();
+            var resultadoGrupo = serviceGrupo.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
             if (resultadoGrupo.IsFailed)
             {

@@ -12,7 +12,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
         private readonly TaxaService taxaService;
         private readonly IMapper mapeador;
 
-        public TaxaController(TaxaService taxaService, IMapper mapeador)
+        public TaxaController(AutenticacaoService autenticacaoService,TaxaService taxaService, IMapper mapeador) : base(autenticacaoService)
         {
             this.taxaService = taxaService;
             this.mapeador = mapeador;
@@ -21,7 +21,7 @@ namespace LocadoraDeAutomoveis.WebApp.Controllers
 
         public IActionResult Listar()
         {
-            var resultado = taxaService.SelecionarTodos();
+            var resultado = taxaService.SelecionarTodos(EmpresaId.GetValueOrDefault());
 
             if (resultado.IsFailed)
             {
