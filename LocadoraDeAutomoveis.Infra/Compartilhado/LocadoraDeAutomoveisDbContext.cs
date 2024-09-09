@@ -8,15 +8,6 @@ using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrpAutomoveis;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxa;
-using LocadoraDeAutomoveis.Infra.ModuloAluguel;
-using LocadoraDeAutomoveis.Infra.ModuloAutomovel;
-using LocadoraDeAutomoveis.Infra.ModuloCleinte;
-using LocadoraDeAutomoveis.Infra.ModuloCondutor;
-using LocadoraDeAutomoveis.Infra.ModuloConfiguracao;
-using LocadoraDeAutomoveis.Infra.ModuloFuncionario;
-using LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis;
-using LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca;
-using LocadoraDeAutomoveis.Infra.ModuloTaxa;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -56,17 +47,7 @@ namespace LocadoraDeAutomoveis.Infra.Compartilhado
             var assembly = typeof(LocadoraDeAutomoveisDbContext).Assembly;
 
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
-
-            //modelBuilder.ApplyConfiguration(new MapeadorGrupoAutomovelEmOrm());
-            //modelBuilder.ApplyConfiguration(new MapeadorAutomovelEmOrm());
-            //modelBuilder.ApplyConfiguration(new MapeadorPlanoCobrancaEmOrm());
-            //modelBuilder.ApplyConfiguration(new MapeadorTaxaEmOrm());
-            //modelBuilder.ApplyConfiguration(new MapeadorClienteEmOrm());
-            //modelBuilder.ApplyConfiguration(new MapeadorCondutorEmOrm());
-            //modelBuilder.ApplyConfiguration(new MapeadorConfiguracaoEmOrm());
-            //modelBuilder.ApplyConfiguration(new MapeadorAluguelEmOrm());
-            //modelBuilder.ApplyConfiguration(new MapeadorFuncionarioEmOrm());
-
+            
             base.OnModelCreating(modelBuilder);
         }
 
