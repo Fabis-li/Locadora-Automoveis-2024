@@ -1,6 +1,8 @@
-﻿using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
+﻿using LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Infra.Compartilhado;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace LocadoraDeAutomoveis.Infra.ModuloFuncionario
 {
@@ -23,6 +25,14 @@ namespace LocadoraDeAutomoveis.Infra.ModuloFuncionario
                 .FirstOrDefault(f => f.Id == id);
         }
 
+
+        public Funcionario? SelecionarPorId(Func<Funcionario, bool> predicate)
+        {
+            return dbContext.Funcionarios
+                .Include(f => f.Empresa)
+                .FirstOrDefault(predicate);
+        }
+
         public List<Funcionario> SelecionarTodos(Func<Funcionario, bool> predicate)
         {
             return dbContext.Funcionarios
@@ -30,5 +40,14 @@ namespace LocadoraDeAutomoveis.Infra.ModuloFuncionario
                 .Where(predicate)
                 .ToList();
         }
+        public List<Funcionario> Filtrar(Func<Funcionario, bool> predicate)
+        {
+            return dbContext.Funcionarios
+                .Include(f => f.Empresa)
+                .Where(predicate)
+                .ToList();
+        }
+
+    
     }
 }
