@@ -46,6 +46,16 @@ namespace LocadoraDeAutomoveis.Infra.ModuloPlanoCobranca
                 .WithMany()
                 .HasForeignKey(p => p.GrupoAutomovelId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            pBuilder.Property(c => c.EmpresaId)
+                .IsRequired()
+                .HasColumnName("Empresa_Id")
+                .HasColumnType("int");
+
+            pBuilder.HasOne(g => g.Empresa)
+                .WithMany()
+                .HasForeignKey(g => g.EmpresaId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

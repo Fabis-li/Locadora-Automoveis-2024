@@ -31,6 +31,16 @@ namespace LocadoraDeAutomoveis.Infra.ModuloConfiguracao
                 .IsRequired()
                 .HasColumnType("decimal(18,2)");
 
+            cBuilder.Property(c => c.EmpresaId)
+                .IsRequired()
+                .HasColumnName("Empresa_Id")
+                .HasColumnType("int");
+
+            cBuilder.HasOne(g => g.Empresa)
+                .WithMany()
+                .HasForeignKey(g => g.EmpresaId)
+                .OnDelete(DeleteBehavior.Restrict);
+
 
         }
     }

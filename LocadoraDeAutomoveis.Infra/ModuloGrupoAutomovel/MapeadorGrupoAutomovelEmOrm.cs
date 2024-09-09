@@ -18,31 +18,16 @@ namespace LocadoraDeAutomoveis.Infra.ModuloGrupoAutomoveis
             gBuilder.Property(g => g.Nome)
                 .IsRequired()
                 .HasColumnType("varchar(200)");
-            
-            gBuilder.HasData(ObterRegistrosPadrao());
-        }
 
+            gBuilder.Property(c => c.EmpresaId)
+                .IsRequired()
+                .HasColumnName("Empresa_Id")
+                .HasColumnType("int");
 
-        private object[] ObterRegistrosPadrao()
-        {
-            return
-            [
-                new
-                {
-                    Id = 1,
-                    Nome = "Passeio"
-                },
-                new
-                {
-                    Id = 2,
-                    Nome = "Utilitário"
-                },
-                new
-                {
-                    Id = 3,
-                    Nome = "Esportivo"
-                }
-            ];
+            gBuilder.HasOne(g => g.Empresa)
+                .WithMany()
+                .HasForeignKey(g => g.EmpresaId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

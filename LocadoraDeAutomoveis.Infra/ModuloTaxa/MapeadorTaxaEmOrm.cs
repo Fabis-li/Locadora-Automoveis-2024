@@ -26,6 +26,16 @@ namespace LocadoraDeAutomoveis.Infra.ModuloTaxa
             tBuilder.Property(t => t.TipoCobranca)
                 .HasColumnType("int")
                 .IsRequired();
+
+            tBuilder.Property(c => c.EmpresaId)
+                .IsRequired()
+                .HasColumnName("Empresa_Id")
+                .HasColumnType("int");
+
+            tBuilder.HasOne(g => g.Empresa)
+                .WithMany()
+                .HasForeignKey(g => g.EmpresaId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
