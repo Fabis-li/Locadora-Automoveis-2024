@@ -1,6 +1,8 @@
-﻿using System.Security.Claims;
+﻿using System.Security.Authentication;
+using System.Security.Claims;
 using FluentResults;
 using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using Microsoft.AspNetCore.Identity;
 
 namespace LocadoraDeAutomovies.Aplicacao.Servicos
@@ -11,11 +13,14 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
         private readonly SignInManager<Usuario> signInManager;
         private readonly RoleManager<Perfil> roleManager;
 
-        public AutenticacaoService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, RoleManager<Perfil> roleManager)
+        private readonly IRepositorioFuncionario repositorioFuncionario;
+
+        public AutenticacaoService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, RoleManager<Perfil> roleManager, IRepositorioFuncionario repositorioFuncionario)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.repositorioFuncionario = repositorioFuncionario;
         }
 
         public async Task<Result<Usuario>> Registrar(Usuario usuario, string senha, TipoUsuarioEnum tipoUsuario)
@@ -76,9 +81,23 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok();
         }
 
-        public async Task<Usuario?> ObterUsuarioAsync(ClaimsPrincipal usuario)
+        public async Task<int?> ObterIdEmpresaAsync(ClaimsPrincipal claim)
         {
-            return await userManager.GetUserAsync(usuario);
+            var usuario = await userManager.GetUserAsync(claim);
+
+            var perfilSelecionado = TipoUsuarioEnum.Empresa.ToString();
+
+            if (!claim.IsInRole(perfilSelecionado))
+            {
+                var funcionario = repositorioFuncionario.SelecionarPorId(f => f.UsuarioId == usuario!.Id);
+
+                if (funcionario is null)
+                    throw new AuthenticationException("Não foi possível selecionar o funcionário registrado!");
+
+                return funcionario.EmpresaId;
+            }
+
+            return usuario?.Id;
         }
     }
 }

@@ -23,7 +23,6 @@ using LocadoraDeAutomoveis.Infra.ModuloTaxa;
 using LocadoraDeAutomoveis.WebApp.Mapping.Resolvers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
-using LocadoraDeAutomoveis.WebApp.Mapping;
 
 namespace LocadoraDeAutomoveis.WebApp
 {

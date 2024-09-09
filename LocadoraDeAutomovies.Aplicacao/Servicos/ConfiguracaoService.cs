@@ -63,9 +63,9 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(configuracao);
         }
 
-        public Result<List<Configuracao>> SelecionarTodos()
+        public Result<List<Configuracao>> SelecionarTodos(int empresaId)
         {
-            var configuracoes = repositorioConfiguracao.SelecionarTodos();
+            var configuracoes = repositorioConfiguracao.Filtrar(c => c.EmpresaId == empresaId);
 
             if (configuracoes.Count == 0)
                 return Result.Fail<List<Configuracao>>("Nenhuma configuração encontrada!");

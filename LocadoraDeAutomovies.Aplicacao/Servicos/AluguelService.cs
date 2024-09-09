@@ -77,9 +77,9 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(aluguel);
         }
 
-        public Result<List<Aluguel>> SelecionarTodos()
+        public Result<List<Aluguel>> SelecionarTodos(int empresaId)
         {
-            var alugueis = repositorioAluguel.SelecionarTodos();
+            var alugueis = repositorioAluguel.Filtrar(a => a.EmpresaId == empresaId);
 
             return Result.Ok(alugueis);
         }

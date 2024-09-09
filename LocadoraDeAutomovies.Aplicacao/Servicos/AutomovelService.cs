@@ -69,9 +69,9 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(automovel);
         }
 
-        public Result<List<Automovel>> SelecionarTodos()
+        public Result<List<Automovel>> SelecionarTodos(int empresaId)
         {
-            var automoveis = repositorioAutomovel.SelecionarTodos();
+            var automoveis = repositorioAutomovel.Filtrar(a => a.EmpresaId == empresaId);
 
             return Result.Ok(automoveis);
         }

@@ -74,9 +74,9 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(taxa);
         }
 
-        public Result<List<Taxa>> SelecionarTodos()
+        public Result<List<Taxa>> SelecionarTodos(int empresaId)
         {
-            var taxas = repositorioTaxa.SelecionarTodos();
+            var taxas = repositorioTaxa.Filtrar(t => t.EmpresaId == empresaId);
 
             return Result.Ok(taxas);
         }

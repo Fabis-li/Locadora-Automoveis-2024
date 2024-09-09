@@ -55,9 +55,9 @@ namespace LocadoraDeAutomovies.Aplicacao.Servicos
             return Result.Ok(grp);
         }
 
-        public Result<List<GrupoAutomovel>> SelecionarTodos()
+        public Result<List<GrupoAutomovel>> SelecionarTodos(int empresaId)
         {
-            var grps = repositorioGrpAutomoveis.SelecionarTodos();
+            var grps = repositorioGrpAutomoveis.Filtrar(g => g.EmpresaId == empresaId);
 
             return Result.Ok(grps);
         }
