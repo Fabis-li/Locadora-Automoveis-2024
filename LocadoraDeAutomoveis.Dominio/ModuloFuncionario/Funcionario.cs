@@ -8,9 +8,6 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloFuncionario
 
         public int UsuarioId { get; set; }
 
-        public int EmpresaId { get; set; }
-        public Usuario? Empresa { get; set; }
-
 
         public string NomeCompleto { get; set; }
         public string Email { get; set; }
