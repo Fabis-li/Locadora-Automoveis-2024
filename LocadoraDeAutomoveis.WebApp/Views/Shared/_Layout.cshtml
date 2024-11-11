@@ -1,7 +1,7 @@
 ﻿@{
     string caminho = Context.Request.Path;
 
-    var grupoAutomoveisAtivo = caminho.StartsWith("/grupoAutomoveis") ? "nav-link active fw-semibold" : "nav-link";
+    var grupoAutomoveisAtivo = caminho.StartsWith("/grupoAutomovel") ? "nav-link active fw-semibold" : "nav-link";
     var automovelAtivo = caminho.StartsWith("/automovel") ? "nav-link active fw-semibold" : "nav-link";
     var planoCobrancaAtivo = caminho.StartsWith("/planoCobranca") ? "nav-link active fw-semibold" : "nav-link";
     var taxaAtivo = caminho.StartsWith("/taxa") ? "nav-link active fw-semibold" : "nav-link";
@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/grupoAutomoveis/Listar" class="nav-link align-middle px-0 text-decoration-none text-primary" title="Grupo de Automóveis">
+                            <a href="/grupoAutomovel/Listar" class="nav-link align-middle px-0 text-decoration-none text-primary" title="Grupo de Automóveis">
                                 <i class=" fs-4 bi-collection-fill"></i><span class="ms-1 d-none d-sm-inline">Grupo de Automóveis</span> 
                             </a>
                         </li>
